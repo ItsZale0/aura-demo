@@ -120,20 +120,99 @@ function resetDemo(n){
   document.getElementById('s'+n+'-btn').disabled=false;
 }
 
-function parseAIJSON(str){
-  str=str.replace(/```json\n?/g,'').replace(/```\n?/g,'');
-  var start=str.indexOf('{'),end=str.lastIndexOf('}');
-  if(start===-1||end===-1)throw new Error('JSON not found');
-  str=str.substring(start,end+1);
-  var prev='',iter=0;
-  while(str!==prev&&iter<20){
-    prev=str;
-    str=str.replace(/\}\s*\{/g,'},{');
-    str=str.replace(/,\s*\]/g,']');
-    str=str.replace(/,\s*\}/g,'}');
-    iter++;
+function parseAIJSON(raw){
+  // --- Robust AI JSON parser: never throws on null/weird input ---
+  if(raw===null||raw===undefined) throw new Error('AI returned empty response');
+  var str = typeof raw==='string' ? raw : (raw && raw.toString ? raw.toString() : '');
+  if(!str.trim()) throw new Error('AI returned empty response');
+
+  // 1. Strip markdown fences and BOM
+  str = str.replace(/^\uFEFF/, '').replace(/```(?:json|JSON)?\s*/g, '').replace(/```/g, '');
+  // 2. Extract outermost {...} block
+  var start = str.indexOf('{'), end = str.lastIndexOf('}');
+  if(start === -1 || end === -1 || end <= start) throw new Error('No JSON object found in AI response');
+  str = str.substring(start, end + 1);
+
+  // 3. Try direct parse first
+  try { return JSON.parse(str); } catch(e) {}
+
+  // 4. Iterative repair (up to 25 cycles)
+  var prev = '';
+  for(var iter = 0; iter < 25 && str !== prev; iter++){
+    prev = str;
+    // missing commas between objects/arrays
+    str = str.replace(/\}\s*\{/g, '},{');
+    str = str.replace(/\]\s*\{/g, '],{');
+    str = str.replace(/\}\s*\[/g, '},[');
+    str = str.replace(/\]\s*\[/g, '],[');
+    // missing commas between "value" and "key"
+    str = str.replace(/"\s*\n\s*"/g, ',"');
+    // trailing commas
+    str = str.replace(/,\s*\]/g, ']');
+    str = str.replace(/,\s*\}/g, '}');
+    // smart quotes -> straight quotes
+    str = str.replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'");
+    // try parse after each repair cycle
+    try { return JSON.parse(str); } catch(e) {}
   }
-  return str;
+
+  // 5. Last resort: extract script[] and actions[] separately
+  var fallback = {title:'', scenario:'', script:[], actions:[]};
+  var scriptMatch = str.match(/"script"\s*:\s*\[([\s\S]*?)\]/);
+  if(scriptMatch){
+    try{
+      fallback.script = JSON.parse('[' + scriptMatch[1].replace(/}\s*{/g, '},{') + ']');
+    }catch(e){
+      // extract individual speaker/text pairs
+      var re = /"speaker"\s*:\s*"([^"]*)"\s*,\s*"text"\s*:\s*"((?:[^"\\]|\\.)*)"/g;
+      var m;
+      while((m = re.exec(str)) !== null){
+        fallback.script.push({speaker: m[1], text: m[2].replace(/\\n/g,' ').replace(/\\"/g,'"')});
+      }
+    }
+  }
+  var titleMatch = str.match(/"title"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if(titleMatch) fallback.title = titleMatch[1];
+  var scenMatch = str.match(/"scenario"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if(scenMatch) fallback.scenario = scenMatch[1];
+  var actMatch = str.match(/"actions"\s*:\s*\[([\s\S]*?)\]\s*\}/);
+  if(actMatch){
+    try{
+      fallback.actions = JSON.parse('[' + actMatch[1].replace(/}\s*{/g, '},{') + ']');
+    }catch(e){}
+  }
+  if(fallback.script.length === 0) throw new Error('Could not parse AI conversation');
+  return fallback;
+}
+
+// Normalize demo object: guarantee fields exist and are safe types
+function normalizeDemo(d){
+  var demo = (typeof d === 'object' && d !== null) ? d : {};
+  if(typeof demo.title !== 'string') demo.title = 'Demo';
+  if(typeof demo.scenario !== 'string') demo.scenario = '';
+  if(!Array.isArray(demo.script)) demo.script = [];
+  demo.script = demo.script.filter(function(m){
+    return m && typeof m === 'object' && typeof m.text === 'string' && m.text.trim();
+  }).map(function(m){
+    return {speaker: (typeof m.speaker === 'string' && m.speaker) ? m.speaker : 'Aria', text: m.text};
+  });
+  if(!Array.isArray(demo.actions)) demo.actions = [];
+  demo.actions = demo.actions.filter(function(a){
+    return a && typeof a === 'object' && a.type;
+  }).map(function(a){
+    return {type: String(a.type), details: (a.details && typeof a.details === 'object') ? a.details : {}};
+  });
+  if(demo.script.length === 0){
+    demo.script = [{speaker:'Aria', text:'...'}, {speaker:'Customer', text:'...'}];
+  }
+  return demo;
+}
+
+// Safe escape for HTML injection
+function esc(s){
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 var GEN_TIMERS=[];
@@ -150,36 +229,45 @@ async function generateDemo(){
   var prompt='You are Aria, an AI voice assistant. Generate a custom demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\nCreate a LONG conversation (8-10 messages) with MANY ACTIONS (5-6).\nFormat: {"title":"...","scenario":"...","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","datetime":"..."}}]}';
   try{
     var res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'nvidia/nemotron-3-ultra-550b-a55b:free',messages:[{role:'user',content:prompt}],max_tokens:2000})});
+    if(!res.ok) throw new Error('API error '+res.status);
     var result=await res.json();
+    if(result.error) throw new Error(result.error.message || 'AI service error');
+    if(!result.choices || !result.choices[0] || !result.choices[0].message) throw new Error('Invalid API response');
     var text=result.choices[0].message.content;
-    var demo=JSON.parse(parseAIJSON(text));
+    if(!text) throw new Error('AI returned no content (try again)');
+    var demo=normalizeDemo(parseAIJSON(text));
     runGenDemo(out,demo);
   }catch(err){
-    out.innerHTML='<div style="color:#ff4444">'+t.personalizza.error+': '+err.message+'</div>';
+    var msg = String(err.message || err);
+    var retry = msg.indexOf('overloaded')>=0 || msg.indexOf('503')>=0 || msg.indexOf('empty')>=0;
+    out.innerHTML='<div style="color:#ff6666;padding:12px;background:rgba(255,100,100,.08);border-radius:8px">⚠️ '+esc(msg)+(retry?' — <button onclick="generateDemo()" style="background:var(--accent);color:#000;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-weight:600;font-family:inherit">↻ Retry</button>':'')+'</div>';
   }
   btn.disabled=false;btn.textContent=t.personalizza.btn;
 }
 
 function runGenDemo(container,demo){
   GEN_TIMERS.forEach(clearTimeout);GEN_TIMERS=[];
-  container.innerHTML='<div style="color:var(--accent);font-weight:600;margin-bottom:8px">'+demo.title+'</div><div style="color:var(--muted);font-size:.85em;margin-bottom:16px">'+demo.scenario+'</div><div style="width:100%;height:3px;background:var(--surface2);border-radius:2px;margin-bottom:16px;overflow:hidden"><div id="gen-prog" style="height:100%;background:var(--accent);width:0%;transition:width .4s"></div></div><div id="gen-chat" style="background:var(--surface2);border-radius:8px;padding:14px;font-size:.85em;min-height:150px"></div><div id="gen-actions" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>';
-  var step=0;
+  demo = normalizeDemo(demo);
+  container.innerHTML='<div style="color:var(--accent);font-weight:600;margin-bottom:8px">'+esc(demo.title)+'</div><div style="color:var(--muted);font-size:.85em;margin-bottom:16px">'+esc(demo.scenario)+'</div><div style="width:100%;height:3px;background:var(--surface2);border-radius:2px;margin-bottom:16px;overflow:hidden"><div id="gen-prog" style="height:100%;background:var(--accent);width:0%;transition:width .4s"></div></div><div id="gen-chat" style="background:var(--surface2);border-radius:8px;padding:14px;font-size:.85em;min-height:150px"></div><div id="gen-actions" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>';
   demo.script.forEach(function(msg,i){
     GEN_TIMERS.push(setTimeout(function(){
       var chat=document.getElementById('gen-chat');
+      if(!chat)return;
       var color=msg.speaker==='Aria'?'var(--accent)':'var(--text)';
-      chat.innerHTML+='<div style="margin-bottom:8px;animation:msgIn .3s ease"><strong style="color:'+color+'">'+msg.speaker+':</strong> '+msg.text+'</div>';
+      chat.innerHTML+='<div style="margin-bottom:8px;animation:msgIn .3s ease"><strong style="color:'+color+'">'+esc(msg.speaker)+':</strong> '+esc(msg.text)+'</div>';
       chat.scrollTop=999;
-      document.getElementById('gen-prog').style.width=((i+1)/demo.script.length)*100+'%';
+      var prog=document.getElementById('gen-prog');
+      if(prog)prog.style.width=((i+1)/demo.script.length)*100+'%';
     },1500+i*2500));
   });
   var actTotal=(demo.script.length*2500)+2000;
-  (demo.actions||[]).forEach(function(a,i){
+  demo.actions.forEach(function(a,i){
     GEN_TIMERS.push(setTimeout(function(){
       var acts=document.getElementById('gen-actions');
+      if(!acts)return;
       var ic={CREATE_APPOINTMENT:'📅',SEND_WHATSAPP_CONFIRMATION:'📱',SEND_EMAIL:'📧',SEND_SMS:'💬',SCHEDULE_REMINDER:'⏰',LOG_CALL_CRM:'🎯',NOTIFY_THERAPIST:'🔔',SEND_DIGITAL_INTAKE_FORM:'📋'}[a.type]||'⚡';
-      var dt=JSON.stringify(a.details||{}).replace(/[{}"]/g,'').replace(/,/g,' · ');
-      acts.innerHTML+='<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;animation:actIn .3s ease"><span style="font-size:1.2em">'+ic+'</span><div><div style="font-size:.8em;font-weight:600">'+a.type+'</div><div style="font-size:.7em;color:var(--muted)">'+dt+'</div></div></div>';
+      var dt=Object.keys(a.details).map(function(k){return k+': '+a.details[k]}).join(' · ');
+      acts.innerHTML+='<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;animation:actIn .3s ease"><span style="font-size:1.2em">'+ic+'</span><div><div style="font-size:.8em;font-weight:600">'+esc(a.type)+'</div><div style="font-size:.7em;color:var(--muted)">'+esc(dt)+'</div></div></div>';
     },actTotal+i*1500));
   });
 }
