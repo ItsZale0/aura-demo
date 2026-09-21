@@ -1,0 +1,135 @@
+{
+"nav": {"demos": "Demo", "personalize": "Personalizza", "contact": "Contatti"},
+"hero": {
+"badge": "Disponibile 24/7 · Configurazione in poche ore",
+"title": "Il tuo commerciale che non dorme mai",
+"subtitle": "Aria risponde a <strong>ogni chiamata</strong>, prenota appuntamenti, invia promemoria via WhatsApp/SMS, qualifica lead e recupera clienti persi. <strong>Tutto automaticamente, anche quando sei chiuso.</strong>",
+"check1": "Risponde a ogni chiamata",
+"check2": "Prenota automaticamente",
+"check3": "Invia WhatsApp/SMS",
+"check4": "Qualifica i lead",
+"cta": "Scopri come funziona →"
+},
+"stats": [
+{"num": "24/7", "lbl": "Sempre disponibile"},
+{"num": "0", "lbl": "Chiamate perse"},
+{"num": "3x", "lbl": "Più appuntamenti"},
+{"num": "80%", "lbl": "Tempo risparmiato"}
+],
+"features": {
+"title": "Cosa fa Aria",
+"subtitle": "Un agente AI completo che si adatta al tuo business.",
+"items": [
+{"icn": "🗣️", "t": "Risponde alle chiamate", "d": "24/7 in qualsiasi lingua, non perde mai una chiamata"},
+{"icn": "📅", "t": "Prenota appuntamenti", "d": "Verifica disponibilità e crea eventi in tempo reale"},
+{"icn": "🎯", "t": "Qualifica i lead", "d": "Domande mirate, valutazione budget e urgenza"},
+{"icn": "📱", "t": "Canali messaging", "d": "Promemoria e follow-up automatici"},
+{"icn": "🔄", "t": "Recupera contatti", "d": "Identifica lead freddi e li riattiva"},
+{"icn": "📊", "t": "Report e analytics", "d": "Dashboard sempre aggiornate"}
+]
+},
+"capabilities": {
+"title": "Cosa può fare Aria per te",
+"subtitle": "Nessun limite. Qualsiasi processo può essere automatizzato.",
+"items": ["Prenotazioni automatiche", "Email automatiche", "SMS e WhatsApp", "Promemoria", "Qualifica lead", "Recupero clienti", "Report e analytics", "Notifiche push", "Moduli digitali", "Chatbot vocale", "Supporto clienti", "E qualsiasi altra cosa!"]
+},
+"demoBanner": {
+"title": "Qui sotto solo alcuni esempi",
+"text": "Aria si adatta a <strong>qualsiasi esigenza</strong> del tuo business. Prenotazioni, email, SMS, promemoria, CRM, notifiche, follow-up e molto altro.",
+"cta": "🎮 Crea la tua demo personalizzata"
+},
+"tabs": ["📅 Prenotazione", "🎯 Qualifica Lead", "🔄 Recupero Clienti"],
+"personalizza": {
+"title": "Crea la tua demo personalizzata",
+"subtitle": "Inserisci i dati della tua attività e genera una demo unica.",
+"name": "Nome attività",
+"namePh": "Es. Studio Rossi, Idraulico Rossi...",
+"type": "Tipo di attività / Settore",
+"typePh": "Es. Idraulico, Commercialista, Clinica...",
+"services": "Servizi principali",
+"servicesPh": "Es. Riparazioni, installazione caldaie, manutenzione...",
+"problem": "Problema da risolvere",
+"problemPh": "Es. Perdiamo molte chiamate...",
+"btn": "Genera Demo Personalizzata",
+"generating": "Generazione in corso...",
+"error": "Errore",
+"fillFields": "Compila almeno nome, tipo e servizi"
+},
+"contact": {
+"title": "Domande su prezzi o richieste specifiche?",
+"text": "Scrivici su WhatsApp per una consulenza gratuita.",
+"btn": "📱 Scrivici su WhatsApp"
+},
+"footer": {
+"about": "Assistente vocale AI per aziende.",
+"services": "Servizi",
+"contact": "Contatti",
+"booking": "Prenotazione automatica",
+"qualification": "Qualifica lead",
+"privacy": "Privacy Policy",
+"terms": "Termini di Servizio",
+"copyright": "© 2026 Aria Automation"
+},
+"demoUI": {
+"start": "Avvia Demo",
+"running": "In corso...",
+"replay": "Rigioca",
+"reset": "Reset",
+"calendar": "Calendario Google",
+"whatsapp": "WhatsApp",
+"crm": "CRM — Lead",
+"aria": "Aria",
+"customer": "Cliente"
+},
+"disclaimer": "⚠️ Le demo sono simulate. I risultati reali dipendono dal modello AI utilizzato e possono variare.",
+"demos": [
+{
+"phone": {"name": "Aria", "tag": "Live"},
+"visual": "cal",
+"steps": [
+{"t": "14:32:05", "title": "Chiamata in arrivo", "body": "Mario Rossi chiama il tuo numero.", "delay": 0},
+{"t": "14:32:07", "title": "Aria risponde", "body": "Risponde in modo professionale.", "say": "Buongiorno! Sono Aria. Come posso aiutarti?", "delay": 2000},
+{"t": "14:32:10", "title": "Richiesta appuntamento", "body": "Il cliente vuole prenotare.", "user": "Vorrei prenotare un appuntamento per una consulenza.", "delay": 5000},
+{"t": "14:32:13", "title": "Analisi", "body": "Aria identifica il tipo di servizio.", "think": true, "delay": 8000},
+{"t": "14:32:15", "title": "Verifica disponibilità", "body": "Aria controlla il calendario.", "action": {"ic": "cal", "t": "Calendario", "s": "Slot verificati"}, "say": "Verifico subito la disponibilità...", "delay": 11000},
+{"t": "14:32:18", "title": "Slot trovato", "body": "Aria propone l'orario.", "say": "Ho domani alle 10:00. Ti va bene?", "delay": 14000},
+{"t": "14:32:21", "title": "Conferma", "body": "Il cliente conferma.", "user": "Perfetto!", "delay": 17000},
+{"t": "14:32:23", "title": "Evento creato", "body": "Aria crea l'evento.", "cal": true, "d": "21 SET", "h": "10:00", "n": "Consulenza — Mario Rossi", "company": "Rossi & Co", "say": "Prenotato! Riceverai un promemoria.", "delay": 20000},
+{"t": "14:32:26", "title": "WhatsApp", "body": "Invia promemoria.", "action": {"ic": "wa", "t": "WhatsApp", "s": "Inviato"}, "delay": 23000},
+{"t": "14:32:28", "title": "Lead salvato", "body": "Salva nel sistema.", "action": {"ic": "crm", "t": "CRM", "s": "Salvato"}, "say": "Grazie, buona giornata!", "delay": 26000}
+]
+},
+{
+"phone": {"name": "Aria", "tag": "Qualifica"},
+"visual": "crm",
+"steps": [
+{"t": "09:15:02", "title": "Nuova chiamata", "body": "Contatto sconosciuto chiama.", "delay": 0},
+{"t": "09:15:04", "title": "Aria risponde", "body": "Inizia la qualifica.", "say": "Buongiorno! Sono Aria di Aria Automation. Come posso aiutarti?", "delay": 2000},
+{"t": "09:15:08", "title": "Interesse cliente", "body": "Il cliente è interessato.", "user": "Vorrei informazioni sui vostri servizi.", "delay": 5000},
+{"t": "09:15:11", "title": "Analisi esigenze", "body": "Aria chiede di cosa ha bisogno.", "say": "Certamente! Posso chiederti di cosa avete bisogno esattamente?", "delay": 8000},
+{"t": "09:15:15", "title": "Descrizione problema", "body": "Il cliente descrive la situazione.", "user": "Perdiamo molte chiamate e non riusciamo a gestire tutto.", "delay": 11000},
+{"t": "09:15:18", "title": "Richiesta budget", "body": "Aria chiede il budget.", "say": "Capisco perfettamente. Avete in mente un budget mensile per questa soluzione?", "delay": 14000},
+{"t": "09:15:22", "title": "Budget indicato", "body": "Il cliente indica il budget.", "user": "Circa 150€ al mese.", "delay": 17000},
+{"t": "09:15:25", "title": "Tempistica", "body": "Aria chiede quando iniziare.", "say": "Perfetto. Quando vorreste iniziare?", "delay": 20000},
+{"t": "09:15:29", "title": "Urgenza", "body": "Il cliente esprime urgenza.", "user": "Appena possibile, ci serve una soluzione veloce.", "delay": 23000},
+{"t": "09:15:32", "title": "Qualificato", "body": "Aria qualifica il lead HOT.", "think": true, "crm": true, "nm": "Marco Bianchi", "comp": "Studio Bianchi", "bdg": "€150/mese", "urg": "Alta", "need": "Gestione chiamate", "say": "Perfetto! Un nostro operatore ti contatterà oggi stesso. Grazie!", "delay": 26000}
+]
+},
+{
+"phone": {"name": "Aria", "tag": "Recupero"},
+"visual": "wa",
+"steps": [
+{"t": "10:00:01", "title": "Analisi database", "body": "Aria identifica i lead freddi.", "delay": 0},
+{"t": "10:00:03", "title": "Lead selezionato", "body": "Laura Verdi, 45 giorni fa.", "action": {"ic": "crm", "t": "CRM", "s": "Selezionato"}, "delay": 1500},
+{"t": "10:00:05", "title": "Chiamata in uscita", "body": "Aria chiama per riattivare.", "say": "Ciao Laura! Sono Aria di Aria Automation. Come stai?", "delay": 3000},
+{"t": "10:00:10", "title": "Il cliente ricorda", "body": "Il cliente ricorda la conversazione.", "user": "Ah sì, mi ricordo. Non avevamo ancora deciso.", "delay": 5500},
+{"t": "10:00:14", "title": "Offerta mirata", "body": "Aria propone la soluzione.", "say": "Capisco. Posso chiederti: il problema delle chiamate perse è ancora aperto? Abbiamo attivato una promozione speciale.", "delay": 7500},
+{"t": "10:00:19", "title": "Interesse rinasce", "body": "Il cliente chiede dettagli.", "user": "Sì, il problema c'è ancora. Di cosa si tratta?", "delay": 10000},
+{"t": "10:00:23", "title": "Offerta inviata", "body": "Aria invia l'offerta via WhatsApp.", "wa": true, "msg": "Ciao Laura! Come promesso, ti mando i dettagli della nostra promozione speciale: 1° mese gratuito + 20% di sconto per i primi 3 mesi. Per qualsiasi domanda, sono qui! 🚀", "say": "Se attivi questa settimana, ti offriamo il 1° mese gratuito e il 20% di sconto per 3 mesi.", "delay": 12000},
+{"t": "10:00:28", "title": "Interesse confermato", "body": "Il cliente è interessato ma deve consultarsi.", "user": "Interessante! Devo parlarne con il mio socio.", "delay": 14500},
+{"t": "10:00:32", "title": "Proposta chiamata", "body": "Aria propone la chiamata con un operatore.", "say": "Certo. Posso fissarti una chiamata con un nostro operatore per domani pomeriggio? Potrà rispondere a tutte le tue domande.", "delay": 16500},
+{"t": "10:00:37", "title": "Appuntamento confermato", "body": "Il cliente conferma per il giorno dopo.", "user": "Sì, domani alle 16:00 va bene.", "wa": true, "msg": "Perfetto Laura! Confermo la chiamata con un nostro operatore per domani alle 16:00. Ti chiameremo al numero che ci hai lasciato. Buona giornata! 📞", "say": "Perfetto. Ti invio un promemoria un'ora prima. A domani!", "delay": 18500}
+]
+}
+]
+}
