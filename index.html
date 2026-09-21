@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Aura — Demo Interattiva</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#000;--surface:#111;--border:#222;--text:#fff;--muted:#666;--accent:#fff}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+.wrap{width:100%;max-width:440px;height:92vh;max-height:780px;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.header{padding:18px;text-align:center;border-bottom:1px solid var(--border)}
+.header h1{font-size:1.25em;font-weight:600;letter-spacing:-0.02em}
+.header p{color:var(--muted);font-size:0.8em;margin-top:3px}
+.status{display:flex;align-items:center;justify-content:center;gap:6px;padding:7px;font-size:0.7em;color:var(--muted);border-bottom:1px solid var(--border);transition:all 0.2s}
+.status .dot{width:6px;height:6px;border-radius:50%;background:#4ade80}
+.status.speaking .dot{background:#3b82f6;animation:pulse 1s infinite}
+.status.listening .dot{background:#f59e0b;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.chat{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:12px 16px;border-radius:16px;font-size:0.9em;line-height:1.4;animation:fade 0.25s ease}
+.msg.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--border)}
+.msg.user{align-self:flex-end;background:var(--accent);color:var(--bg);font-weight:500}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{display:none;padding:10px 14px;color:var(--muted);font-size:0.78em;font-style:italic}
+.typing.show{display:block}
+.sugs{padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--border)}
+.sugs button{padding:7px 12px;border:1px solid var(--border);border-radius:16px;background:transparent;color:var(--text);cursor:pointer;font-size:0.75em;transition:all 0.15s}
+.sugs button:hover{background:var(--bg)}
+.input{padding:12px;display:flex;gap:8px;border-top:1px solid var(--border)}
+.input input{flex:1;padding:12px 14px;border:none;border-radius:20px;background:var(--bg);color:var(--text);font-size:0.9em;outline:none;border:1px solid var(--border)}
+.input input:focus{border-color:var(--muted)}
+.input button{width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:var(--bg);font-size:1.1em;cursor:pointer}
+.input button:active{transform:scale(0.92)}
+.mic-btn{border:1px solid var(--border)!important;background:transparent!important;color:var(--text)!important}
+.mic-btn.on{background:#dc2626!important;border-color:#dc2626!important;color:#fff!important;animation:pulse 1s infinite}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="header"><h1>🤖 Aura</h1><p>Assistente vocale AI per aziende</p></div>
+<div class="status" id="status"><span class="dot"></span><span id="statusText">Pronto</span></div>
+<div class="chat" id="chat">
+  <div class="msg bot">Ciao! 👋 Sono Aura, l'assistente vocale di Ario Automation. Come posso aiutarti?</div>
+</div>
+<div class="typing" id="typing">Aura sta scrivendo...</div>
+<div class="sugs" id="sugs">
+  <button onclick="send('Come funziona?')">Come funziona?</button>
+  <button onclick="send('Quanto costa?')">Quanto costa?</button>
+  <button onclick="send('Voglio una demo')">Voglio una demo</button>
+</div>
+<div class="input">
+  <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Parla con Aura">🎤</button>
+  <input type="text" id="txt" placeholder="Scrivi o parla..." onkeypress="if(event.key==='Enter')send()">
+  <button onclick="send()" title="Invia">↑</button>
+</div>
+</div>
+
+<script>
+// Logica conversazionale — completamente locale, nessun server
+var responses = {
+  greeting: {
+    patterns: ['ciao','buongiorno','buonasera','salve','hi','hello','hey','inizio'],
+    reply: "Ciao! 👋 Sono Aura, l'assistente vocale di Ario Automation. Come posso aiutarti?",
+    suggestions: ["Come funziona?","Quanto costa?","Voglio una demo"]
+  },
+  funziona: {
+    patterns: ['come funziona','cosa fate','cosa fa','come fate','spiega','cos è','cosa è'],
+    reply: "Ario Automation crea assistenti vocali AI che:\n\n• Rispondono alle chiamate 24/7\n• Fissano appuntamenti su Google Calendar\n• Inviano promemoria WhatsApp\n• Inviano proposte commerciali\n• Qualificano i lead\n\nTutto automaticamente, senza personale umano.",
+    suggestions: ["Fammi un esempio","Quanto costa?","Voglio una demo"]
+  },
+  esempio: {
+    patterns: ['esempio','fammi','mostra','dimostra','pratico','reale'],
+    reply: "Ecco un esempio reale:\n\nUn cliente chiama il tuo studio alle 22:00 di sera. L'assistente risponde, verifica la disponibilità su Calendar, fissa l'appuntamento e invia un promemoria WhatsApp un'ora prima.\n\nTu non fai nulla. Quando il cliente arriva, sei già pronto.",
+    suggestions: ["Geniale!","Quanto costa?","Voglio una demo"]
+  },
+  costo: {
+    patterns: ['costo','prezzo','quanto','spendere','euro','tariffa','piano','budget'],
+    reply: "I piani sono:\n\n• BASE — €99/mese: risposta chiamate + appuntamenti\n• PRO — €199/mese: aggiunge WhatsApp + qualifica lead\n• ENTERPRISE — su misura per esigenze specifiche\n\nROI medio: 2-3 mesi.",
+    suggestions: ["Voglio una demo","Parliamone","Grazie"]
+  },
+  demo: {
+    patterns: ['demo','provare','test','prova','sì','si','certo','ok','interessa','interessato'],
+    reply: "Perfetto! Fissiamo una demo di 10 minuti.\n\nTi chiamo io dal vivo e ti mostro come funziona per la tua attività specifica.\n\nQual è il tuo nome?",
+    suggestions: ["Mi chiamo...","Preferisco WhatsApp","Non ora grazie"]
+  },
+  nome: {
+    patterns: ['chiamo','mi chiamo','sono il','sono la','il mio nome','mi sono'],
+    reply: "Piacere! E il tuo numero di telefono o WhatsApp per contattarti?",
+    suggestions: ["+393...","Prefiro WhatsApp","Grazie"]
+  },
+  telefono: {
+    patterns: ['+39','+1','+44','+33','+49','00','numero','whatsapp','wa.me'],
+    reply: "Perfetto! Ho il tuo recapito.\n\nIl nostro team ti contatterà entro 24 ore per fissare la demo.\n\nGrazie e a presto! 🚀",
+    suggestions: ["Grazie!","Altra domanda","Ciao"]
+  },
+  grazie: {
+    patterns: ['grazie','thanks','grazie mille','perfetto','bene','ottimo','super'],
+    reply: "Grazie a te! Se hai altre domande, sono qui. Buona giornata! 👋",
+    suggestions: ["Fissiamo una demo","Altra domanda","Ciao"]
+  },
+  default: {
+    reply: "Interessante! Posso aiutarti con:\n\n• Come funziona Ario Automation\n• Prezzi e piani\n• Esempi pratici\n• Fissare una demo\n\nCosa preferisci?",
+    suggestions: ["Come funziona?","Quanto costa?","Voglio una demo"]
+  }
+};
+
+function getResponse(msg){
+  var m = msg.toLowerCase().trim();
+  for(var key in responses){
+    if(key==='default') continue;
+    var patterns = responses[key].patterns || [];
+    for(var i=0;i<patterns.length;i++){
+      if(m.indexOf(patterns[i])!==-1) return responses[key];
+    }
+  }
+  return responses.default;
+}
+
+// Voice (Web Speech API)
+var synth = window.speechSynthesis;
+var recognition = null;
+if('webkitSpeechRecognition' in window||'SpeechRecognition' in window){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SR();recognition.lang='it-IT';recognition.continuous=false;recognition.interimResults=false;
+  recognition.onresult=function(e){document.getElementById('txt').value=e.results[0][0].transcript;send();};
+  recognition.onend=function(){stopMic();};
+  recognition.onerror=function(){stopMic();};
+}
+
+function toggleMic(){
+  if(!recognition)return;
+  try{
+    if(document.getElementById('micBtn').classList.contains('on')){stopMic();}
+    else{recognition.start();document.getElementById('micBtn').classList.add('on');document.getElementById('status').classList.add('listening');document.getElementById('statusText').textContent='In ascolto...';}
+  }catch(e){}
+}
+function stopMic(){document.getElementById('micBtn').classList.remove('on');document.getElementById('status').classList.remove('listening');document.getElementById('statusText').textContent='Pronto';}
+
+function speak(text){
+  if(!synth)return;
+  synth.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='it-IT';u.rate=1.0;
+  document.getElementById('status').classList.add('speaking');
+  document.getElementById('statusText').textContent='Aura parla...';
+  u.onend=function(){document.getElementById('status').classList.remove('speaking');document.getElementById('statusText').textContent='Pronto';};
+  synth.speak(u);
+}
+
+function send(text){
+  var input=document.getElementById('txt');
+  var msg=text||input.value.trim();
+  if(!msg)return;
+  document.getElementById('chat').innerHTML+='<div class="msg user">'+msg+'</div>';
+  input.value='';
+  document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+  document.getElementById('typing').classList.add('show');
+  document.getElementById('sugs').innerHTML='';
+  
+  setTimeout(function(){
+    document.getElementById('typing').classList.remove('show');
+    var r=getResponse(msg);
+    document.getElementById('chat').innerHTML+='<div class="msg bot">'+r.reply.replace(/\n/g,'<br>')+'</div>';
+    document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    if(r.suggestions){
+      var h='';
+      r.suggestions.forEach(function(s){h+='<button onclick="send(\''+s.replace(/'/g,'\\'')+'\')">'+s+'</button>';});
+      document.getElementById('sugs').innerHTML=h;
+    }
+    speak(r.reply);
+  },400+Math.random()*400);
+}
+
+// Greeting
+setTimeout(function(){speak("Ciao! Sono Aura, l'assistente vocale di Ario Automation. Come posso aiutarti?");},800);
+</script>
+</body>
+</html>
