@@ -216,11 +216,57 @@ function esc(s){
 }
 
 var GEN_TIMERS=[];
+
+// Sanitize user input: strip chars that break prompts/JSON, limit length
+function sanitizeInput(s, maxLen){
+  s = String(s === null || s === undefined ? '' : s);
+  maxLen = maxLen || 300;
+  return s
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '') // control chars
+    .replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'") // smart quotes
+    .replace(/[{}<>`\\]/g, ' ') // chars that break JSON structure
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+    .substring(0, maxLen);
+}
+
+// Validate demo object: returns array of error strings (empty = valid)
+function validateDemo(d){
+  var errs = [];
+  if(!d || typeof d !== 'object'){ errs.push('demo is not an object'); return errs; }
+  if(typeof d.title !== 'string' || !d.title.trim()) errs.push('missing title');
+  if(!Array.isArray(d.script) || d.script.length < 4) errs.push('script must have at least 4 messages');
+  if(Array.isArray(d.script)){
+    d.script.forEach(function(m, i){
+      if(!m || typeof m !== 'object' || !m.text || typeof m.text !== 'string'){
+        errs.push('script[' + i + '] missing text');
+      }
+    });
+  }
+  return errs;
+}
+
+// Repair agent: asks the AI to fix broken JSON, returns raw text
+async function repairJSON(brokenText, errors){
+  var repairPrompt = 'The following JSON is broken. Errors: ' + errors.join('; ') + '.\nReturn ONLY the corrected valid JSON, nothing else. Same schema: {"title":"...","scenario":"...","script":[{"speaker":"Aria","text":"..."}],"actions":[{"type":"...","details":{...}}]}\n\nBROKEN JSON:\n' + brokenText.substring(0, 6000);
+  var res = await fetch(WORKER_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({model:'nvidia/nemotron-3-ultra-550b-a55b:free', messages:[{role:'user', content:repairPrompt}], max_tokens:2000})});
+  var result = await res.json();
+  if(result.error) throw new Error(result.error.message || 'repair service error');
+  if(!result.choices || !result.choices[0] || !result.choices[0].message) throw new Error('invalid repair response');
+  return result.choices[0].message.content;
+}
+
 async function generateDemo(){
   var t=I18N[CUR];
   var btn=document.getElementById('pBtn');
   var out=document.getElementById('pOutput');
-  var data={name:document.getElementById('pName').value,type:document.getElementById('pType').value,services:document.getElementById('pServices').value,problem:document.getElementById('pProblem').value,lang:LANG_NAMES[CUR]};
+  var data={
+    name:sanitizeInput(document.getElementById('pName').value, 120),
+    type:sanitizeInput(document.getElementById('pType').value, 120),
+    services:sanitizeInput(document.getElementById('pServices').value, 400),
+    problem:sanitizeInput(document.getElementById('pProblem').value, 300)
+  };
+  data.lang = LANG_NAMES[CUR];
   if(!data.name||!data.type||!data.services){alert(t.personalizza.fillFields);return}
   btn.disabled=true;btn.textContent=t.personalizza.generating;
   out.style.display='block';
@@ -235,8 +281,41 @@ async function generateDemo(){
     if(!result.choices || !result.choices[0] || !result.choices[0].message) throw new Error('Invalid API response');
     var text=result.choices[0].message.content;
     if(!text) throw new Error('AI returned no content (try again)');
-    var demo=normalizeDemo(parseAIJSON(text));
-    runGenDemo(out,demo);
+
+    // Parse + validate + repair loop (subagent fixer, max 2 repair attempts)
+    var demo, parseErr = null;
+    try{
+      demo = normalizeDemo(parseAIJSON(text));
+    }catch(e){
+      parseErr = e;
+      demo = null;
+    }
+    // Validate even if parse succeeded
+    var vErrs = demo ? validateDemo(demo) : [parseErr ? parseErr.message : 'unknown parse error'];
+
+    if(vErrs.length > 0){
+      // Subagent repair: send broken JSON + errors back to AI to fix
+      for(var attempt = 0; attempt < 2 && vErrs.length > 0; attempt++){
+        try{
+          var repaired = await repairJSON(text, vErrs);
+          demo = normalizeDemo(parseAIJSON(repaired));
+          vErrs = validateDemo(demo);
+          if(vErrs.length === 0) break;
+          text = repaired; // use repaired text for next attempt
+        }catch(re){
+          vErrs = [re.message];
+        }
+      }
+      if(vErrs.length > 0){
+        // Even repair failed — show what we salvaged if any script exists
+        if(demo && demo.script && demo.script.length >= 2){
+          runGenDemo(out, demo); // show partial result
+        } else {
+          throw new Error('JSON repair failed: ' + vErrs.join('; '));
+        }
+      }
+    }
+    runGenDemo(out, demo);
   }catch(err){
     var msg = String(err.message || err);
     var retry = msg.indexOf('overloaded')>=0 || msg.indexOf('503')>=0 || msg.indexOf('empty')>=0;
