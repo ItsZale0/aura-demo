@@ -1,471 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Aria Automation — AI Voice Agent for Business</title>
-<meta name="description" content="Aria is the AI voice agent that answers 24/7, books appointments, sends reminders, qualifies leads, and recovers lost customers.">
+<title>Aria Automation — Assistente Vocale AI</title>
+<meta name="description" content="Aria risponde 24/7, prenota appuntamenti, invia promemoria, qualifica lead e recupera clienti.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#060608;--surface:#0e0e14;--surface2:#16161f;--border:#1e1e2e;--text:#f5f5fa;--muted:#5c5c7a;--accent:#ff6b00;--accent2:#ff8533;--green:#10b981;--blue:#3b82f6;--purple:#a855f7;--shadow:0 20px 50px rgba(0,0,0,.4)}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Space Grotesk',-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.bg .b1{position:absolute;width:500px;height:500px;background:var(--accent);top:-15%;right:-10%;border-radius:50%;filter:blur(120px);opacity:.12;animation:drift1 20s ease-in-out infinite}
-.bg .b2{position:absolute;width:400px;height:400px;background:var(--purple);bottom:-10%;left:-10%;border-radius:50%;filter:blur(120px);opacity:.12;animation:drift2 25s ease-in-out infinite}
-@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,40px)}}
-@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-60px)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes actIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-@keyframes think{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-4px) scale(1.2);opacity:1}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 28px;background:rgba(6,6,10,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.nav-brand{font-size:1.1em;font-weight:700;display:flex;align-items:center;gap:10px}
-.nav-brand .mark{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.nav-links{display:flex;gap:24px;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.82em;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-@media(max-width:600px){.nav-links{display:none}.nav{padding:12px 16px}}
-section{position:relative;z-index:10;padding:80px 24px;max-width:1000px;margin:0 auto}
-.hero{padding:140px 24px 80px;text-align:center;max-width:750px}
-.hero h1{font-size:clamp(2.5em,6vw,4.2em);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;background:linear-gradient(135deg,#fff 20%,var(--accent2) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{color:var(--muted);font-size:clamp(1em,2vw,1.25em);max-width:600px;margin:0 auto 32px;line-height:1.6}
-.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:var(--accent);color:#000;border:none;border-radius:50px;font-size:.95em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:0 6px 30px rgba(255,107,0,.25)}
-.hero-cta:hover{transform:translateY(-2px)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;margin-bottom:60px}
-.stat{text-align:center}
-.stat .num{font-size:2em;font-weight:700;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat .lbl{font-size:.72em;color:var(--muted);margin-top:4px}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.feat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:left;transition:all .25s}
-.feat:hover{border-color:var(--accent);transform:translateY(-3px)}
-.feat .icn{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2em;margin-bottom:14px}
-.feat .icn.ai{background:rgba(255,107,0,.15);color:var(--accent)}
-.feat .icn.cal{background:rgba(59,130,246,.15);color:var(--blue)}
-.feat .icn.crm{background:rgba(168,85,247,.15);color:var(--purple)}
-.feat .icn.wa{background:rgba(37,211,102,.15);color:#25d366}
-.feat h4{font-size:.95em;font-weight:600;margin:0 0 6px 0;color:var(--text)}
-.feat p{font-size:.8em;color:var(--muted);line-height:1.5;margin:0}
-.tabs{padding:0 24px 40px;max-width:900px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.tab{padding:12px 22px;border:1px solid var(--border);border-radius:12px;background:var(--surface);font-size:.85em;font-weight:500;cursor:pointer;transition:all .2s;color:var(--muted)}
-.tab:hover{border-color:var(--accent);color:var(--text)}
-.tab.active{background:var(--accent);border-color:var(--accent);color:#000}
-.demo-view{display:none;padding:0 24px 80px;max-width:1100px;margin:0 auto}
-.demo-view.active{display:block;animation:fadeUp .4s ease}
-.dash{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:30px}
-@media(max-width:750px){.dash{grid-template-columns:1fr}}
-.phone{background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
-.phone-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.phone-head .icn{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#f59e0b);display:flex;align-items:center;justify-content:center}
-.phone-head h4{font-size:.85em;font-weight:600}
-.phone-head .tag{margin-left:auto;font-size:.55em;padding:3px 8px;border-radius:8px;background:rgba(16,185,129,.15);color:var(--green);font-weight:600}
-.phone-chat{padding:14px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#0a0a0a}
-.msg{padding:10px 14px;border-radius:14px;font-size:.78em;max-width:85%;line-height:1.38;animation:msgIn .3s ease}
-.msg.bot{background:var(--surface2);border:1px solid var(--border)}
-.msg.user{background:var(--accent);color:#000;margin-left:auto}
-.msg .lbl{font-size:.52em;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:3px}
-.msg.user .lbl{color:rgba(0,0,0,.5)}
-.think{padding:8px 12px;display:flex;gap:4px}
-.think span{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:think 1.2s infinite}
-.think span:nth-child(2){animation-delay:.15s}
-.think span:nth-child(3){animation-delay:.3s}
-.visual{background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
-.visual-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.visual-head .icn{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.visual-head .icn.cal{background:rgba(59,130,246,.15);color:var(--blue)}
-.visual-head .icn.wa{background:rgba(37,211,102,.15);color:#25d366}
-.visual-head .icn.crm{background:rgba(168,85,247,.15);color:var(--purple)}
-.visual-head h4{font-size:.85em;font-weight:600}
-.visual-body{padding:18px;min-height:340px;position:relative}
-.cal-vis{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.cal-vis .cal-top{background:#fff;padding:12px 16px;color:#3c4043;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e0e0e0}
-.cal-vis .cal-title{font-size:1.1em;font-weight:500;color:#3c4043}
-.cal-vis .cal-nav{display:flex;align-items:center;gap:8px}
-.cal-vis .cal-nav button{background:none;border:1px solid #dadce0;border-radius:4px;padding:4px 10px;font-size:.75em;color:#3c4043;cursor:pointer}
-.cal-vis .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
-.cal-vis .cal-grid .hdr{font-size:.65em;color:#70757a;font-weight:500;padding:8px 0;text-transform:uppercase;background:#fff;border-bottom:1px solid #e0e0e0}
-.cal-vis .cal-grid .day{padding:6px 4px;font-size:.7em;color:#3c4043;min-height:32px;border-radius:50%;margin:2px auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
-.cal-vis .cal-grid .day.today{background:#1a73e8;color:#fff}
-.cal-vis .cal-grid .day.has-ev::after{content:'';position:absolute;bottom:2px;width:4px;height:4px;border-radius:50%;background:#1a73e8}
-.cal-vis .cal-ev{margin-top:12px;padding:10px 12px;background:#fff;border-radius:4px;border-left:4px solid #1a73e8;opacity:0;transform:translateY(10px);transition:all .4s}
-.cal-vis .cal-ev.show{opacity:1;transform:none}
-.cal-vis .cal-ev .ev-time{font-size:.7em;font-weight:500;color:#1a73e8}
-.cal-vis .cal-ev .ev-name{font-size:.78em;color:#3c4043;margin-top:2px}
-.cal-vis .cal-ev .ev-det{font-size:.65em;color:#70757a;margin-top:1px}
-.wa-vis{background:#e5ddd5;border-radius:12px;padding:12px;min-height:200px}
-.wa-msg{padding:8px 12px;border-radius:12px;font-size:.72em;max-width:85%;color:#111}
-.wa-msg.sent{background:#dcf8c6;margin-left:auto}
-.wa-msg.recv{background:#fff}
-.wa-msg .time{font-size:.5em;color:#666;text-align:right;margin-top:4px}
-.crm-vis{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.crm-vis .crm-top{background:#6200ea;padding:10px 14px;color:#fff;font-size:.72em;font-weight:600}
-.crm-vis .crm-body{padding:14px}
-.crm-vis .crm-lead{display:flex;align-items:center;gap:10px;padding:10px;background:#f5f5f5;border-radius:8px;margin-bottom:10px;opacity:0;transform:translateY(10px);transition:all .4s}
-.crm-vis .crm-lead.show{opacity:1;transform:none}
-.crm-vis .crm-lead .av{width:36px;height:36px;border-radius:50%;background:#ede7f6;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:700;color:#6200ea}
-.crm-vis .crm-lead .info .n{font-size:.75em;font-weight:600;color:#333}
-.crm-vis .crm-lead .info .m{font-size:.58em;color:#666}
-.crm-vis .crm-lead .badge{padding:3px 8px;border-radius:10px;font-size:.52em;font-weight:700;color:#fff}
-.crm-vis .crm-lead .badge.hot{background:#ff6b00}
-.crm-vis .crm-lead .badge.warm{background:#f59e0b}
-.timeline{margin-top:24px}
-.tl-step{margin-bottom:14px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;opacity:0;transform:translateY(10px);transition:all .45s}
-.tl-step.visible{opacity:1;transform:none}
-.tl-step .tl-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.tl-step .tl-num{width:24px;height:24px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.65em;font-weight:700;color:#000}
-.tl-step .tl-title{font-size:.85em;font-weight:600}
-.tl-step .tl-time{font-size:.58em;color:var(--muted);margin-left:auto}
-.tl-step .tl-body{font-size:.75em;color:var(--muted);margin-left:34px;line-height:1.45}
-.tl-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;margin-left:34px}
-.tl-action{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:.68em;animation:actIn .3s ease}
-.tl-action .ic{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.7rem}
-.tl-action .ic.cal{background:rgba(59,130,246,.15);color:var(--blue)}
-.tl-action .ic.wa{background:rgba(37,211,102,.15);color:#25d366}
-.tl-action .ic.crm{background:rgba(168,85,247,.15);color:var(--purple)}
-.controls{display:flex;gap:10px;justify-content:center;margin-top:28px}
-.controls button{padding:12px 24px;border-radius:25px;border:none;font-size:.85em;font-weight:600;cursor:pointer;font-family:inherit}
-.controls .prim{background:var(--accent);color:#000}
-.controls .sec{background:var(--surface);color:#fff;border:1px solid var(--border)}
-.prog{width:100%;height:3px;background:var(--surface);border-radius:2px;margin-top:20px;overflow:hidden}
-.prog .fill{height:100%;background:var(--accent);width:0%;transition:width .4s}
-.faq-item.open .faq-body{max-height:300px;padding-top:14px}
-.cta{text-align:center;padding:100px 24px}
-.foot{padding:40px 24px;border-top:1px solid var(--border)}
-.foot-inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px}
-.foot-col{flex:1;min-width:200px}
-.foot-col h5{font-size:.78em;font-weight:600;margin-bottom:12px;color:var(--text)}
-.foot-col a,.foot-col span{display:block;font-size:.78em;color:var(--muted);text-decoration:none;margin-bottom:8px}
-.foot-bottom{max-width:1000px;margin:30px auto 0;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.72em;color:var(--muted)}
-@media(max-width:600px){
-  .hero{padding:100px 16px 60px}
-  .hero h1{font-size:2em}
-  section{padding:60px 16px}
-  .feat-grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .dash{grid-template-columns:1fr}
-  .phone-chat{height:260px}
-  .visual-body{min-height:260px}
-  .tl-body,.tl-actions{margin-left:0}
-  .foot-inner{flex-direction:column}
-}
-/* Highlight Personalizza */
-#personalizza{position:relative;border:2px solid var(--accent);border-radius:20px;padding:60px 24px;background:linear-gradient(180deg,rgba(255,107,0,.03) 0%,transparent 100%);box-shadow:0 0 40px rgba(255,107,0,.1)}
-#personalizza::before{content:'';position:absolute;inset:-2px;border-radius:20px;padding:2px;background:linear-gradient(135deg,var(--accent),var(--purple),var(--blue),var(--accent));background-size:300% 300%;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:borderGlow 4s ease infinite;pointer-events:none;z-index:0}
-@keyframes borderGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-#personalizza>*{position:relative;z-index:1}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="bg"></div>
+<div class="bg"><div class="b1"></div><div class="b2"></div></div>
 <nav class="nav">
 <div class="nav-brand"><div class="mark"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#ff6b00"/><path d="M8 22V10h2v12H8z" fill="#fff"/><path d="M12 10h3.5c2.8 0 5 2.2 5 5s-2.2 5-5 5H12V10zm3.5 8c1.7 0 3-1.3 3-3s-1.3-3-3-3H14v6h1.5z" fill="#fff"/><circle cx="24" cy="20" r="2.5" fill="#fff" opacity=".7"/></svg></div> Aria Automation</div>
-<ul class="nav-links"><li><a href="#demo">Demos</a></li><li><a href="#personalizza">Personalize</a></li><li><a href="#contact">Contact</a></li></ul>
+<ul class="nav-links"><li><a href="#demo" data-i18n="nav.demos">Demo</a></li><li><a href="#personalizza" data-i18n="nav.personalize">Personalizza</a></li><li><a href="#contact" data-i18n="nav.contact">Contatti</a></li></ul>
+<div class="lang-sel" id="langSel">
+<button onclick="setLang('it')" class="active">IT</button>
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('es')">ES</button>
+<button onclick="setLang('zh')">中文</button>
+</div>
 </nav>
 
 <section class="hero">
 <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.2);border-radius:20px;font-size:.75em;color:var(--accent);font-weight:500;margin-bottom:24px">
 <span style="width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></span>
-Available 24/7 · Setup in hours
+<span data-i18n="hero.badge">Disponibile 24/7 · Configurazione in poche ore</span>
 </div>
-<h1>Your salesperson that never sleeps</h1>
-<p>Aria answers <strong style="color:var(--text)">every call</strong>, books appointments, sends reminders via WhatsApp/SMS, qualifies leads, and recovers lost customers. <strong style="color:var(--text)">All automatically, even when you're closed.</strong></p>
+<h1 data-i18n="hero.title">Il tuo commerciale che non dorme mai</h1>
+<p data-i18n-html="hero.subtitle">Aria risponde a <strong>ogni chiamata</strong>...</p>
 <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:40px">
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> Answers every call</div>
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> Books automatically</div>
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> Sends WhatsApp/SMS</div>
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> Qualifies leads</div>
+<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check1">Risponde a ogni chiamata</span></div>
+<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check2">Prenota automaticamente</span></div>
+<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check3">Invia WhatsApp/SMS</span></div>
+<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check4">Qualifica i lead</span></div>
 </div>
-<a href="#demo" class="hero-cta">See how it works →</a>
+<a href="#demo" class="hero-cta" data-i18n="hero.cta">Scopri come funziona →</a>
 </section>
 
 <section style="padding-top:0">
-<div class="stats">
-<div class="stat"><div class="num">24/7</div><div class="lbl">Always available</div></div>
-<div class="stat"><div class="num">0</div><div class="lbl">Missed calls</div></div>
-<div class="stat"><div class="num">3x</div><div class="lbl">More appointments</div></div>
-<div class="stat"><div class="num">80%</div><div class="lbl">Time saved</div></div>
-</div>
+<div class="stats" id="stats"></div>
 </section>
 
 <section id="features" style="text-align:center">
-<h2>What Aria does</h2>
-<p class="sub" style="color:var(--muted);margin-bottom:32px">A complete AI agent that adapts to your business.</p>
-<div class="feat-grid">
-<div class="feat"><div class="icn ai">🗣️</div><h4>Answers calls</h4><p>24/7 in any language, never misses a call</p></div>
-<div class="feat"><div class="icn cal">📅</div><h4>Books appointments</h4><p>Checks availability and creates events in real-time</p></div>
-<div class="feat"><div class="icn crm">🎯</div><h4>Qualifies leads</h4><p>Targeted questions, budget and urgency assessment</p></div>
-<div class="feat"><div class="icn wa">📱</div><h4>Messaging channels</h4><p>Automatic reminders and follow-ups</p></div>
-<div class="feat"><div class="icn ai">🔄</div><h4>Recovers contacts</h4><p>Identifies cold leads and re-engages them</p></div>
-<div class="feat"><div class="icn ai">📊</div><h4>Reports & analytics</h4><p>Always up-to-date dashboards</p></div>
-</div>
+<h2 data-i18n="features.title">Cosa fa Aria</h2>
+<p style="color:var(--muted);margin-bottom:32px" data-i18n="features.subtitle">Un agente AI completo...</p>
+<div class="feat-grid" id="featGrid"></div>
 </section>
 
-<!-- What Aria can do -->
 <section style="padding:60px 24px;text-align:center;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-<h2 style="font-size:clamp(1.4em,3vw,1.8em);font-weight:700;margin-bottom:12px">What Aria can do for you</h2>
-<p style="color:var(--muted);font-size:.95em;max-width:600px;margin:0 auto 32px">No limits. Any process can be automated.</p>
-<div style="max-width:700px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;text-align:left">
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">📅</span><span style="font-size:.85em">Automatic bookings</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">📧</span><span style="font-size:.85em">Automated emails</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">💬</span><span style="font-size:.85em">SMS & WhatsApp</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">⏰</span><span style="font-size:.85em">Reminders</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">🎯</span><span style="font-size:.85em">Lead qualification</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">🔄</span><span style="font-size:.85em">Customer recovery</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">📊</span><span style="font-size:.85em">Reports & analytics</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">🔔</span><span style="font-size:.85em">Push notifications</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">📋</span><span style="font-size:.85em">Digital forms</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">🤖</span><span style="font-size:.85em">Voice chatbot</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">🎫</span><span style="font-size:.85em">Customer support</span></div>
-<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">⚡</span><span style="font-size:.85em">And anything else!</span></div>
-</div>
+<h2 style="font-size:clamp(1.4em,3vw,1.8em);font-weight:700;margin-bottom:12px" data-i18n="capabilities.title">Cosa può fare Aria per te</h2>
+<p style="color:var(--muted);font-size:.95em;max-width:600px;margin:0 auto 32px" data-i18n="capabilities.subtitle">Nessun limite...</p>
+<div style="max-width:700px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;text-align:left" id="capGrid"></div>
 </section>
 
-<!-- Demo Tabs -->
-<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:32px;text-align:center">
-<h3 style="font-size:1.1em;font-weight:600;margin-bottom:8px">Below are just a few examples</h3>
-<p style="color:var(--muted);font-size:.9em;margin-bottom:16px">Aria adapts to <strong>any need</strong> of your business. Bookings, emails, SMS, reminders, CRM, notifications, follow-up and much more.</p>
-<a href="#personalizza" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--accent);color:#000;border-radius:50px;font-size:.85em;font-weight:600;text-decoration:none">🎮 Create your custom demo</a>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:32px;text-align:center;max-width:900px;margin-left:auto;margin-right:auto">
+<h3 style="font-size:1.1em;font-weight:600;margin-bottom:8px" data-i18n="demoBanner.title">Qui sotto solo alcuni esempi</h3>
+<p style="color:var(--muted);font-size:.9em;margin-bottom:16px" data-i18n-html="demoBanner.text">Aria si adatta...</p>
+<a href="#personalizza" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--accent);color:#000;border-radius:50px;font-size:.85em;font-weight:600;text-decoration:none" data-i18n="demoBanner.cta">🎮 Crea la tua demo</a>
 </div>
 
-<div class="tabs" id="demo">
-<div class="tab active" onclick="selectDemo(0)">📅 Booking</div>
-<div class="tab" onclick="selectDemo(1)">🎯 Lead Qualification</div>
-<div class="tab" onclick="selectDemo(2)">🔄 Customer Recovery</div>
-</div>
+<div class="tabs" id="demo"></div>
 <div id="demoViews"></div>
 
-<!-- Personalizza -->
 <section id="personalizza" style="text-align:center">
-<h2>Create your custom demo</h2>
-<p class="sub" style="color:var(--muted);margin-bottom:32px">Enter your business data and generate a unique demo.</p>
+<h2 data-i18n="personalizza.title">Crea la tua demo personalizzata</h2>
+<p style="color:var(--muted);margin-bottom:32px" data-i18n="personalizza.subtitle">Inserisci i dati...</p>
 <div style="max-width:500px;margin:0 auto;text-align:left">
-<div style="margin-bottom:16px">
-<label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px">Business name</label>
-<input type="text" id="pName" placeholder="Es. Rossi Studio..." style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
-</div>
-<div style="margin-bottom:16px">
-<label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px">Business type</label>
-<input type="text" id="pType" placeholder="Es. Plumber, Physiotherapist..." style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
-</div>
-<div style="margin-bottom:16px">
-<label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px">Main services</label>
-<textarea id="pServices" placeholder="Es. Repairs, installation..." style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit;resize:vertical;min-height:60px"></textarea>
-</div>
-<div style="margin-bottom:16px">
-<label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px">Problem to solve</label>
-<input type="text" id="pProblem" placeholder="Es. We miss many calls..." style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
-</div>
-<button onclick="generateDemo()" id="pBtn" style="width:100%;padding:14px;background:var(--accent);color:#000;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;font-family:inherit">Generate Demo</button>
+<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.name">Nome attività</label><input type="text" id="pName" data-i18n-ph="personalizza.namePh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit"></div>
+<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.type">Tipo di attività</label><input type="text" id="pType" data-i18n-ph="personalizza.typePh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit"></div>
+<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.services">Servizi principali</label><textarea id="pServices" data-i18n-ph="personalizza.servicesPh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit;resize:vertical;min-height:60px"></textarea></div>
+<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.problem">Problema da risolvere</label><input type="text" id="pProblem" data-i18n-ph="personalizza.problemPh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit"></div>
+<button onclick="generateDemo()" id="pBtn" style="width:100%;padding:14px;background:var(--accent);color:#000;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;font-family:inherit" data-i18n="personalizza.btn">Genera Demo</button>
 <div id="pOutput" style="margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;display:none"></div>
 </div>
 </section>
 
-<!-- Contact -->
 <section id="contact" style="padding:60px 24px;text-align:center">
 <div style="max-width:500px;margin:0 auto">
-<h3 style="font-size:clamp(1.2em,2.5vw,1.6em);font-weight:700;margin-bottom:12px">Questions about pricing or specific requests?</h3>
-<p style="color:var(--muted);font-size:.95em;margin-bottom:24px">Write us on WhatsApp for a free consultation.</p>
-<a href="https://wa.me/39351805820?text=Hi, I have some questions" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:var(--accent);color:#000;border:none;border-radius:50px;font-size:.95em;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 6px 30px rgba(255,107,0,.25)">📱 Write us on WhatsApp</a>
+<h3 style="font-size:clamp(1.2em,2.5vw,1.6em);font-weight:700;margin-bottom:12px" data-i18n="contact.title">Domande su prezzi?</h3>
+<p style="color:var(--muted);font-size:.95em;margin-bottom:24px" data-i18n="contact.text">Scrivici su WhatsApp</p>
+<a href="https://wa.me/393518058208?text=Ciao, ho alcune domande" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:var(--accent);color:#000;border:none;border-radius:50px;font-size:.95em;font-weight:600;text-decoration:none;box-shadow:0 6px 30px rgba(255,107,0,.25)" data-i18n="contact.btn">📱 WhatsApp</a>
 </div>
 </section>
 
-<!-- Footer -->
 <footer class="foot">
 <div class="foot-inner">
-<div class="foot-col"><h5>Aria Automation</h5><span>AI voice assistant for businesses.</span></div>
-<div class="foot-col"><h5>Services</h5><a href="#">Automatic booking</a><a href="#">Lead qualification</a></div>
-<div class="foot-col"><h5>Contact</h5><a href="https://wa.me/39351805820">WhatsApp</a></div>
+<div class="foot-col"><h5>Aria Automation</h5><span data-i18n="footer.about">Assistente vocale AI</span></div>
+<div class="foot-col"><h5 data-i18n="footer.services">Servizi</h5><a href="#" data-i18n="footer.booking">Prenotazione</a><a href="#" data-i18n="footer.qualification">Qualifica</a></div>
+<div class="foot-col"><h5 data-i18n="footer.contact">Contatti</h5><a href="https://wa.me/393518058208">WhatsApp</a></div>
 </div>
-<div class="foot-bottom"><span>© 2026 Aria Automation</span><span><a href="privacy.html" style="color:var(--muted)">Privacy Policy</a> · <a href="terms.html" style="color:var(--muted)">Terms of Service</a></span></div>
+<div class="foot-bottom"><span data-i18n="footer.copyright">© 2026 Aria Automation</span><span><a href="privacy.html" style="color:var(--muted)" data-i18n="footer.privacy">Privacy</a> · <a href="terms.html" style="color:var(--muted)" data-i18n="footer.terms">Termini</a></span></div>
 </footer>
 
-<script>
-const WORKER_URL = 'https://aria-proxy.zampese-alessandro.workers.dev';
-
-function demo0(){return{phone:{name:'Aria',tag:'Live'},visual:'cal',steps:[
-{t:'2:32:05 PM',title:'Incoming call',body:'John Smith calls your number.',delay:0},
-{t:'2:32:07 PM',title:'Aria answers',body:'Answers professionally.',say:'Hello, this is Aria. How can I help you?',delay:2000},
-{t:'2:32:10 PM',title:'Appointment request',body:'Customer wants to book.',user:'I\'d like to book an appointment for a consultation.',delay:5000},
-{t:'2:32:13 PM',title:'Analysis',body:'Aria identifies service type.',think:true,delay:8000},
-{t:'2:32:15 PM',title:'Check availability',body:'Aria checks calendar.',action:{ic:'cal',t:'Calendar',s:'Check slots'},say:'Let me check availability...',delay:11000},
-{t:'2:32:18 PM',title:'Slot found',body:'Aria proposes time.',say:'I have tomorrow at 10:00 AM. Does that work?',delay:14000},
-{t:'2:32:21 PM',title:'Confirmation',body:'Customer confirms.',user:'Perfect!',delay:17000},
-{t:'2:32:23 PM',title:'Event created',body:'Aria creates event.',cal:true,d:'21 SEP',h:'10:00 AM',n:'Consultation — John Smith',company:'Smith & Co',say:'Booked! You\'ll receive a reminder.',delay:20000},
-{t:'2:32:26 PM',title:'WhatsApp',body:'Sends reminder.',action:{ic:'wa',t:'WhatsApp',s:'Sent'},delay:23000},
-{t:'2:32:28 PM',title:'Lead saved',body:'Saves to system.',action:{ic:'crm',t:'CRM',s:'Saved'},say:'Thank you, have a great day!',delay:26000}]}}
-
-function demo1(){return{phone:{name:'Aria',tag:'Qualify'},visual:'crm',steps:[
-{t:'9:15:02 AM',title:'New call',body:'Unknown contact calls.',delay:0},
-{t:'9:15:04 AM',title:'Aria answers',body:'Starts qualification.',say:'Hello, this is Aria from Aria Automation. How can I help you?',delay:2000},
-{t:'9:15:08 AM',title:'Customer interest',body:'Customer interested.',user:'I\'d like to learn more about your services.',delay:5000},
-{t:'9:15:11 AM',title:'Needs assessment',body:'Aria asks what they need.',say:'Of course. What exactly do you need?',delay:8000},
-{t:'9:15:15 AM',title:'Problem description',body:'Customer describes situation.',user:'We miss many calls and can\'t manage everything.',delay:11000},
-{t:'9:15:18 AM',title:'Budget inquiry',body:'Aria asks about budget.',say:'I understand. Do you have a monthly budget in mind?',delay:14000},
-{t:'9:15:22 AM',title:'Budget indicated',body:'Customer states budget.',user:'Around €150 per month.',delay:17000},
-{t:'9:15:25 AM',title:'Timeline',body:'Aria asks when to start.',say:'Perfect. When would you like to start?',delay:20000},
-{t:'9:15:29 AM',title:'Urgency',body:'Customer expresses urgency.',user:'As soon as possible, we need a quick solution.',delay:23000},
-{t:'9:15:32 AM',title:'Qualified',body:'Aria qualifies lead HOT.',think:true,crm:true,nm:'Marco Bianchi',comp:'Bianchi Studio',bdg:'€150/month',urg:'High',need:'Call management',say:'Got it. An operator will contact you today. Thanks!',delay:26000}]}}
-
-function demo2(){return{phone:{name:'Aria',tag:'Recovery'},visual:'wa',steps:[
-{t:'10:00:01 AM',title:'Database analysis',body:'Aria identifies cold leads.',delay:0},
-{t:'10:00:03 AM',title:'Lead selected',body:'Laura Verdi, 45 days ago.',action:{ic:'crm',t:'CRM',s:'Selected'},delay:1500},
-{t:'10:00:05 AM',title:'Outbound call',body:'Aria calls to re-engage.',say:'Hi Laura, this is Aria from Aria Automation. How are you?',delay:3000},
-{t:'10:00:10 AM',title:'Customer remembers',body:'Customer remembers conversation.',user:'Oh yes, I remember. We hadn\'t decided yet.',delay:5500},
-{t:'10:00:14 AM',title:'Targeted offer',body:'Aria proposes solution.',say:'I understand. Can I ask: is the call loss problem still open? We\'ve activated a special promotion.',delay:7500},
-{t:'10:00:19 AM',title:'Interest reborn',body:'Customer asks details.',user:'Yes, the problem is still there. What is it about?',delay:10000},
-{t:'10:00:23 AM',title:'Offer sent',body:'Aria sends offer via WhatsApp.',wa:true,msg:'Hi Laura! As promised, here are the details of our special promotion: 1st month free + 20% discount for first 3 months. If you have questions, I\'m here! 🚀',say:'If you activate this week, we offer you the 1st month free and 20% discount for 3 months.',delay:12000},
-{t:'10:00:28 AM',title:'Interest confirmed',body:'Customer interested but needs to consult.',user:'Interesting! I need to talk to my partner.',delay:14500},
-{t:'10:00:32 AM',title:'Call proposal',body:'Aria proposes operator call.',say:'Of course. Can I schedule a call with our operator for tomorrow afternoon? They can answer all your questions.',delay:16500},
-{t:'10:00:37 AM',title:'Appointment confirmed',body:'Customer confirms next day.',user:'Yes, tomorrow at 4:00 PM works.',wa:true,msg:'Perfect Laura! I confirm the call with our operator for tomorrow at 4:00 PM. We\'ll call you at the usual number. Have a great day! 📞',say:'Perfect. I\'ll send you an reminder one hour before. See you tomorrow!',delay:18500}]}}
-
-var views=document.getElementById('demoViews');
-var fns=[demo0,demo1,demo2];
-for(var n=0;n<3;n++){
-  var d=fns[n]();
-  var v=document.createElement('div');
-  v.className='demo-view'+(n===0?' active':'');
-  v.id='dv'+n;
-  var vis='';
-  if(d.visual==='cal'){
-    vis='<div class="cal-vis"><div class="cal-top"><span class="cal-title">September 2026</span><div class="cal-nav"><button>‹</button><button>Today</button><button>›</button></div></div><div class="cal-grid"><div class="hdr">M</div><div class="hdr">T</div><div class="hdr">W</div><div class="hdr">T</div><div class="hdr">F</div><div class="hdr">S</div><div class="hdr">S</div>';
-    for(var i=1;i<=35;i++){vis+='<div class="day'+(i===20?' today':'')+'" id="cal-day-'+(i-2)+'">'+((i>2&&i<=32)?i-2:'')+'</div>'}
-    vis+='</div><div class="cal-ev" id="cal-ev"><div class="ev-time" id="cal-ht"></div><div class="ev-name" id="cal-hn"></div><div class="ev-det" id="cal-hc"></div></div></div>';
-  } else if(d.visual==='wa'){
-    vis='<div class="wa-vis" id="wa-box"><div class="wa-msg sent">Waiting for messages...</div></div>';
-  } else {
-    vis='<div class="crm-vis"><div class="crm-top">🎯 CRM — Lead</div><div class="crm-body"><div class="crm-lead" id="crm-card"><div class="av" id="crm-av">J</div><div class="info"><div class="n" id="crm-cn">John Smith</div><div class="m" id="crm-cc">Smith & Co</div></div><span class="badge hot" id="crm-cb">HOT</span></div></div></div>';
-  }
-  v.innerHTML='<div class="dash"><div class="phone"><div class="phone-head"><div class="icn">🤖</div><h4>'+d.phone.name+'</h4><span class="tag">'+d.phone.tag+'</span></div><div class="phone-chat" id="s'+n+'-chat"></div></div><div class="visual"><div class="visual-head"><div class="icn '+d.visual+'">'+{cal:'📅',wa:'📱',crm:'🎯'}[d.visual]+'</div><h4>'+{cal:'Google Calendar',wa:'WhatsApp',crm:'CRM — Lead'}[d.visual]+'</h4></div><div class="visual-body">'+vis+'</div></div></div><div class="timeline" id="s'+n+'-tl"></div><div class="prog"><div class="fill" id="s'+n+'-prog"></div></div><div class="controls"><button class="prim" id="s'+n+'-btn" onclick="startDemo('+n+')">Start Demo</button><button class="sec" onclick="resetDemo('+n+')">Reset</button></div>';
-  views.appendChild(v);
-}
-
-var timers=[];
-function clr(){timers.forEach(clearTimeout);timers=[]}
-function sch(fn,ms){timers.push(setTimeout(fn,ms))}
-function selectDemo(n){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));document.querySelectorAll('.demo-view').forEach((v,i)=>v.classList.toggle('active',i===n))}
-
-function startDemo(n){
-  clr();
-  var d=fns[n]();
-  var btn=document.getElementById('s'+n+'-btn');
-  btn.textContent='Running...';
-  btn.disabled=true;
-  document.getElementById('s'+n+'-chat').innerHTML='';
-  document.getElementById('s'+n+'-tl').innerHTML='';
-  document.getElementById('s'+n+'-prog').style.width='0%';
-  if(d.visual==='cal'){document.getElementById('cal-ev').classList.remove('show');document.querySelectorAll('.cal-grid .day').forEach(el=>el.classList.remove('has-ev','show-ev','flash'))}
-  else if(d.visual==='wa'){document.getElementById('wa-box').innerHTML='<div class="wa-msg sent">Waiting...</div>'}
-  else{document.getElementById('crm-card').classList.remove('show')}
-  
-  d.steps.forEach((s,i)=>{
-    var div=document.createElement('div');
-    div.className='tl-step';
-    div.id='s'+n+'-step'+i;
-    var h='<div class="tl-head"><div class="tl-num">'+(i+1)+'</div><div class="tl-title">'+s.title+'</div><div class="tl-time">'+s.t+'</div></div>';
-    h+='<div class="tl-body">'+s.body+'</div>';
-    if(s.action){var icn={cal:'📅',wa:'📱',crm:'🎯'}[s.action.ic]||'✓';h+='<div class="tl-actions"><div class="tl-action"><div class="ic '+s.action.ic+'">'+icn+'</div><div class="tx"><div class="t">'+s.action.t+'</div><div class="s">'+s.action.s+'</div></div></div></div>'}
-    div.innerHTML=h;
-    document.getElementById('s'+n+'-tl').appendChild(div);
-  });
-  
-  d.steps.forEach((s,i)=>{
-    var delay=s.delay;
-    sch(()=>{var el=document.getElementById('s'+n+'-step'+i);if(el)el.classList.add('visible');document.getElementById('s'+n+'-prog').style.width=((i+1)/d.steps.length)*100+'%'},delay);
-    if(s.say)sch(()=>{var c=document.getElementById('s'+n+'-chat');c.innerHTML+='<div class="msg bot"><div class="lbl">Aria</div>'+s.say+'</div>';c.scrollTop=999},delay+300);
-    if(s.user)sch(()=>{var c=document.getElementById('s'+n+'-chat');c.innerHTML+='<div class="msg user"><div class="lbl">Customer</div>'+s.user+'</div>';c.scrollTop=999},delay+300);
-    if(s.think)sch(()=>{var c=document.getElementById('s'+n+'-chat');c.innerHTML+='<div class="think"><span></span><span></span><span></span></div>';c.scrollTop=999},delay+200);
-    if(s.cal){sch(()=>{document.getElementById('cal-ht').textContent=s.h;document.getElementById('cal-hn').textContent=s.n;document.getElementById('cal-hc').textContent=s.company+' — Created by Aria';document.getElementById('cal-ev').classList.add('show');var dayEl=document.getElementById('cal-day-19');if(dayEl){dayEl.classList.add('has-ev','show-ev','flash');setTimeout(()=>dayEl.classList.remove('flash'),800)}},delay+400)}
-    if(s.wa){sch(()=>{var box=document.getElementById('wa-box');box.innerHTML='<div class="wa-msg sent">'+s.msg+'</div>';box.scrollTop=999},delay+300)}
-    if(s.crm){sch(()=>{document.getElementById('crm-av').textContent=s.nm.charAt(0);document.getElementById('crm-cn').textContent=s.nm;document.getElementById('crm-cc').textContent=s.comp;document.getElementById('crm-cb').textContent=s.bdg.includes('150')?'HOT':'WARM';document.getElementById('crm-card').classList.add('show')},delay+400)}
-  });
-  
-  var last=d.steps[d.steps.length-1].delay;
-  sch(()=>{document.getElementById('s'+n+'-btn').textContent='Replay';document.getElementById('s'+n+'-btn').disabled=false},last+3000);
-}
-
-function resetDemo(n){
-  clr();
-  document.getElementById('s'+n+'-chat').innerHTML='';
-  document.getElementById('s'+n+'-tl').innerHTML='';
-  document.getElementById('s'+n+'-prog').style.width='0%';
-  document.getElementById('s'+n+'-btn').textContent='Start Demo';
-  document.getElementById('s'+n+'-btn').disabled=false;
-}
-
-async function generateDemo(){
-  var btn=document.getElementById('pBtn');
-  var out=document.getElementById('pOutput');
-  var data={name:document.getElementById('pName').value,type:document.getElementById('pType').value,services:document.getElementById('pServices').value,problem:document.getElementById('pProblem').value};
-  if(!data.name||!data.type||!data.services){alert('Fill at least name, type and services');return}
-  btn.disabled=true;
-  btn.textContent='Generating...';
-  out.style.display='block';
-  out.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:20px"><div style="width:24px;height:24px;border:3px solid #5c5c7a;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div><span style="color:var(--muted)">Generating demo...</span></div>';
-  
-  var prompt='You are Aria, an AI voice assistant. Generate a custom demo.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\nCreate a LONG conversation (8-10 messages) with MANY ACTIONS (5-6).\nRespond ONLY with valid JSON: {"title":"...","scenario":"...","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","datetime":"..."}}]}';
-  
-  try{
-    var res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'nvidia/nemotron-3-ultra-550b-a55b:free',messages:[{role:'user',content:prompt}],max_tokens:2000})});
-    var result=await res.json();
-    var text=result.choices[0].message.content;
-    var jsonMatch=text.match(/\{[\s\S]*\}/);
-    var jsonStr=jsonMatch?jsonMatch[0]:text;
-    function parseAIJSON(str){
-      str=str.replace(/```json\n?/g,'').replace(/```\n?/g,'');
-      var start=str.indexOf('{');
-      var end=str.lastIndexOf('}');
-      if(start===-1||end===-1) throw new Error('JSON not found');
-      str=str.substring(start,end+1);
-      var prev='';
-      var iter=0;
-      while(str!==prev&&iter<20){
-        prev=str;
-        str=str.replace(/\}\s*\{/g,'},{');
-        str=str.replace(/\}\s*"/g,')}","');
-        str=str.replace(/"\s*\{/g,'",{');
-        str=str.replace(/,\s*\]/g,']');
-        str=str.replace(/,\s*\}/g,'}');
-        iter++;
-      }
-      return str;
-    }
-    jsonStr=parseAIJSON(jsonStr);
-    var demo=JSON.parse(jsonStr);
-    runDemo(out,demo);
-  }catch(err){
-    out.innerHTML='<div style="color:#ff4444">Error: '+err.message+'</div>';
-  }
-  btn.disabled=false;
-  btn.textContent='Generate Demo';
-}
-
-function runDemo(container,demo){
-  var step=0,timers=[];
-  function reset(){
-    timers.forEach(clearTimeout);
-    timers=[];
-    step=0;
-    container.innerHTML='<div style="color:var(--accent);font-weight:600;margin-bottom:8px">'+demo.title+'</div><div style="color:var(--muted);font-size:.85em;margin-bottom:16px">'+demo.scenario+'</div><div style="width:100%;height:3px;background:var(--surface);border-radius:2px;margin-bottom:16px;overflow:hidden"><div id="demo-prog" style="height:100%;background:var(--accent);width:0%;transition:width .4s"></div></div><div id="demo-chat" style="background:var(--surface2);border-radius:8px;padding:14px;font-size:.85em;min-height:150px"></div>';
-  }
-  function showMsg(msg,delay){
-    setTimeout(()=>{
-      var chat=document.getElementById('demo-chat');
-      var color=msg.speaker==='Aria'?'var(--accent)':'var(--text)';
-      chat.innerHTML+='<div style="margin-bottom:8px;animation:msgIn .3s ease"><strong style="color:'+color+'">'+msg.speaker+':</strong> '+msg.text+'</div>';
-      chat.scrollTop=999;
-      document.getElementById('demo-prog').style.width=((step/demo.script.length)*100)+'%';
-      step++;
-    },delay);
-  }
-  reset();
-  var time=1000;
-  demo.script.forEach((msg,i)=>{showMsg(msg,time);time+=2500});
-}
-</script>
+<script src="app.js"></script>
 </body>
 </html>
