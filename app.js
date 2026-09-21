@@ -40,10 +40,10 @@ function buildDynamic(){
   var stats = document.getElementById('stats');
   stats.innerHTML = t.stats.map(function(s){return '<div class="stat"><div class="num">'+s.num+'</div><div class="lbl">'+s.lbl+'</div></div>'}).join('');
   var fg = document.getElementById('featGrid');
-  fg.innerHTML = t.features.items.map(function(f){return '<div class="feat"><div class="icn '+['ai','cal','crm','wa','ai','ai'][t.features.items.indexOf(f)]+'">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
+  fg.innerHTML = t.features.items.map(function(f,i){return '<div class="feat"><div class="icn '+['ai','cal','crm','wa','ai','ai'][i]+'">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
   var caps = ['📅','📧','💬','⏰','🎯','🔄','📊','🔔','📋','🤖','🎫','⚡'];
   var cg = document.getElementById('capGrid');
-  cg.innerHTML = t.capabilities.items.map(function(c,i){return '<div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)"><span style="font-size:1.3em">'+caps[i]+'</span><span style="font-size:.85em">'+c+'</span></div>'}).join('');
+  cg.innerHTML = t.capabilities.items.map(function(c,i){return '<div class="cap-item"><span class="cap-icn">'+caps[i]+'</span><span class="cap-txt">'+c+'</span></div>'}).join('');
   var tabs = document.getElementById('demo');
   tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')">'+tb+'</div>'}).join('');
   buildDemos();
