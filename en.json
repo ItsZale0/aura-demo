@@ -1,0 +1,135 @@
+{
+"nav": {"demos": "Demos", "personalize": "Personalize", "contact": "Contact"},
+"hero": {
+"badge": "Available 24/7 · Setup in hours",
+"title": "Your salesperson that never sleeps",
+"subtitle": "Aria answers <strong>every call</strong>, books appointments, sends WhatsApp/SMS reminders, qualifies leads, and recovers lost customers. <strong>All automatically, even when you're closed.</strong>",
+"check1": "Answers every call",
+"check2": "Books automatically",
+"check3": "Sends WhatsApp/SMS",
+"check4": "Qualifies leads",
+"cta": "See how it works →"
+},
+"stats": [
+{"num": "24/7", "lbl": "Always available"},
+{"num": "0", "lbl": "Missed calls"},
+{"num": "3x", "lbl": "More appointments"},
+{"num": "80%", "lbl": "Time saved"}
+],
+"features": {
+"title": "What Aria does",
+"subtitle": "A complete AI agent that adapts to your business.",
+"items": [
+{"icn": "🗣️", "t": "Answers calls", "d": "24/7 in any language, never misses a call"},
+{"icn": "📅", "t": "Books appointments", "d": "Checks availability and creates events in real-time"},
+{"icn": "🎯", "t": "Qualifies leads", "d": "Targeted questions, budget and urgency assessment"},
+{"icn": "📱", "t": "Messaging channels", "d": "Automatic reminders and follow-ups"},
+{"icn": "🔄", "t": "Recovers contacts", "d": "Identifies cold leads and re-engages them"},
+{"icn": "📊", "t": "Reports & analytics", "d": "Always up-to-date dashboards"}
+]
+},
+"capabilities": {
+"title": "What Aria can do for you",
+"subtitle": "No limits. Any process can be automated.",
+"items": ["Automatic bookings", "Automated emails", "SMS & WhatsApp", "Reminders", "Lead qualification", "Customer recovery", "Reports & analytics", "Push notifications", "Digital forms", "Voice chatbot", "Customer support", "And anything else!"]
+},
+"demoBanner": {
+"title": "Below are just a few examples",
+"text": "Aria adapts to <strong>any need</strong> of your business. Bookings, emails, SMS, reminders, CRM, notifications, follow-up and much more.",
+"cta": "🎮 Create your custom demo"
+},
+"tabs": ["📅 Booking", "🎯 Lead Qualification", "🔄 Customer Recovery"],
+"personalizza": {
+"title": "Create your custom demo",
+"subtitle": "Enter your business data and generate a unique demo.",
+"name": "Business name",
+"namePh": "e.g. Smith Studio, Smith Plumbing...",
+"type": "Business type / Industry",
+"typePh": "e.g. Plumber, Accountant, Clinic...",
+"services": "Main services",
+"servicesPh": "e.g. Repairs, boiler installation, maintenance...",
+"problem": "Problem to solve",
+"problemPh": "e.g. We miss many calls...",
+"btn": "Generate Custom Demo",
+"generating": "Generating...",
+"error": "Error",
+"fillFields": "Fill at least name, type and services"
+},
+"contact": {
+"title": "Questions about pricing or specific requests?",
+"text": "Write us on WhatsApp for a free consultation.",
+"btn": "📱 Message us on WhatsApp"
+},
+"footer": {
+"about": "AI voice assistant for businesses.",
+"services": "Services",
+"contact": "Contact",
+"booking": "Automatic booking",
+"qualification": "Lead qualification",
+"privacy": "Privacy Policy",
+"terms": "Terms of Service",
+"copyright": "© 2026 Aria Automation"
+},
+"demoUI": {
+"start": "Start Demo",
+"running": "Running...",
+"replay": "Replay",
+"reset": "Reset",
+"calendar": "Google Calendar",
+"whatsapp": "WhatsApp",
+"crm": "CRM — Lead",
+"aria": "Aria",
+"customer": "Customer"
+},
+"disclaimer": "⚠️ Demos are simulated. Real results depend on the AI model used and may vary.",
+"demos": [
+{
+"phone": {"name": "Aria", "tag": "Live"},
+"visual": "cal",
+"steps": [
+{"t": "2:32:05 PM", "title": "Incoming call", "body": "John Smith calls your number.", "delay": 0},
+{"t": "2:32:07 PM", "title": "Aria answers", "body": "Answers professionally.", "say": "Hello! This is Aria. How can I help you?", "delay": 2000},
+{"t": "2:32:10 PM", "title": "Appointment request", "body": "Customer wants to book.", "user": "I'd like to book an appointment for a consultation.", "delay": 5000},
+{"t": "2:32:13 PM", "title": "Analysis", "body": "Aria identifies service type.", "think": true, "delay": 8000},
+{"t": "2:32:15 PM", "title": "Check availability", "body": "Aria checks calendar.", "action": {"ic": "cal", "t": "Calendar", "s": "Slots checked"}, "say": "Let me check availability...", "delay": 11000},
+{"t": "2:32:18 PM", "title": "Slot found", "body": "Aria proposes time.", "say": "I have tomorrow at 10:00 AM. Does that work?", "delay": 14000},
+{"t": "2:32:21 PM", "title": "Confirmation", "body": "Customer confirms.", "user": "Perfect!", "delay": 17000},
+{"t": "2:32:23 PM", "title": "Event created", "body": "Aria creates event.", "cal": true, "d": "SEP 21", "h": "10:00 AM", "n": "Consultation — John Smith", "company": "Smith & Co", "say": "Booked! You'll receive a reminder.", "delay": 20000},
+{"t": "2:32:26 PM", "title": "WhatsApp", "body": "Sends reminder.", "action": {"ic": "wa", "t": "WhatsApp", "s": "Sent"}, "delay": 23000},
+{"t": "2:28:28 PM", "title": "Lead saved", "body": "Saves to system.", "action": {"ic": "crm", "t": "CRM", "s": "Saved"}, "say": "Thank you, have a great day!", "delay": 26000}
+]
+},
+{
+"phone": {"name": "Aria", "tag": "Qualify"},
+"visual": "crm",
+"steps": [
+{"t": "9:15:02 AM", "title": "New call", "body": "Unknown contact calls.", "delay": 0},
+{"t": "9:15:04 AM", "title": "Aria answers", "body": "Starts qualification.", "say": "Hello! This is Aria from Aria Automation. How can I help you?", "delay": 2000},
+{"t": "9:15:08 AM", "title": "Customer interest", "body": "Customer is interested.", "user": "I'd like to learn more about your services.", "delay": 5000},
+{"t": "9:15:11 AM", "title": "Needs assessment", "body": "Aria asks what they need.", "say": "Of course! What exactly do you need?", "delay": 8000},
+{"t": "9:15:15 AM", "title": "Problem description", "body": "Customer describes situation.", "user": "We miss many calls and can't manage everything.", "delay": 11000},
+{"t": "9:15:18 AM", "title": "Budget inquiry", "body": "Aria asks about budget.", "say": "I understand. Do you have a monthly budget in mind?", "delay": 14000},
+{"t": "9:15:22 AM", "title": "Budget indicated", "body": "Customer states budget.", "user": "Around $150 per month.", "delay": 17000},
+{"t": "9:15:25 AM", "title": "Timeline", "body": "Aria asks when to start.", "say": "Perfect. When would you like to start?", "delay": 20000},
+{"t": "9:15:29 AM", "title": "Urgency", "body": "Customer expresses urgency.", "user": "As soon as possible, we need a quick solution.", "delay": 23000},
+{"t": "9:15:32 AM", "title": "Qualified", "body": "Aria qualifies lead HOT.", "think": true, "crm": true, "nm": "Michael Brown", "comp": "Brown Studio", "bdg": "$150/month", "urg": "High", "need": "Call management", "say": "Got it! An operator will contact you today. Thanks!", "delay": 26000}
+]
+},
+{
+"phone": {"name": "Aria", "tag": "Recovery"},
+"visual": "wa",
+"steps": [
+{"t": "10:00:01 AM", "title": "Database analysis", "body": "Aria identifies cold leads.", "delay": 0},
+{"t": "10:00:03 AM", "title": "Lead selected", "body": "Sarah Green, 45 days ago.", "action": {"ic": "crm", "t": "CRM", "s": "Selected"}, "delay": 1500},
+{"t": "10:00:05 AM", "title": "Outbound call", "body": "Aria calls to re-engage.", "say": "Hi Sarah! This is Aria from Aria Automation. How are you?", "delay": 3000},
+{"t": "10:00:10 AM", "title": "Customer remembers", "body": "Customer remembers conversation.", "user": "Oh yes, I remember. We hadn't decided yet.", "delay": 5500},
+{"t": "10:00:14 AM", "title": "Targeted offer", "body": "Aria proposes solution.", "say": "I understand. Can I ask: is the missed calls problem still open? We've activated a special promotion.", "delay": 7500},
+{"t": "10:00:19 AM", "title": "Interest reborn", "body": "Customer asks details.", "user": "Yes, the problem is still there. What is it about?", "delay": 10000},
+{"t": "10:00:23 AM", "title": "Offer sent", "body": "Aria sends offer via WhatsApp.", "wa": true, "msg": "Hi Sarah! As promised, here are the details of our special promotion: 1st month free + 20% discount for the first 3 months. If you have questions, I'm here! 🚀", "say": "If you activate this week, we offer you the 1st month free and 20% discount for 3 months.", "delay": 12000},
+{"t": "10:00:28 AM", "title": "Interest confirmed", "body": "Customer interested but needs to consult.", "user": "Interesting! I need to talk to my partner.", "delay": 14500},
+{"t": "10:00:32 AM", "title": "Call proposal", "body": "Aria proposes operator call.", "say": "Of course. Can I schedule a call with our operator for tomorrow afternoon? They can answer all your questions.", "delay": 16500},
+{"t": "10:00:37 AM", "title": "Appointment confirmed", "body": "Customer confirms next day.", "user": "Yes, tomorrow at 4:00 PM works.", "wa": true, "msg": "Perfect Sarah! I confirm the call with our operator for tomorrow at 4:00 PM. We'll call you at your usual number. Have a great day! 📞", "say": "Perfect. I'll send you a reminder one hour before. See you tomorrow!", "delay": 18500}
+]
+}
+]
+}
