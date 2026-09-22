@@ -515,7 +515,7 @@ function runGenDemo(container,demo){
       if(!acts)return;
       var ic={CREATE_APPOINTMENT:'📅',SEND_WHATSAPP_CONFIRMATION:'📱',SEND_WHATSAPP_REMINDER:'⏰',SEND_EMAIL:'📧',SEND_SMS:'💬',LOG_CALL_CRM:'🎯',CREATE_TICKET:'🎫',UPDATE_CRM_STATUS:'🔄',ADD_TO_WAITLIST:'📋',SEND_FOLLOWUP:'📨',GENERATE_QUOTE:'🧾',TRANSCRIBE_SUMMARY:'📝',BOOK_TABLE:'🍽️',ORDER_STATUS_CHECK:'📦',CANCEL_APPOINTMENT:'❌'}[a.type]||'⚡';
       var dt=Object.keys(a.details).map(function(k){return k+': '+a.details[k]}).join(' · ');
-      acts.innerHTML+='<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;animation:actIn .3s ease"><span style="font-size:1.2em">'+ic+'</span><div><div style="font-size:.8em;font-weight:600">'+esc(a.type)+'</div><div style="font-size:.7em;color:var(--muted)">'+esc(dt)+'</div></div></div>';
+      acts.innerHTML+='<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;animation:actIn .3s ease"><span style="font-size:1.2em">'+ic+'</span><div><div style="font-size:.8em;font-weight:600">'+esc(a.type)+'</div><div style="font-size:.7em;color:var(--muted)">'+esc(dt)+'</div></div></div>';
     },actTotal+i*1500));
   });
 }
@@ -638,6 +638,14 @@ function initDynamic(){
   setInterval(updateGreetingClock, 30000);
   initScrollProgress();
   initNavActive();
+  // tab demo accessibili da tastiera (Enter/Spazio)
+  document.addEventListener('keydown', function(e){
+    if((e.key==='Enter'||e.key===' ') && e.target && e.target.classList && e.target.classList.contains('tab')){
+      e.preventDefault();
+      var tabs = [].slice.call(document.querySelectorAll('.tab'));
+      selectDemo(tabs.indexOf(e.target));
+    }
+  });
 }
 
 
