@@ -590,13 +590,82 @@ function initDynamic(){
   try{ saved = localStorage.getItem('aria-theme'); }catch(e){}
   var h = new Date().getHours();
   applyTheme(saved || (h >= 19 || h < 6 ? 'night' : 'day'));
-  showTimeGreeting();
+  updateGreetingClock();
   initReveal();
   initCursorGlow();
   initVisitVibe();
   // saluto aggiornato ogni minuto (cambia a mezzanotte ecc)
-  setInterval(showTimeGreeting, 60000);
+  setInterval(updateGreetingClock, 30000);
+  initScrollProgress();
+  initNavActive();
 }
+
+
+// ═══ OROLOGIO LIVE nel saluto ═══
+function updateGreetingClock(){
+  var el = document.getElementById('tgText');
+  if(!el) return;
+  var now = new Date();
+  var hh = String(now.getHours()).padStart(2,'0');
+  var mm = String(now.getMinutes()).padStart(2,'0');
+  var g = getTimeGreeting();
+  var t = I18N[CUR];
+  var msg = t && t.ui && t.ui.greetings && t.ui.greetings[g.key] ? t.ui.greetings[g.key] : '';
+  if(msg){
+    el.innerHTML = msg + ' <span class="tg-sep" style="display:inline-block;margin:0 6px;vertical-align:middle"></span> <span class="tg-clock">' + hh + ':' + mm + '</span>';
+  }
+}
+
+// ═══ SCROLL PROGRESS BAR ═══
+function initScrollProgress(){
+  var bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+  var raf = null;
+  window.addEventListener('scroll', function(){
+    if(raf) return;
+    raf = requestAnimationFrame(function(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      raf = null;
+    });
+  }, {passive:true});
+}
+
+// ═══ NAV ACTIVE SECTION ═══
+function initNavActive(){
+  var links = document.querySelectorAll('.nav-links a');
+  if(!links.length) return;
+  var sections = [];
+  links.forEach(function(a){
+    var id = a.getAttribute('href');
+    if(id && id.startsWith('#')){
+      var s = document.querySelector(id);
+      if(s) sections.push({el: s, link: a});
+    }
+  });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        var match = sections.find(function(s){ return s.el === e.target; });
+        if(match) match.link.classList.add('active');
+      }
+    });
+  }, {rootMargin: '-30% 0px -60% 0px'});
+  sections.forEach(function(s){ obs.observe(s.el); });
+}
+
+// ═══ PANEL RUNNING STATE ═══
+var origStartDemo = startDemo;
+startDemo = function(n){
+  var panels = document.querySelectorAll('#dv' + n + ' .panel');
+  panels.forEach(function(p){ p.classList.add('running'); });
+  origStartDemo(n);
+  var last = I18N[CUR].demos[n].steps[I18N[CUR].demos[n].steps.length-1].delay;
+  setTimeout(function(){ panels.forEach(function(p){ p.classList.remove('running'); }); }, last + 3500);
+};
+
 
 // INIT
 (function(){
