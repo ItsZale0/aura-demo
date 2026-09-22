@@ -267,8 +267,8 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 .foot-bottom a:hover{color:#fff}
 
 /* ═══ TOAST (saluto dinamico) ═══ */
-.toast{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;font-size:.88em;font-weight:500;line-height:1.5;max-width:340px;transform:translateY(120%);transition:transform .5s cubic-bezier(.2,.7,.3,1)}
-.toast.show{transform:none}
+.toast{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;font-size:.88em;font-weight:500;line-height:1.5;max-width:340px;transform:translateY(calc(100% + 40px));transition:transform .5s cubic-bezier(.2,.7,.3,1),visibility .5s;visibility:hidden}
+.toast.show{transform:none;visibility:visible}
 .toast .t-icn{font-size:1.4em;flex-shrink:0;animation:float 2.5s ease-in-out infinite}
 
 /* ═══ CURSOR GLOW ═══ */
