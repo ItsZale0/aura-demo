@@ -424,5 +424,10 @@
   "welcomeFirst": "Benvenuto! Sono Aria, guarda le demo qui sotto.",
   "welcomeBack": "Bentornato!",
   "welcomeBack3": "Ci vediamo spesso, mi piace 😊"
+ },
+ "siteCta": {
+  "title": "Vuoi un sito così?",
+  "text": "Questo sito è veloce, si adatta a ogni schermo ed è ottimizzato per i motori di ricerca. Se ti serve una presenza web così per la tua attività, la realizziamo noi.",
+  "btn": "Parliamone"
  }
 }
