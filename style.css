@@ -118,6 +118,7 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 .cap-item{display:flex;align-items:center;gap:12px;padding:15px 18px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:.9em;font-weight:500;line-height:1.5;transition:all .25s;box-shadow:var(--shadow-sm)}
 .cap-item:hover{transform:translateX(6px);border-color:color-mix(in srgb,var(--accent) 40%,var(--border));box-shadow:var(--shadow-md)}
 .cap-icn{font-size:1.15em;flex-shrink:0;transition:transform .25s}
+.cap-txt{line-height:1.5}
 .cap-item:hover .cap-icn{transform:scale(1.25)}
 
 /* ═══ DEMO TABS ═══ */
@@ -209,6 +210,7 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 .tl-body{font-size:.84em;color:var(--muted);margin-left:35px;line-height:1.6}
 .tl-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;margin-left:35px}
 .tl-action{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;font-size:.75em;font-weight:500;line-height:1.4;animation:actIn .3s ease;transition:all .2s}
+.tl-action .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95em;background:var(--card);box-shadow:var(--shadow-sm);flex-shrink:0}
 .tl-action:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 @media(max-width:640px){.tl-body,.tl-actions{margin-left:0}}
 
@@ -481,7 +483,7 @@ section.after-full{padding-top:48px}
 [data-theme="night"] ::selection{background:color-mix(in srgb,var(--accent) 40%,transparent)}
 
 /* Scroll-margin per anchor con nav sticky */
-section[id]{scroll-margin-top:80px}
+section[id],#demo{scroll-margin-top:80px}
 
 /* Smooth scroll migliore */
 html{scroll-behavior:smooth}
