@@ -98,6 +98,7 @@ section{max-width:1080px;margin:0 auto;padding:96px 32px}
 section.full{max-width:100%;background:var(--bg2);padding:96px 32px;transition:background .5s}
 section.full>div{max-width:1080px;margin:0 auto}
 .sec-head{margin-bottom:48px}
+.sec-head.tight{margin-bottom:36px}
 h2{font-size:clamp(1.9em,4vw,2.7em);font-weight:800;letter-spacing:-.035em;line-height:1.15;margin-bottom:16px}
 .sub{font-size:1.08em;color:var(--muted);line-height:1.7;max-width:32em;margin-bottom:0}
 
@@ -120,11 +121,11 @@ h2{font-size:clamp(1.9em,4vw,2.7em);font-weight:800;letter-spacing:-.035em;line-
 .cap-item:hover .cap-icn{transform:scale(1.25)}
 
 /* ═══ DEMO TABS ═══ */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;max-width:1080px;margin:0 auto 40px;padding:0 32px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;max-width:1080px;margin:0 auto 36px;padding:0 32px}
 .tab{padding:13px 26px;border:1.5px solid var(--border);border-radius:28px;background:var(--card);font-size:.9em;font-weight:600;line-height:1.2;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .22s;box-shadow:var(--shadow-sm)}
 .tab:hover{border-color:var(--text);color:var(--text);transform:translateY(-2px)}
 .tab.active{background:var(--text);color:var(--bg);border-color:var(--text);box-shadow:var(--shadow-md)}
-.demo-view{display:none;max-width:1080px;margin:0 auto;padding:0 32px 100px}
+.demo-view{display:none;max-width:1080px;margin:0 auto;padding:0 32px 96px}
 .demo-view.active{display:block;animation:fadeUp .45s ease}
 
 /* ═══ DASH ═══ */
