@@ -10,7 +10,7 @@ function setLang(l){
     var langs=['it','en','es','zh'];
     b.classList.toggle('active', langs[i]===l);
   });
-  document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Space Grotesk',sans-serif" : "'Space Grotesk',sans-serif";
+  document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Inter',sans-serif" : "'Inter',sans-serif";
   applyI18N();
   buildDynamic();
   try{localStorage.setItem('aria-lang',l)}catch(e){}
@@ -40,7 +40,7 @@ function buildDynamic(){
   var stats = document.getElementById('stats');
   stats.innerHTML = t.stats.map(function(s){return '<div class="stat"><div class="num">'+s.num+'</div><div class="lbl">'+s.lbl+'</div></div>'}).join('');
   var fg = document.getElementById('featGrid');
-  fg.innerHTML = t.features.items.map(function(f,i){return '<div class="feat"><div class="icn '+['ai','cal','crm','wa','ai','ai'][i]+'">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
+  fg.innerHTML = t.features.items.map(function(f){return '<div class="feat"><div class="ficn">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
   var caps = ['📅','📧','💬','⏰','🎯','🔄','📊','🔔','📋','🤖','🎫','⚡'];
   var cg = document.getElementById('capGrid');
   cg.innerHTML = t.capabilities.items.map(function(c,i){return '<div class="cap-item"><span class="cap-icn">'+caps[i]+'</span><span class="cap-txt">'+c+'</span></div>'}).join('');
