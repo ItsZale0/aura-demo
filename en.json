@@ -424,5 +424,10 @@
   "welcomeFirst": "Welcome! I'm Aria — check out the demos below.",
   "welcomeBack": "Welcome back!",
   "welcomeBack3": "You keep coming back — I like it 😊"
+ },
+ "siteCta": {
+  "title": "Want a site like this?",
+  "text": "This site is fast, adapts to any screen, and is optimized for search engines. If your business needs a web presence like this, we build it.",
+  "btn": "Let's talk"
  }
 }
