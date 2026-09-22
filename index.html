@@ -14,15 +14,15 @@
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <nav class="nav">
-<div class="nav-brand"><div class="mark" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#000"/><path d="M9 22V10h2.2v12H9z" fill="#fff"/><path d="M13 10h3.4c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9H15v2.4h-2V10zm3.4 7.8c1.6 0 2.9-1.3 2.9-2.9s-1.3-2.9-2.9-2.9H15v5.8h1.4z" fill="#fff"/><circle cx="23.5" cy="20.5" r="2" fill="#ff6b00"/></svg></div> Aria</div>
+<div class="nav-brand"><div class="mark"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" role="img" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#000"/><path d="M9 22V10h2.2v12H9z" fill="#fff"/><path d="M13 10h3.4c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9H15v2.4h-2V10zm3.4 7.8c1.6 0 2.9-1.3 2.9-2.9s-1.3-2.9-2.9-2.9H15v5.8h1.4z" fill="#fff"/><circle cx="23.5" cy="20.5" r="2" fill="#ff6b00"/></svg></div> Aria</div>
 <ul class="nav-links"><li><a href="#demo" data-i18n="nav.demos">Demo</a></li><li><a href="#personalizza" data-i18n="nav.personalize">Personalizza</a></li><li><a href="#contact" data-i18n="nav.contact">Contatti</a></li></ul>
 <div style="display:flex;gap:8px;align-items:center">
-<button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Giorno / Notte" aria-label="Cambia tema giorno/notte">☀️</button>
-<div class="lang-sel" id="langSel" role="group" aria-label="Selettore lingua">
-<button onclick="setLang('it')" class="active">IT</button>
-<button onclick="setLang('en')">EN</button>
-<button onclick="setLang('es')">ES</button>
-<button onclick="setLang('zh')">中文</button>
+<button class="theme-btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Giorno / Notte" aria-label="Attiva o disattiva la modalità notte">☀️</button>
+<div class="lang-sel" id="langSel" role="group" aria-label="Lingua / Language">
+<button type="button" onclick="setLang('it')" class="active" aria-label="Italiano" aria-pressed="true">IT</button>
+<button type="button" onclick="setLang('en')" aria-label="English" aria-pressed="false">EN</button>
+<button type="button" onclick="setLang('es')" aria-label="Español" aria-pressed="false">ES</button>
+<button type="button" onclick="setLang('zh')" aria-label="中文" aria-pressed="false">中文</button>
 </div>
 </div>
 </nav>
@@ -78,6 +78,19 @@
 <div class="tabs" id="demo"></div>
 <div id="demoViews"></div>
 
+
+<section class="site-cta reveal">
+<div class="cta-inner">
+<div class="cta-text">
+<h2 data-i18n="siteCta.title">Vuoi un sito così?</h2>
+<p data-i18n="siteCta.text">Questo sito è veloce, si adatta a ogni schermo ed è ottimizzato per i motori di ricerca. Se ti serve una presenza web così per la tua attività, la realizziamo noi.</p>
+</div>
+<div class="cta-action">
+<a href="https://wa.me/393518058208?text=Ciao, voglio un sito come quello di Aria" class="btn accent" data-i18n="siteCta.btn">Parliamone</a>
+</div>
+</div>
+</section>
+
 <section id="personalizza">
 <div>
 <div class="sec-head reveal" style="text-align:center;max-width:600px;margin:0 auto 48px">
@@ -112,7 +125,7 @@
 <div class="foot-bottom"><span data-i18n="footer.copyright">© 2026 Aria Automation</span><span><a href="privacy.html" data-i18n="footer.privacy">Privacy</a> · <a href="terms.html" data-i18n="footer.terms">Termini</a></span></div>
 </footer>
 
-<div class="toast" id="toast"><span class="t-icn" id="toastIcon">👋</span><span id="toastText"></span></div>
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="t-icn" id="toastIcon">👋</span><span id="toastText"></span></div>
 
 <script src="app.js"></script>
 </body>
