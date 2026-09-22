@@ -63,7 +63,14 @@ function applyI18N(){
   document.querySelectorAll('[data-i18n-html]').forEach(function(el){
     var k = el.getAttribute('data-i18n-html');
     var v = k.split('.').reduce(function(o,p){return o&&o[p]},t);
-    if(v!==undefined) el.innerHTML=v;
+    // Hero subtitle: variante casuale ad ogni load
+    if(v!==undefined){
+      if(k==='hero.subtitle'){
+        var vars = k.split('.').reduce(function(o,p){return o&&o[p]}, {hero:{subtitle:t.hero['subtitleVariants']}});
+        if(vars && vars.length){ v = vars[Math.floor(Math.random()*vars.length)]; }
+      }
+      el.innerHTML=v;
+    }
   });
   document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
     var k = el.getAttribute('data-i18n-ph');
