@@ -11,7 +11,11 @@
   "check2": "Books appointments",
   "check3": "Sends confirmations",
   "check4": "Never misses a call",
-  "cta": "See how it works"
+  "cta": "See how it works",
+  "badge": "Online right now",
+  "title1": "Your phone",
+  "title2": "answers itself.",
+  "cta2": "Try it on your business"
  },
  "stats": [
   {
@@ -407,5 +411,18 @@
     }
    ]
   }
- ]
+ ],
+ "ui": {
+  "greetings": {
+   "morning": "Good morning! Off to a good start today.",
+   "afternoon": "Good afternoon! How's it going?",
+   "evening": "Good evening! Still working?",
+   "night": "Coding late huh? 👀"
+  },
+  "nightOn": "Night mode on",
+  "dayOn": "Day mode on",
+  "welcomeFirst": "Welcome! I'm Aria — check out the demos below.",
+  "welcomeBack": "Welcome back!",
+  "welcomeBack3": "You keep coming back — I like it 😊"
+ }
 }
