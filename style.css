@@ -73,6 +73,7 @@ body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;background:var(--bg
 
 @media(max-width:600px){
 .time-greet{font-size:.72em;margin-bottom:10px}
+.hero-badge{font-size:.72em;margin-bottom:18px}
 }
 
 .hero{max-width:1080px;margin:0 auto;padding:40px 32px 56px;position:relative}
