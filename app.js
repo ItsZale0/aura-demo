@@ -14,7 +14,7 @@ function setLang(l){
   });
   var themeBtn=document.getElementById('themeBtn');
   if(themeBtn) themeBtn.setAttribute('aria-label', THEME_ARIA[l]||THEME_ARIA.it);
-  document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Inter',sans-serif" : "'Inter',sans-serif";
+  document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Plus Jakarta Sans',sans-serif" : "'Plus Jakarta Sans',sans-serif";
   applyI18N();
   buildDynamic();
   showTimeGreeting();
