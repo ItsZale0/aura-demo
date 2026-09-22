@@ -2,6 +2,7 @@ var WORKER_URL = 'https://aria-proxy.zampese-alessandro.workers.dev';
 var I18N = {};
 var CUR = 'it';
 var LANG_NAMES = {it:'Italiano',en:'English',es:'Español',zh:'中文'};
+var THEME_ARIA = {it:'Attiva o disattiva la modalità notte',en:'Toggle night mode',es:'Activar o desactivar el modo noche',zh:'切换夜间模式'};
 
 function setLang(l){
   CUR = l;
@@ -9,11 +10,15 @@ function setLang(l){
   document.querySelectorAll('#langSel button').forEach(function(b,i){
     var langs=['it','en','es','zh'];
     b.classList.toggle('active', langs[i]===l);
+    b.setAttribute('aria-pressed', langs[i]===l ? 'true' : 'false');
   });
+  var themeBtn=document.getElementById('themeBtn');
+  if(themeBtn) themeBtn.setAttribute('aria-label', THEME_ARIA[l]||THEME_ARIA.it);
   document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Inter',sans-serif" : "'Inter',sans-serif";
   applyI18N();
   buildDynamic();
   showTimeGreeting();
+  updateGreetingClock();
   try{localStorage.setItem('aria-lang',l)}catch(e){}
 }
 
@@ -23,6 +28,7 @@ function typeText(elId, text){
   if(!el) return;
   var i = 0;
   el.textContent = '';
+  clearTimeout(TYPE_TIMER);
   function tick(){
     if(i <= text.length){
       el.textContent = text.substring(0, i);
@@ -47,7 +53,7 @@ function applyI18N(){
           // title2 = typewriter, parte dopo l'ingresso di title1
           el.innerHTML = '<span class="type-wrap"><span class="accent" id="typeTarget"></span></span><span class="type-cursor" id="typeCursor"></span>';
           clearTimeout(TYPE_TIMER);
-          setTimeout(function(){ typeText('typeTarget', v); }, 650);
+          TYPE_TIMER = setTimeout(function(){ typeText('typeTarget', v); }, 650);
         }
       } else {
         el.textContent = v;
@@ -68,22 +74,23 @@ function applyI18N(){
 
 function buildDynamic(){
   var t = I18N[CUR];
+  if(!t){ return; } // lingua non caricata: niente da costruire
   var stats = document.getElementById('stats');
-  stats.innerHTML = t.stats.map(function(s){return '<div class="stat"><div class="num">'+s.num+'</div><div class="lbl">'+s.lbl+'</div></div>'}).join('');
+  if(stats) stats.innerHTML = t.stats.map(function(s){return '<div class="stat"><div class="num">'+s.num+'</div><div class="lbl">'+s.lbl+'</div></div>'}).join('');
   var fg = document.getElementById('featGrid');
-  fg.innerHTML = t.features.items.map(function(f){return '<div class="feat"><div class="ficn">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
+  if(fg) fg.innerHTML = t.features.items.map(function(f){return '<div class="feat"><div class="ficn">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
   var caps = ['📅','📧','💬','⏰','🎯','🔄','📊','🔔','📋','🤖','🎫','⚡'];
   var cg = document.getElementById('capGrid');
-  cg.innerHTML = t.capabilities.items.map(function(c,i){return '<div class="cap-item"><span class="cap-icn">'+caps[i]+'</span><span class="cap-txt">'+c+'</span></div>'}).join('');
+  if(cg) cg.innerHTML = t.capabilities.items.map(function(c,i){return '<div class="cap-item"><span class="cap-icn">'+caps[i]+'</span><span class="cap-txt">'+c+'</span></div>'}).join('');
   var tabs = document.getElementById('demo');
-  tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')">'+tb+'</div>'}).join('');
+  if(tabs) tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')" role="button" tabindex="0" aria-pressed="'+(i===0)+'">'+tb+'</div>'}).join('');
   buildDemos();
 }
 
 var timers=[];
 function clr(){timers.forEach(clearTimeout);timers=[]}
 function sch(fn,ms){timers.push(setTimeout(fn,ms))}
-function selectDemo(n){document.querySelectorAll('.tab').forEach(function(tb,i){tb.classList.toggle('active',i===n)});document.querySelectorAll('.demo-view').forEach(function(v,i){v.classList.toggle('active',i===n)})}
+function selectDemo(n){document.querySelectorAll('.tab').forEach(function(tb,i){tb.classList.toggle('active',i===n);tb.setAttribute('aria-pressed', i===n)});document.querySelectorAll('.demo-view').forEach(function(v,i){v.classList.toggle('active',i===n)})}
 
 function buildDemos(){
   var t = I18N[CUR];
@@ -94,6 +101,7 @@ function buildDemos(){
   t.demos.forEach(function(d,n){
     var v=document.createElement('div');
     v.className='demo-view'+(n===0?' active':'');
+    v.id='dv'+n;
     var vis='';
     if(d.visual==='cal'){
       vis='<div class="cal-vis"><div class="cal-top"><span class="cal-title">2026</span><div class="cal-nav"><button>‹</button><button>Today</button><button>›</button></div></div><div class="cal-grid"><div class="hdr">L</div><div class="hdr">M</div><div class="hdr">M</div><div class="hdr">G</div><div class="hdr">V</div><div class="hdr">S</div><div class="hdr">D</div>';
@@ -104,7 +112,7 @@ function buildDemos(){
     } else {
       vis='<div class="crm-vis"><div class="crm-top">🎯 CRM</div><div class="crm-body"><div class="crm-lead" id="crm-card"><div class="av" id="crm-av">J</div><div class="info"><div class="n" id="crm-cn"></div><div class="m" id="crm-cc"></div></div><span class="badge hot" id="crm-cb">HOT</span></div><div class="crm-row"><span class="k">Budget</span><span class="v" id="crm-bdg"></span></div><div class="crm-row"><span class="k">Urgency</span><span class="v" id="crm-urg"></span></div><div class="crm-row"><span class="k">Need</span><span class="v" id="crm-need"></span></div></div></div>';
     }
-    v.innerHTML='<div class="dash"><div class="phone"><div class="phone-head"><div class="icn">🤖</div><h4>'+d.phone.name+'</h4><span class="tag">'+d.phone.tag+'</span></div><div class="phone-chat" id="s'+n+'-chat"></div></div><div class="visual"><div class="visual-head"><div class="icn '+d.visual+'">'+icnMap[d.visual]+'</div><h4>'+titleMap[d.visual]+'</h4></div><div class="visual-body">'+vis+'</div></div></div><div class="timeline" id="s'+n+'-tl"></div><div class="prog"><div class="fill" id="s'+n+'-prog"></div></div><div class="controls"><button class="prim" id="s'+n+'-btn" onclick="startDemo('+n+')">'+t.demoUI.start+'</button><button class="sec" onclick="resetDemo('+n+')">'+t.demoUI.reset+'</button></div>';
+    v.innerHTML='<div class="dash"><div class="panel phone"><div class="panel-head"><div class="picn">🤖</div><h4>'+d.phone.name+'</h4><span class="tag"><span class="dot"></span>'+d.phone.tag+'</span></div><div class="phone-chat" id="s'+n+'-chat"></div></div><div class="panel visual"><div class="panel-head"><div class="picn">'+icnMap[d.visual]+'</div><h4>'+titleMap[d.visual]+'</h4></div><div class="visual-body">'+vis+'</div></div></div><div class="timeline" id="s'+n+'-tl"></div><div class="prog"><div class="fill" id="s'+n+'-prog"></div></div><div class="controls"><button class="prim" id="s'+n+'-btn" onclick="startDemo('+n+')">'+t.demoUI.start+'</button><button class="sec" onclick="resetDemo('+n+')">'+t.demoUI.reset+'</button></div>';
     views.appendChild(v);
   });
 }
@@ -149,6 +157,8 @@ function resetDemo(n){
   document.getElementById('s'+n+'-prog').style.width='0%';
   document.getElementById('s'+n+'-btn').textContent=t.demoUI.start;
   document.getElementById('s'+n+'-btn').disabled=false;
+  var panels=document.querySelectorAll('#dv'+n+' .panel');
+  panels.forEach(function(p){p.classList.remove('running')});
 }
 
 function parseAIJSON(raw){
@@ -486,7 +496,7 @@ async function generateDemo(){
 function runGenDemo(container,demo){
   GEN_TIMERS.forEach(clearTimeout);GEN_TIMERS=[];
   demo = normalizeDemo(demo);
-  container.innerHTML='<div style="color:var(--accent);font-weight:600;margin-bottom:8px">'+esc(demo.title)+'</div><div style="color:var(--muted);font-size:.85em;margin-bottom:16px">'+esc(demo.scenario)+'</div><div style="width:100%;height:3px;background:var(--surface2);border-radius:2px;margin-bottom:16px;overflow:hidden"><div id="gen-prog" style="height:100%;background:var(--accent);width:0%;transition:width .4s"></div></div><div id="gen-chat" style="background:var(--surface2);border-radius:8px;padding:14px;font-size:.85em;min-height:150px"></div><div id="gen-actions" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>';
+  container.innerHTML='<div style="color:var(--accent);font-weight:600;margin-bottom:8px">'+esc(demo.title)+'</div><div style="color:var(--muted);font-size:.85em;margin-bottom:16px">'+esc(demo.scenario)+'</div><div style="width:100%;height:3px;background:var(--bg2);border-radius:2px;margin-bottom:16px;overflow:hidden"><div id="gen-prog" style="height:100%;background:var(--accent);width:0%;transition:width .4s"></div></div><div id="gen-chat" style="background:var(--bg2);border-radius:8px;padding:14px;font-size:.85em;min-height:150px"></div><div id="gen-actions" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>';
   demo.script.forEach(function(msg,i){
     GEN_TIMERS.push(setTimeout(function(){
       var chat=document.getElementById('gen-chat');
@@ -695,8 +705,6 @@ startDemo = function(n){
   var last = I18N[CUR].demos[n].steps[I18N[CUR].demos[n].steps.length-1].delay;
   setTimeout(function(){ panels.forEach(function(p){ p.classList.remove('running'); }); }, last + 3500);
 };
-
-
 // INIT
 (function(){
   var langs=['it','en','es','zh'];
