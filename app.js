@@ -17,12 +17,42 @@ function setLang(l){
   try{localStorage.setItem('aria-lang',l)}catch(e){}
 }
 
+var TYPE_TIMER = null;
+function typeText(elId, text){
+  var el = document.getElementById(elId);
+  if(!el) return;
+  var i = 0;
+  el.textContent = '';
+  function tick(){
+    if(i <= text.length){
+      el.textContent = text.substring(0, i);
+      i++;
+      TYPE_TIMER = setTimeout(tick, 55);
+    }
+  }
+  tick();
+}
+
 function applyI18N(){
   var t = I18N[CUR];
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var k = el.getAttribute('data-i18n');
     var v = k.split('.').reduce(function(o,p){return o&&o[p]},t);
-    if(v!==undefined) el.textContent=v;
+    if(v!==undefined){
+      // Hero title: animazione speciale
+      if(el.hasAttribute('data-i18n') && (k==='hero.title1' || k==='hero.title2')){
+        if(k==='hero.title1'){
+          el.innerHTML = '<span class="w">'+esc(v)+'</span>';
+        } else {
+          // title2 = typewriter, parte dopo l'ingresso di title1
+          el.innerHTML = '<span class="type-wrap"><span class="accent" id="typeTarget"></span></span><span class="type-cursor" id="typeCursor"></span>';
+          clearTimeout(TYPE_TIMER);
+          setTimeout(function(){ typeText('typeTarget', v); }, 650);
+        }
+      } else {
+        el.textContent = v;
+      }
+    }
   });
   document.querySelectorAll('[data-i18n-html]').forEach(function(el){
     var k = el.getAttribute('data-i18n-html');
