@@ -213,7 +213,7 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 @media(max-width:640px){.tl-body,.tl-actions{margin-left:0}}
 
 .controls{display:flex;gap:12px;justify-content:center;margin-top:30px}
-.controls button{padding:14px 30px;border-radius:12px;border:none;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:var(--shadow-sm)}
+.controls button{padding:14px 30px;border-radius:12px;border:none;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:var(--shadow-sm);position:relative}
 .controls .prim{background:var(--text);color:var(--bg)}
 .controls .prim:hover:not(:disabled){transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .controls .prim:disabled{opacity:.55;cursor:default}
@@ -486,3 +486,15 @@ section[id]{scroll-margin-top:80px}
 /* Smooth scroll migliore */
 html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ═══ SITE CTA — "Vuoi un sito così?" ═══ */
+.site-cta{max-width:1080px;margin:0 auto;padding:0 32px 72px}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--radius);padding:32px 36px;box-shadow:var(--shadow-sm);transition:all .3s}
+.cta-inner:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.cta-text h2{font-size:clamp(1.3em,2.5vw,1.7em);margin-bottom:8px}
+.cta-text p{font-size:.92em;color:var(--muted);line-height:1.6;max-width:44em}
+.cta-action{flex-shrink:0}
+@media(max-width:700px){
+.cta-inner{flex-direction:column;align-items:flex-start;gap:20px;padding:24px 22px}
+.cta-action .btn{width:100%;justify-content:center}
+}
