@@ -62,7 +62,7 @@ body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;background:var(--bg
 .time-greet .tg-icn{font-size:1.1em;animation:float 3s ease-in-out infinite}
 
 /* ═══ HERO ═══ */
-.hero{max-width:1080px;margin:0 auto;padding:56px 32px 96px;position:relative}
+.hero{max-width:1080px;margin:0 auto;padding:48px 32px 64px;position:relative}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:color-mix(in srgb,var(--accent) 10%,var(--card));border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:20px;font-size:.8em;font-weight:600;color:var(--accent);margin-bottom:24px;line-height:1.4;animation:badge-in .5s ease}
 .hero-badge .dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse-dot 2s infinite}
 .hero h1{font-size:clamp(2.4em,6.5vw,4.4em);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;max-width:13ch;animation:fadeUp .7s ease}
@@ -84,7 +84,7 @@ body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;background:var(--bg
 .btn.sec:hover{background:var(--bg2)}
 
 /* ═══ STATS ═══ */
-.stats-wrap{max-width:1080px;margin:0 auto;padding:0 32px 96px}
+.stats-wrap{max-width:1080px;margin:0 auto;padding:0 32px 64px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow-sm);transition:all .3s;position:relative;overflow:hidden}
 .stat::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
@@ -94,11 +94,11 @@ body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;background:var(--bg
 .stat .lbl{font-size:.85em;color:var(--muted);margin-top:8px;font-weight:500;line-height:1.45}
 
 /* ═══ SEZIONI ═══ */
-section{max-width:1080px;margin:0 auto;padding:96px 32px}
-section.full{max-width:100%;background:var(--bg2);padding:96px 32px;transition:background .5s}
+section{max-width:1080px;margin:0 auto;padding:72px 32px}
+section.full{max-width:100%;background:var(--bg2);padding:72px 32px;transition:background .5s}
 section.full>div{max-width:1080px;margin:0 auto}
-.sec-head{margin-bottom:48px}
-.sec-head.tight{margin-bottom:40px}
+.sec-head{margin-bottom:36px}
+.sec-head.tight{margin-bottom:32px}
 h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px}
 .sub{font-size:1.05em;color:var(--muted);line-height:1.7;max-width:32em;margin-bottom:0}
 
@@ -125,7 +125,7 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 .tab{padding:13px 26px;border:1.5px solid var(--border);border-radius:28px;background:var(--card);font-size:.9em;font-weight:600;line-height:1.2;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .22s;box-shadow:var(--shadow-sm)}
 .tab:hover{border-color:var(--text);color:var(--text);transform:translateY(-2px)}
 .tab.active{background:var(--text);color:var(--bg);border-color:var(--text);box-shadow:var(--shadow-md)}
-.demo-view{display:none;max-width:1080px;margin:0 auto;padding:0 32px 96px}
+.demo-view{display:none;max-width:1080px;margin:0 auto;padding:0 32px 72px}
 .demo-view.active{display:block;animation:fadeUp .45s ease}
 
 /* ═══ DASH ═══ */
@@ -223,7 +223,7 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 .prog .fill{height:100%;background:linear-gradient(90deg,var(--accent),#ff9500);width:0%;transition:width .5s cubic-bezier(.2,.7,.3,1);border-radius:3px}
 
 /* ═══ PERSONALIZZA ═══ */
-#personalizza{position:relative;max-width:100%;background:var(--bg2);padding:100px 32px;overflow:hidden;transition:background .5s}
+#personalizza{position:relative;max-width:100%;background:var(--bg2);padding:72px 32px;overflow:hidden;transition:background .5s}
 #personalizza::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%);pointer-events:none;animation:sun-glow 6s ease-in-out infinite}
 #personalizza>div{max-width:1080px;margin:0 auto;position:relative}
 .p-form{max-width:480px;margin:0 auto;text-align:left}
@@ -461,3 +461,28 @@ section.full{padding:70px 20px}
   .hero h1 .accent::after{animation:none;transform:scaleX(1)}
   .hero h1 .type-cursor{animation:none}
 }
+
+/* Spazio tra capabilities (full) e Tre esempi */
+section.after-full{padding-top:48px}
+
+/* ═══ RIFINITURE ═══ */
+
+/* Focus states accessibili */
+.tab:focus-visible,.btn:focus-visible,.controls button:focus-visible,.lang-sel button:focus-visible,.theme-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Scrollbar custom per chat */
+.phone-chat::-webkit-scrollbar{width:4px}
+.phone-chat::-webkit-scrollbar-track{background:transparent}
+.phone-chat::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.phone-chat::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* Selezione testo arancione */
+::selection{background:color-mix(in srgb,var(--accent) 25%,transparent);color:inherit}
+[data-theme="night"] ::selection{background:color-mix(in srgb,var(--accent) 40%,transparent)}
+
+/* Scroll-margin per anchor con nav sticky */
+section[id]{scroll-margin-top:80px}
+
+/* Smooth scroll migliore */
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
