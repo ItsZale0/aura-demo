@@ -288,6 +288,20 @@ function checkFeasibility(demo){
   return issues;
 }
 
+// Tone checker: flags Aria messages containing technical terms she would never say aloud
+var TECH_TERMS = /\b(api|token|id\b|workflow|automation|system|database|crm\b|integration|url|http|endpoint|json|webhook|ticket id|order id|reference number|unique[_ ]?token|intake form|anamnesi digitale)/i;
+
+function checkTone(demo){
+  var issues = [];
+  if(!demo || !Array.isArray(demo.script)) return issues;
+  demo.script.forEach(function(m, i){
+    if(m && m.speaker === 'Aria' && m.text && TECH_TERMS.test(m.text)){
+      issues.push('script[' + i + ']: Aria says technical term "' + (m.text.match(TECH_TERMS) || [''])[0] + '" — rewrite in natural language');
+    }
+  });
+  return issues;
+}
+
 // Validate demo object: returns array of error strings (empty = valid)
 function validateDemo(d){
   var errs = [];
@@ -338,7 +352,7 @@ async function generateDemo(){
   out.style.display='block';
   out.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:20px"><div style="width:24px;height:24px;border:3px solid #5c5c7a;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div><span style="color:var(--muted)">'+t.personalizza.generating+'</span></div>';
   var langInstr = CUR==='it'?'Rispondi SOLO con JSON valido in italiano.':CUR==='es'?'Responde SOLO con JSON válido en español.':CUR==='zh'?'仅用有效的中文 JSON 回答。':'Respond ONLY with valid JSON in English.';
-  var prompt='You are Aria, a REALISTIC phone receptionist AI. Generate a demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\n\nREALISM RULES (critical):\n- Conversation: 6-8 SHORT messages total (real phone calls are brief)\n- Each message: max 15 words, natural spoken language, like a real phone call\n- Aria sounds human: polite, direct, no sales pitch, no technical terms\n- Customer speaks casually, sometimes brief ("Yes, perfect", "Tomorrow works")\n- datetime format: "tomorrow 10:00" or "2026-09-22 15:00"\n\nACTIONS — use ONLY these types (all automatable via n8n):\nCREATE_APPOINTMENT {service, customer_name, datetime}\nSEND_WHATSAPP_CONFIRMATION {to, message}\nSEND_WHATSAPP_REMINDER {to, timing, message}\nLOG_CALL_CRM {name, request, status}\nSEND_EMAIL {to, subject, message}\nSEND_SMS {to, message}\nCREATE_TICKET {subject, priority, customer}\nUPDATE_CRM_STATUS {name, from, to}\nADD_TO_WAITLIST {name, preferred_time}\nSEND_FOLLOWUP {channel, timing, message}\nGENERATE_QUOTE {service, price_range}\nTRANSCRIBE_SUMMARY {sent_to, summary}\nBOOK_TABLE {name, people, datetime}\nORDER_STATUS_CHECK {order_id}\nCANCEL_APPOINTMENT {customer_name, datetime}\n\nPick 2-4 actions that fit this business. Every action MUST have its required fields filled.\nNEVER invent action types outside this list.\n\nExample tone: Aria: "Hi, this is Aria from Smith Plumbing. How can I help?" — Customer: "Hi, my kitchen sink is leaking." — Aria: "Sorry to hear that. Can I book a technician for you?"\n\nFormat: {"title":"...","scenario":"one short sentence","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","customer_name":"...","datetime":"..."}}]}';
+  var prompt='You are Aria, a REALISTIC phone receptionist AI. Generate a demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\n\nREALISM RULES (critical):\n- Conversation: 6-8 SHORT messages total (real phone calls are brief)\n- Each message: max 15 words, natural spoken language, like a real phone call\n- Aria sounds human: polite, direct, warm, like a real receptionist\n- Customer speaks casually, sometimes brief ("Yes, perfect", "Tomorrow works")\n- datetime format: "tomorrow 10:00" or "2026-09-22 15:00"\n\nTONE RULES — Aria NEVER says technical or detailed things:\n- NEVER mention: APIs, tokens, IDs, workflows, automations, systems, databases, CRM, integrations, URLs, codes, forms with links\n- NEVER read long details aloud (no full addresses, no lists of options, no prices with decimals)\n- Aria speaks like a person: "Perfect, all set!", "I will send you a message on WhatsApp", "Marco will call you tomorrow"\n- The technical details go ONLY in the actions JSON, never in the spoken conversation\n\nACTIONS — use ONLY these types (all automatable via n8n):\nCREATE_APPOINTMENT {service, customer_name, datetime}\nSEND_WHATSAPP_CONFIRMATION {to, message}\nSEND_WHATSAPP_REMINDER {to, timing, message}\nLOG_CALL_CRM {name, request, status}\nSEND_EMAIL {to, subject, message}\nSEND_SMS {to, message}\nCREATE_TICKET {subject, priority, customer}\nUPDATE_CRM_STATUS {name, from, to}\nADD_TO_WAITLIST {name, preferred_time}\nSEND_FOLLOWUP {channel, timing, message}\nGENERATE_QUOTE {service, price_range}\nTRANSCRIBE_SUMMARY {sent_to, summary}\nBOOK_TABLE {name, people, datetime}\nORDER_STATUS_CHECK {order_id}\nCANCEL_APPOINTMENT {customer_name, datetime}\n\nPick 2-4 actions that fit this business. Every action MUST have its required fields filled.\nNEVER invent action types outside this list.\n\nExample tone: Aria: "Hi, this is Aria from Smith Plumbing. How can I help?" — Customer: "Hi, my kitchen sink is leaking." — Aria: "Sorry to hear that. Can I book a technician for you?" — Customer: "Yes, tomorrow morning if possible." — Aria: "Done, tomorrow at 9. You will get a message with the details."\n\nFormat: {"title":"...","scenario":"one short sentence","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","customer_name":"...","datetime":"..."}}]}';
   try{
     var res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'nvidia/nemotron-3-ultra-550b-a55b:free',messages:[{role:'user',content:prompt}],max_tokens:2000})});
     if(!res.ok) throw new Error('API error '+res.status);
@@ -358,6 +372,13 @@ async function generateDemo(){
     }
     // Validate even if parse succeeded
     var vErrs = demo ? validateDemo(demo) : [parseErr ? parseErr.message : 'unknown parse error'];
+    // TONE CHECK: Aria must never speak technical — add violations to repair list
+    if(demo && vErrs.length === 0){
+      var toneIssues = checkTone(demo);
+      if(toneIssues.length > 0){
+        vErrs = toneIssues.concat(['TONE: rewrite Aria lines in natural human language, no technical terms']);
+      }
+    }
 
     if(vErrs.length > 0){
       // Subagent repair: send broken JSON + errors back to AI to fix
