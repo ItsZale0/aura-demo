@@ -256,15 +256,15 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 #contact .sub{margin-left:auto;margin-right:auto}
 
 /* ═══ FOOTER ═══ */
-.foot{background:#0d0e13;color:#fff;padding:56px 32px;margin-top:40px}
+.foot{background:var(--bg2);color:var(--text);padding:56px 32px;margin-top:40px;border-top:1px solid var(--border)}
 .foot-inner{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:36px}
 .foot-col{flex:1;min-width:180px}
-.foot-col h5{font-size:.82em;font-weight:700;margin-bottom:16px;color:#fff;letter-spacing:-.01em}
-.foot-col a,.foot-col span{display:block;font-size:.86em;color:#8b8b96;text-decoration:none;margin-bottom:10px;line-height:1.5;transition:color .2s}
-.foot-col a:hover{color:#fff}
-.foot-bottom{max-width:1080px;margin:40px auto 0;padding-top:26px;border-top:1px solid #23242e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.8em;color:#66676f}
-.foot-bottom a{color:#8b8b96;text-decoration:none;transition:color .2s}
-.foot-bottom a:hover{color:#fff}
+.foot-col h5{font-size:.82em;font-weight:700;margin-bottom:16px;color:var(--text);letter-spacing:-.01em}
+.foot-col a,.foot-col span{display:block;font-size:.86em;color:var(--muted);text-decoration:none;margin-bottom:10px;line-height:1.5;transition:color .2s}
+.foot-col a:hover{color:var(--accent)}
+.foot-bottom{max-width:1080px;margin:40px auto 0;padding-top:26px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.8em;color:var(--muted)}
+.foot-bottom a{color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-bottom a:hover{color:var(--accent)}
 
 /* ═══ TOAST (saluto dinamico) ═══ */
 .toast{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;font-size:.88em;font-weight:500;line-height:1.5;max-width:340px;transform:translateY(calc(100% + 40px));transition:transform .5s cubic-bezier(.2,.7,.3,1),visibility .5s;visibility:hidden}
