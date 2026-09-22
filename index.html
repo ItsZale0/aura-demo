@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Aria Automation — Assistente Vocale AI</title>
-<meta name="description" content="Aria risponde 24/7, prenota appuntamenti, invia promemoria, qualifica lead e recupera clienti.">
+<title>Aria — Risponde al telefono per te</title>
+<meta name="description" content="Aria risponde alle chiamate dei tuoi clienti, prende appuntamenti e manda conferme. Funziona anche quando non rispondi tu.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="bg"><div class="b1"></div><div class="b2"></div></div>
 <nav class="nav">
-<div class="nav-brand"><div class="mark"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#ff6b00"/><path d="M8 22V10h2v12H8z" fill="#fff"/><path d="M12 10h3.5c2.8 0 5 2.2 5 5s-2.2 5-5 5H12V10zm3.5 8c1.7 0 3-1.3 3-3s-1.3-3-3-3H14v6h1.5z" fill="#fff"/><circle cx="24" cy="20" r="2.5" fill="#fff" opacity=".7"/></svg></div> Aria Automation</div>
+<div class="nav-brand"><div class="mark"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#000"/><path d="M9 22V10h2.2v12H9z" fill="#fff"/><path d="M13 10h3.4c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9H15v2.4h-2V10zm3.4 7.8c1.6 0 2.9-1.3 2.9-2.9s-1.3-2.9-2.9-2.9H15v5.8h1.4z" fill="#fff"/><circle cx="23.5" cy="20.5" r="2" fill="#ff6b00"/></svg></div> Aria</div>
 <ul class="nav-links"><li><a href="#demo" data-i18n="nav.demos">Demo</a></li><li><a href="#personalizza" data-i18n="nav.personalize">Personalizza</a></li><li><a href="#contact" data-i18n="nav.contact">Contatti</a></li></ul>
 <div class="lang-sel" id="langSel">
 <button onclick="setLang('it')" class="active">IT</button>
@@ -24,76 +23,71 @@
 </nav>
 
 <section class="hero">
-<div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.2);border-radius:20px;font-size:.75em;color:var(--accent);font-weight:500;margin-bottom:24px">
-<span style="width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></span>
-<span data-i18n="hero.badge">Disponibile 24/7 · Configurazione in poche ore</span>
+<h1 data-i18n="hero.title">Il telefono risponde da solo.</h1>
+<p data-i18n-html="hero.subtitle">Aria prende le chiamate dei tuoi clienti, segna gli appuntamenti sul calendario e manda le conferme su WhatsApp. <strong>Tu fai il tuo lavoro, lei fa il resto.</strong></p>
+<div class="hero-checks">
+<span><span class="ck">✓</span> <span data-i18n="hero.check1">Risponde sempre</span></span>
+<span><span class="ck">✓</span> <span data-i18n="hero.check2">Segna gli appuntamenti</span></span>
+<span><span class="ck">✓</span> <span data-i18n="hero.check3">Manda le conferme</span></span>
+<span><span class="ck">✓</span> <span data-i18n="hero.check4">Non perde una chiamata</span></span>
 </div>
-<h1 data-i18n="hero.title">Il tuo commerciale che non dorme mai</h1>
-<p data-i18n-html="hero.subtitle">Aria risponde a <strong>ogni chiamata</strong>...</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:40px">
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check1">Risponde a ogni chiamata</span></div>
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check2">Prenota automaticamente</span></div>
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check3">Invia WhatsApp/SMS</span></div>
-<div style="display:flex;align-items:center;gap:8px;font-size:.85em;color:var(--muted)"><span style="color:var(--green)">✓</span> <span data-i18n="hero.check4">Qualifica i lead</span></div>
+<a href="#demo" class="btn" data-i18n="hero.cta">Vedi come funziona</a>
+</section>
+
+<div class="stats" id="stats"></div>
+
+<section id="features">
+<h2 data-i18n="features.title">Cosa fa, esattamente</h2>
+<p class="sub" data-i18n="features.subtitle">Niente di complicato. Le cose che servono a chi riceve chiamate tutto il giorno.</p>
+<div class="feat-list" id="featGrid"></div>
+</section>
+
+<section class="full">
+<div>
+<h2 data-i18n="capabilities.title">E non solo</h2>
+<p class="sub" data-i18n="capabilities.subtitle">Se lo fai al telefono, probabilmente lo può fare Aria.</p>
+<div class="cap-grid" id="capGrid"></div>
 </div>
-<a href="#demo" class="hero-cta" data-i18n="hero.cta">Scopri come funziona →</a>
 </section>
 
 <section style="padding-top:0">
-<div class="stats" id="stats"></div>
-</section>
-
-<section id="features" style="text-align:center">
-<h2 data-i18n="features.title">Cosa fa Aria</h2>
-<p class="sub" data-i18n="features.subtitle">Un agente AI completo...</p>
-<div class="feat-grid" id="featGrid"></div>
-</section>
-
-<section style="padding:64px 24px;text-align:center;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%">
-<div style="max-width:1000px;margin:0 auto">
-<h2 style="font-size:clamp(1.4em,3vw,1.8em);font-weight:700;margin-bottom:14px;line-height:1.2" data-i18n="capabilities.title">Cosa può fare Aria per te</h2>
-<p style="color:var(--muted);font-size:.95em;max-width:600px;margin:0 auto 36px;line-height:1.6" data-i18n="capabilities.subtitle">Nessun limite...</p>
-<div style="max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 32px;text-align:left" id="capGrid"></div>
-</div>
-</section>
-
-<section style="text-align:center;max-width:900px">
-<h2 style="font-size:clamp(1.3em,2.5vw,1.6em);font-weight:700;margin-bottom:14px;line-height:1.25" data-i18n="demoBanner.title">Qui sotto solo alcuni esempi</h2>
-<p style="color:var(--muted);font-size:.95em;max-width:600px;margin:0 auto 28px;line-height:1.6" data-i18n-html="demoBanner.text">Aria si adatta...</p>
-<a href="#personalizza" style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--accent);color:#000;border-radius:50px;font-size:.88em;font-weight:600;text-decoration:none" data-i18n="demoBanner.cta">🎮 Crea la tua demo</a>
+<h2 style="font-size:clamp(1.5em,3vw,2em)" data-i18n="demoBanner.title">Tre esempi, fatti vedere</h2>
+<p class="sub" data-i18n-html="demoBanner.text">Queste sono solo tre situazioni. Ogni attività ha le sue — <a href="#personalizza" style="color:var(--text)">crea la tua qui</a>.</p>
 </section>
 
 <div class="tabs" id="demo"></div>
 <div id="demoViews"></div>
 
-<section id="personalizza" style="text-align:center">
-<h2 data-i18n="personalizza.title">Crea la tua demo personalizzata</h2>
-<p class="sub" data-i18n="personalizza.subtitle">Inserisci i dati...</p>
-<div style="max-width:500px;margin:0 auto;text-align:left">
-<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.name">Nome attività</label><input type="text" id="pName" data-i18n-ph="personalizza.namePh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit"></div>
-<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.type">Tipo di attività</label><input type="text" id="pType" data-i18n-ph="personalizza.typePh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit"></div>
-<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.services">Servizi principali</label><textarea id="pServices" data-i18n-ph="personalizza.servicesPh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit;resize:vertical;min-height:60px"></textarea></div>
-<div style="margin-bottom:16px"><label style="display:block;font-size:.85em;font-weight:500;margin-bottom:6px" data-i18n="personalizza.problem">Problema da risolvere</label><input type="text" id="pProblem" data-i18n-ph="personalizza.problemPh" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:.95em;background:var(--surface);color:var(--text);outline:none;font-family:inherit"></div>
-<button onclick="generateDemo()" id="pBtn" style="width:100%;padding:14px;background:var(--accent);color:#000;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;font-family:inherit" data-i18n="personalizza.btn">Genera Demo</button>
-<div id="pOutput" style="margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;display:none"></div>
+<section id="personalizza">
+<div>
+<h2 data-i18n="personalizza.title">Provala sul tuo business</h2>
+<p class="sub" data-i18n="personalizza.subtitle">Raccontaci cosa fai. Aria ti mostra come risponderebbe alle chiamate dei tuoi clienti.</p>
+<div class="p-form">
+<div><label data-i18n="personalizza.name">Nome attività</label><input type="text" id="pName" data-i18n-ph="personalizza.namePh"></div>
+<div><label data-i18n="personalizza.type">Settore</label><input type="text" id="pType" data-i18n-ph="personalizza.typePh"></div>
+<div><label data-i18n="personalizza.services">Servizi principali</label><textarea id="pServices" data-i18n-ph="personalizza.servicesPh" style="min-height:70px;resize:vertical"></textarea></div>
+<div><label data-i18n="personalizza.problem">Problema da risolvere</label><input type="text" id="pProblem" data-i18n-ph="personalizza.problemPh"></div>
+<button onclick="generateDemo()" id="pBtn" class="btn" style="width:100%;justify-content:center" data-i18n="personalizza.btn">Genera la demo</button>
+<div class="p-out" id="pOutput"></div>
+</div>
 </div>
 </section>
 
-<section id="contact" style="padding:96px 24px;text-align:center">
-<div style="max-width:500px;margin:0 auto">
-<h2 style="font-size:clamp(1.3em,2.5vw,1.7em);font-weight:700;margin-bottom:14px;line-height:1.25" data-i18n="contact.title">Domande su prezzi?</h2>
-<p style="color:var(--muted);font-size:.95em;margin-bottom:32px;line-height:1.6" data-i18n="contact.text">Scrivici su WhatsApp</p>
-<a href="https://wa.me/393518058208?text=Ciao, ho alcune domande" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:var(--accent);color:#000;border:none;border-radius:50px;font-size:.95em;font-weight:600;text-decoration:none;box-shadow:0 6px 30px rgba(255,107,0,.25)" data-i18n="contact.btn">📱 WhatsApp</a>
+<section id="contact">
+<div>
+<h2 style="font-size:clamp(1.6em,3vw,2.2em)" data-i18n="contact.title">Due domande veloci</h2>
+<p class="sub" style="margin-bottom:36px" data-i18n="contact.text">Quanto costa? Funziona per il mio caso? Scrivici, rispondiamo in giornata.</p>
+<a href="https://wa.me/393518058208?text=Ciao, ho visto il sito di Aria" class="btn" data-i18n="contact.btn">Scrivici su WhatsApp</a>
 </div>
 </section>
 
 <footer class="foot">
 <div class="foot-inner">
-<div class="foot-col"><h5>Aria Automation</h5><span data-i18n="footer.about">Assistente vocale AI</span></div>
-<div class="foot-col"><h5 data-i18n="footer.services">Servizi</h5><a href="#" data-i18n="footer.booking">Prenotazione</a><a href="#" data-i18n="footer.qualification">Qualifica</a></div>
+<div class="foot-col"><h5>Aria</h5><span data-i18n="footer.about">Chi risponde al telefono per te.</span></div>
+<div class="foot-col"><h5 data-i18n="footer.services">Servizi</h5><a href="#demo" data-i18n="footer.booking">Appuntamenti</a><a href="#demo" data-i18n="footer.qualification">Qualifica clienti</a></div>
 <div class="foot-col"><h5 data-i18n="footer.contact">Contatti</h5><a href="https://wa.me/393518058208">WhatsApp</a></div>
 </div>
-<div class="foot-bottom"><span data-i18n="footer.copyright">© 2026 Aria Automation</span><span><a href="privacy.html" style="color:var(--muted)" data-i18n="footer.privacy">Privacy</a> · <a href="terms.html" style="color:var(--muted)" data-i18n="footer.terms">Termini</a></span></div>
+<div class="foot-bottom"><span data-i18n="footer.copyright">© 2026 Aria Automation</span><span><a href="privacy.html" data-i18n="footer.privacy">Privacy</a> · <a href="terms.html" data-i18n="footer.terms">Termini</a></span></div>
 </footer>
 
 <script src="app.js"></script>
