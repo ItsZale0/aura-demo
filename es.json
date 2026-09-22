@@ -11,7 +11,11 @@
   "check2": "Agenda las citas",
   "check3": "Envía las confirmaciones",
   "check4": "No pierde ninguna llamada",
-  "cta": "Mira cómo funciona"
+  "cta": "Mira cómo funciona",
+  "badge": "En línea ahora",
+  "title1": "El teléfono",
+  "title2": "contesta solo.",
+  "cta2": "Pruébala en tu negocio"
  },
  "stats": [
   {
@@ -407,5 +411,18 @@
     }
    ]
   }
- ]
+ ],
+ "ui": {
+  "greetings": {
+   "morning": "¡Buenos días! Empezamos bien hoy.",
+   "afternoon": "¡Buenas tardes! ¿Qué tal todo?",
+   "evening": "¡Buenas noches! ¿Aún trabajando?",
+   "night": "Programando tarde eh? 👀"
+  },
+  "nightOn": "Modo noche activado",
+  "dayOn": "Modo día activado",
+  "welcomeFirst": "¡Bienvenido! Soy Aria, mira las demos aquí abajo.",
+  "welcomeBack": "¡Bienvenido de nuevo!",
+  "welcomeBack3": "Nos vemos a menudo, me gusta 😊"
+ }
 }
