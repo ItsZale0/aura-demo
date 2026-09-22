@@ -243,6 +243,14 @@ function validateDemo(d){
       }
     });
   }
+  // Realism check: flag overly long messages (over 40 words)
+  var longMsgs = 0;
+  if(Array.isArray(d.script)){
+    d.script.forEach(function(m){
+      if(m && m.text && m.text.split(/\s+/).length > 40) longMsgs++;
+    });
+  }
+  if(longMsgs > 2) errs.push('messages too long (unrealistic)');
   return errs;
 }
 
@@ -272,7 +280,7 @@ async function generateDemo(){
   out.style.display='block';
   out.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:20px"><div style="width:24px;height:24px;border:3px solid #5c5c7a;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div><span style="color:var(--muted)">'+t.personalizza.generating+'</span></div>';
   var langInstr = CUR==='it'?'Rispondi SOLO con JSON valido in italiano.':CUR==='es'?'Responde SOLO con JSON válido en español.':CUR==='zh'?'仅用有效的中文 JSON 回答。':'Respond ONLY with valid JSON in English.';
-  var prompt='You are Aria, an AI voice assistant. Generate a custom demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\nCreate a LONG conversation (8-10 messages) with MANY ACTIONS (5-6).\nFormat: {"title":"...","scenario":"...","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","datetime":"..."}}]}';
+  var prompt='You are Aria, a REALISTIC phone receptionist AI. Generate a demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\n\nREALISM RULES (critical):\n- Conversation: 6-8 SHORT messages total (real phone calls are brief)\n- Each message: max 15 words, natural spoken language, like a real phone call\n- Aria sounds human: polite, direct, no sales pitch, no technical terms\n- Customer speaks casually, sometimes brief ("Yes, perfect", "Tomorrow works")\n- Actions: only 2-3 REALISTIC actions (e.g. CREATE_APPOINTMENT, SEND_WHATSAPP_CONFIRMATION, LOG_CALL_CRM)\n- Do NOT invent exotic actions or complex workflows\n- datetime format: "tomorrow 10:00" or "2026-09-22 15:00"\n\nExample tone: Aria: "Hi, this is Aria from Smith Plumbing. How can I help?" — Customer: "Hi, my kitchen sink is leaking." — Aria: "Sorry to hear that. Can I book a technician for you?"\n\nFormat: {"title":"...","scenario":"one short sentence","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","datetime":"..."}}]}';
   try{
     var res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'nvidia/nemotron-3-ultra-550b-a55b:free',messages:[{role:'user',content:prompt}],max_tokens:2000})});
     if(!res.ok) throw new Error('API error '+res.status);
