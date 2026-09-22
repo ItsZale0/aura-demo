@@ -302,6 +302,45 @@ function checkTone(demo){
   return issues;
 }
 
+// Auto-sanitizer: rewrites Aria's technical phrases into natural ones (no AI call needed)
+var TONE_FIXES = [
+  [/\bI (?:have )?(?:created|logged|registered) (?:a |an |the )?(ticket|work ?order|task)[^.]*?(?:in|into|on) (?:the )?(?:system|crm|database)[.]?/gi, 'All done, I have everything I need.'],
+  [/\bI(?:'m| am) (?:sending|going to send) (?:you )?(?:the|a|an) (?:digital )?(?:intake |anamnesi )?form (?:link|via|with|at)[^.]*[.]?/gi, 'I will send you a short message with the details.'],
+  [/\b(?:your|the) (?:unique )?(?:token|reference (?:number|code)|confirmation code) is[^.]*[.]?/gi, 'You will find the details in the message.'],
+  [/\bI(?:'m| am) (?:logging|saving|recording) (?:this|your call|your request)[^.]*?(?:in|into) (?:the )?(?:crm|system|database)[.]?/gi, 'Perfect, I have noted everything.'],
+  [/\b(?:the )?system (?:has|will)[^.]*[.]?/gi, 'We will take care of it.'],
+  [/\bvia (?:the )?(?:internal )?(?:app|portal|dashboard|api)[.]?/gi, 'right away'],
+  [/\b(?:with|and) (?:the )?(?:following )?(?:details|parameters|fields)?:?[^.]*[.]?/gi, ''],
+  [/\bI(?:'m| am) (?:creating|generating) (?:a |an |the )?(?:automated )?(?:workflow|automation|process)[^.]*[.]?/gi, 'I will handle that right away.'],
+  [/\b(?:your|the) (?:appointment|booking) (?:id|reference)[^.]*[.]?/gi, 'Everything is confirmed.'],
+  [/\bI(?:'m| am) (?:updating|syncing)[^.]*?(?:crm|system|database|status)[^.]*[.]?/gi, 'All set!'],
+  [/\bhere(?:'s| is) (?:your|the)[^.]*?(?:link|url)[^.]*[.]?/gi, 'I will send it to you in a message.'],
+  [/\b(?:I|i) (?:will )?(?:notify|alert|inform) (?:the )?(?:therapist|doctor|technician|team|staff) (?:via|through|on) (?:the )?(?:internal )?(?:app|system|platform)[.]?/gi, 'I will let them know right away.'],
+  [/\b scheduled (?:a |an )?reminder[^.]*[.]?/gi, ' and you will get a reminder'],
+  [/\b(?:status|priority|severity):?\s*\w+/gi, ''],
+  [/\b(?:ticket|order|booking) (?:number|#|id)\s*[:#]?\s*\w+/gi, ''],
+  [/\bhttps?:\/\/\S+/gi, ''],
+  [/\b[A-Z0-9]{8,}\b/g, ''] // long codes/IDs
+];
+
+function sanitizeTone(demo){
+  if(!demo || !Array.isArray(demo.script)) return demo;
+  demo.script.forEach(function(m){
+    if(m && m.speaker === 'Aria' && typeof m.text === 'string'){
+      TONE_FIXES.forEach(function(fx){
+        m.text = m.text.replace(fx[0], fx[1]);
+      });
+      // cleanup: double spaces, orphan punctuation
+      m.text = m.text.replace(/\s{2,}/g, ' ').replace(/\s+([.,!?])/g, '$1').replace(/^[\s.,;:]+/, '').trim();
+      // if message became empty after sanitization, replace with natural filler
+      if(!m.text || m.text.length < 4){
+        m.text = {it:'Perfetto, tutto fatto!',en:'Perfect, all done!',es:'¡Perfecto, todo listo!',zh:'好的，都办妥了！'}[CUR] || 'Perfect, all done!';
+      }
+    }
+  });
+  return demo;
+}
+
 // Validate demo object: returns array of error strings (empty = valid)
 function validateDemo(d){
   var errs = [];
@@ -402,6 +441,8 @@ async function generateDemo(){
         }
       }
     }
+    // Final tone sanitization: ALWAYS applied before display (instant, no AI call)
+    demo = sanitizeTone(demo);
     runGenDemo(out, demo);
   }catch(err){
     var msg = String(err.message || err);
