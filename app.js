@@ -202,10 +202,19 @@ function normalizeDemo(d){
   }).map(function(a){
     return {type: String(a.type), details: (a.details && typeof a.details === 'object') ? a.details : {}};
   });
-  // HARD FILTER: keep only whitelisted realistic actions
+  // HARD FILTER: keep only whitelisted feasible actions
   demo.actions = demo.actions.filter(function(a){
     return ALLOWED_ACTIONS.indexOf(a.type) >= 0;
   });
+  // FEASIBILITY SUBAGENT: strip actions that lack operational sense (missing required fields)
+  var feasIssues = checkFeasibility(demo);
+  if(feasIssues.length > 0){
+    var badIdx = {};
+    feasIssues.forEach(function(f){ badIdx[f.index] = true; });
+    demo.actions = demo.actions.filter(function(a, i){
+      return !badIdx[i];
+    });
+  }
   if(demo.script.length === 0){
     demo.script = [{speaker:'Aria', text:'...'}, {speaker:'Customer', text:'...'}];
   }
@@ -234,8 +243,50 @@ function sanitizeInput(s, maxLen){
     .substring(0, maxLen);
 }
 
-// Whitelist of allowed action types (realistic receptionist actions only)
-var ALLOWED_ACTIONS = ['CREATE_APPOINTMENT','SEND_WHATSAPP_CONFIRMATION','LOG_CALL_CRM'];
+// Whitelist of allowed action types — all feasible with n8n automations
+var ALLOWED_ACTIONS = [
+  'CREATE_APPOINTMENT',        // n8n Google Calendar node
+  'SEND_WHATSAPP_CONFIRMATION',// n8n WhatsApp/whapi/wa.me
+  'SEND_WHATSAPP_REMINDER',    // n8n scheduled WhatsApp message
+  'LOG_CALL_CRM',              // n8n Google Sheets/HubSpot/Airtable
+  'SEND_EMAIL',                // n8n Gmail/SMTP node
+  'SEND_SMS',                  // n8n Twilio SMS
+  'CREATE_TICKET',             // n8n Zendesk/Freshdesk/Trello
+  'UPDATE_CRM_STATUS',         // n8n CRM update (HubSpot etc.)
+  'ADD_TO_WAITLIST',           // n8n Sheets/DB insert
+  'SEND_FOLLOWUP',             // n8n scheduled follow-up message
+  'GENERATE_QUOTE',            // n8n PDF generation + email/WA
+  'TRANSCRIBE_SUMMARY',        // n8n OpenAI/LLM call summary + email
+  'BOOK_TABLE',                // n8n restaurant booking (Sheets/DB)
+  'ORDER_STATUS_CHECK',        // n8n DB/API lookup
+  'CANCEL_APPOINTMENT'         // n8n Google Calendar delete/update
+];
+
+// Feasibility validator: checks that actions make operational sense for a phone receptionist
+// Returns list of removal reasons; invalid actions are stripped by normalizeDemo
+function checkFeasibility(demo){
+  var issues = [];
+  if(!demo || !Array.isArray(demo.actions)) return issues;
+  demo.actions.forEach(function(a, i){
+    if(!a || !a.type) return;
+    var t = a.type;
+    var det = a.details || {};
+    // Action with no meaningful details = not feasible
+    var detKeys = Object.keys(det).filter(function(k){ return det[k] !== undefined && det[k] !== null && String(det[k]).trim() !== ''; });
+    if(detKeys.length === 0){
+      issues.push({index: i, type: t, reason: 'no details'});
+    }
+    // Appointment without datetime/customer = broken
+    if(t === 'CREATE_APPOINTMENT' && (!det.datetime || !det.service)){
+      issues.push({index: i, type: t, reason: 'appointment missing service or datetime'});
+    }
+    // WhatsApp/email/sms without message = broken
+    if((t === 'SEND_WHATSAPP_CONFIRMATION' || t === 'SEND_EMAIL' || t === 'SEND_SMS' || t === 'SEND_FOLLOWUP') && !det.message){
+      issues.push({index: i, type: t, reason: 'message missing'});
+    }
+  });
+  return issues;
+}
 
 // Validate demo object: returns array of error strings (empty = valid)
 function validateDemo(d){
@@ -287,7 +338,7 @@ async function generateDemo(){
   out.style.display='block';
   out.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:20px"><div style="width:24px;height:24px;border:3px solid #5c5c7a;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div><span style="color:var(--muted)">'+t.personalizza.generating+'</span></div>';
   var langInstr = CUR==='it'?'Rispondi SOLO con JSON valido in italiano.':CUR==='es'?'Responde SOLO con JSON válido en español.':CUR==='zh'?'仅用有效的中文 JSON 回答。':'Respond ONLY with valid JSON in English.';
-  var prompt='You are Aria, a REALISTIC phone receptionist AI. Generate a demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\n\nREALISM RULES (critical):\n- Conversation: 6-8 SHORT messages total (real phone calls are brief)\n- Each message: max 15 words, natural spoken language, like a real phone call\n- Aria sounds human: polite, direct, no sales pitch, no technical terms\n- Customer speaks casually, sometimes brief ("Yes, perfect", "Tomorrow works")\n- datetime format: "tomorrow 10:00" or "2026-09-22 15:00"\n\nACTIONS — use ONLY these 3 types, nothing else:\n1. CREATE_APPOINTMENT — details: {"service":"...","customer_name":"...","datetime":"..."}\n2. SEND_WHATSAPP_CONFIRMATION — details: {"to":"customer","message":"short confirmation text"}\n3. LOG_CALL_CRM — details: {"name":"...","request":"...","status":"booked"}\n\nNEVER use: SEND_DIGITAL_INTAKE_FORM, NOTIFY_THERAPIST, SEND_EMAIL, SEND_SMS, SCHEDULE_REMINDER, or any invented action type. A phone receptionist only books, confirms on WhatsApp, and logs the call. That is ALL.\n\nExample tone: Aria: "Hi, this is Aria from Smith Plumbing. How can I help?" — Customer: "Hi, my kitchen sink is leaking." — Aria: "Sorry to hear that. Can I book a technician for you?"\n\nFormat: {"title":"...","scenario":"one short sentence","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","customer_name":"...","datetime":"..."}}]}';
+  var prompt='You are Aria, a REALISTIC phone receptionist AI. Generate a demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\n\nREALISM RULES (critical):\n- Conversation: 6-8 SHORT messages total (real phone calls are brief)\n- Each message: max 15 words, natural spoken language, like a real phone call\n- Aria sounds human: polite, direct, no sales pitch, no technical terms\n- Customer speaks casually, sometimes brief ("Yes, perfect", "Tomorrow works")\n- datetime format: "tomorrow 10:00" or "2026-09-22 15:00"\n\nACTIONS — use ONLY these types (all automatable via n8n):\nCREATE_APPOINTMENT {service, customer_name, datetime}\nSEND_WHATSAPP_CONFIRMATION {to, message}\nSEND_WHATSAPP_REMINDER {to, timing, message}\nLOG_CALL_CRM {name, request, status}\nSEND_EMAIL {to, subject, message}\nSEND_SMS {to, message}\nCREATE_TICKET {subject, priority, customer}\nUPDATE_CRM_STATUS {name, from, to}\nADD_TO_WAITLIST {name, preferred_time}\nSEND_FOLLOWUP {channel, timing, message}\nGENERATE_QUOTE {service, price_range}\nTRANSCRIBE_SUMMARY {sent_to, summary}\nBOOK_TABLE {name, people, datetime}\nORDER_STATUS_CHECK {order_id}\nCANCEL_APPOINTMENT {customer_name, datetime}\n\nPick 2-4 actions that fit this business. Every action MUST have its required fields filled.\nNEVER invent action types outside this list.\n\nExample tone: Aria: "Hi, this is Aria from Smith Plumbing. How can I help?" — Customer: "Hi, my kitchen sink is leaking." — Aria: "Sorry to hear that. Can I book a technician for you?"\n\nFormat: {"title":"...","scenario":"one short sentence","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","customer_name":"...","datetime":"..."}}]}';
   try{
     var res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'nvidia/nemotron-3-ultra-550b-a55b:free',messages:[{role:'user',content:prompt}],max_tokens:2000})});
     if(!res.ok) throw new Error('API error '+res.status);
@@ -359,7 +410,7 @@ function runGenDemo(container,demo){
     GEN_TIMERS.push(setTimeout(function(){
       var acts=document.getElementById('gen-actions');
       if(!acts)return;
-      var ic={CREATE_APPOINTMENT:'📅',SEND_WHATSAPP_CONFIRMATION:'📱',SEND_EMAIL:'📧',SEND_SMS:'💬',SCHEDULE_REMINDER:'⏰',LOG_CALL_CRM:'🎯',NOTIFY_THERAPIST:'🔔',SEND_DIGITAL_INTAKE_FORM:'📋'}[a.type]||'⚡';
+      var ic={CREATE_APPOINTMENT:'📅',SEND_WHATSAPP_CONFIRMATION:'📱',SEND_WHATSAPP_REMINDER:'⏰',SEND_EMAIL:'📧',SEND_SMS:'💬',LOG_CALL_CRM:'🎯',CREATE_TICKET:'🎫',UPDATE_CRM_STATUS:'🔄',ADD_TO_WAITLIST:'📋',SEND_FOLLOWUP:'📨',GENERATE_QUOTE:'🧾',TRANSCRIBE_SUMMARY:'📝',BOOK_TABLE:'🍽️',ORDER_STATUS_CHECK:'📦',CANCEL_APPOINTMENT:'❌'}[a.type]||'⚡';
       var dt=Object.keys(a.details).map(function(k){return k+': '+a.details[k]}).join(' · ');
       acts.innerHTML+='<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;animation:actIn .3s ease"><span style="font-size:1.2em">'+ic+'</span><div><div style="font-size:.8em;font-weight:600">'+esc(a.type)+'</div><div style="font-size:.7em;color:var(--muted)">'+esc(dt)+'</div></div></div>';
     },actTotal+i*1500));
