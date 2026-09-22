@@ -226,7 +226,7 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 #personalizza{position:relative;max-width:100%;background:var(--bg2);padding:100px 32px;overflow:hidden;transition:background .5s}
 #personalizza::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%);pointer-events:none;animation:sun-glow 6s ease-in-out infinite}
 #personalizza>div{max-width:1080px;margin:0 auto;position:relative}
-.p-form{max-width:520px;margin:0 auto;text-align:left}
+.p-form{max-width:480px;margin:0 auto;text-align:left}
 .p-form label{display:block;font-size:.87em;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;line-height:1.4}
 .p-form input,.p-form textarea{width:100%;padding:15px 18px;border:1.5px solid var(--border);border-radius:12px;font-size:.95em;background:var(--card);color:var(--text);outline:none;font-family:inherit;transition:all .2s;box-shadow:var(--shadow-sm)}
 .p-form input:focus,.p-form textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 12%,transparent)}
@@ -236,6 +236,8 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 
 /* ═══ CONTACT ═══ */
 #contact>div{max-width:560px;margin:0 auto;text-align:center}
+#contact h2{text-align:center}
+#contact .sub{margin-left:auto;margin-right:auto}
 
 /* ═══ FOOTER ═══ */
 .foot{background:#0d0e13;color:#fff;padding:56px 32px;margin-top:40px}
@@ -308,3 +310,128 @@ section.full{padding:70px 20px}
 .foot-col a::before{content:'→';position:absolute;left:-14px;opacity:0;transition:opacity .2s}
 .foot-col a:hover{padding-left:16px}
 .foot-col a:hover::before{opacity:1;left:0}
+
+
+/* ═══ RESPONSIVE RAFFINATO ═══ */
+
+/* Tablet (601-900px) */
+@media(max-width:900px){
+  .hero{padding:48px 28px 72px}
+  .hero h1{font-size:clamp(2.2em,7vw,3.4em)}
+  section{padding:72px 28px}
+  section.full{padding:72px 28px}
+  .stats-wrap{padding:0 28px 72px}
+  .tabs,.demo-view{padding-left:28px;padding-right:28px}
+  #personalizza{padding:72px 28px}
+  .time-greet{padding:18px 28px 0}
+  .nav{padding:12px 20px}
+  .feat-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .dash{gap:16px}
+}
+
+/* Mobile (≤600px) */
+@media(max-width:600px){
+  .nav{padding:10px 16px}
+  .nav-brand{font-size:1em}
+  .lang-sel button{padding:4px 8px;font-size:.72em}
+  .theme-btn{width:32px;height:32px}
+  
+  .time-greet{padding:14px 16px 0;font-size:.75em;gap:8px}
+  
+  .hero{padding:36px 20px 56px}
+  .hero h1{font-size:clamp(2em,9vw,2.8em);line-height:1.12}
+  .hero p{font-size:1em;line-height:1.65;margin-bottom:24px}
+  .hero-badge{font-size:.74em;margin-bottom:20px;padding:6px 14px}
+  .hero-checks{gap:8px;margin-bottom:32px}
+  .hero-checks span{font-size:.78em;padding:7px 13px}
+  .hero-cta{flex-direction:column;gap:10px}
+  .hero-cta .btn{width:100%;justify-content:center}
+  
+  section{padding:56px 20px}
+  section.full{padding:56px 20px}
+  h2{font-size:clamp(1.5em,6vw,2em);margin-bottom:12px}
+  .sub{font-size:.95em;margin-bottom:0}
+  .sec-head{margin-bottom:36px}
+  .sec-head.tight{margin-bottom:32px}
+  
+  .stats-wrap{padding:0 20px 56px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:12px}
+  .stat{padding:20px 18px}
+  .stat .num{font-size:1.8em}
+  .stat .lbl{font-size:.78em}
+  
+  .feat-grid{grid-template-columns:1fr;gap:12px}
+  .feat{padding:22px 20px}
+  .feat .ficn{width:40px;height:40px;font-size:1.15em;margin-bottom:12px}
+  .feat h4{font-size:.98em}
+  .feat p{font-size:.86em}
+  
+  .cap-grid{grid-template-columns:1fr;gap:8px}
+  .cap-item{padding:13px 16px;font-size:.86em}
+  
+  .tabs{gap:8px;margin:0 auto 28px;padding:0 20px}
+  .tab{padding:11px 20px;font-size:.84em}
+  .demo-view{padding:0 20px 64px}
+  
+  .dash{grid-template-columns:1fr;gap:14px}
+  .phone-chat{height:280px;padding:12px}
+  .visual-body{min-height:280px;padding:14px}
+  .panel-head{padding:12px 14px}
+  .panel-head h4{font-size:.82em}
+  
+  .tl-step{padding:14px 16px}
+  .tl-body{font-size:.8em;margin-left:0}
+  .tl-actions{margin-left:0}
+  .tl-num{width:22px;height:22px;font-size:.62em}
+  
+  .controls{flex-direction:column;gap:8px;margin-top:22px}
+  .controls button{width:100%}
+  
+  #personalizza{padding:56px 20px}
+  #personalizza .sec-head{margin-bottom:36px}
+  .p-form{max-width:100%}
+  .p-form input,.p-form textarea{padding:13px 15px;font-size:.92em}
+  .p-form>div{margin-bottom:16px}
+  .p-out{padding:20px 18px}
+  
+  #contact{padding:56px 20px}
+  #contact .sub{margin-bottom:32px}
+  #contact .btn{width:100%;justify-content:center}
+  
+  .foot{padding:40px 20px}
+  .foot-inner{flex-direction:column;gap:28px}
+  .foot-bottom{flex-direction:column;gap:8px;text-align:center;margin-top:28px}
+  
+  .toast{left:16px;right:16px;bottom:16px;max-width:none;font-size:.82em;padding:14px 16px}
+  
+  .cursor-glow{display:none}
+  
+  .cal-vis .cal-grid .day{width:32px;height:32px;min-height:32px;font-size:.7em}
+  .wa-vis{padding:10px}
+  .crm-lead{padding:11px;gap:10px}
+}
+
+/* Mobile piccolo (≤380px) */
+@media(max-width:380px){
+  .hero h1{font-size:1.9em}
+  .stats{grid-template-columns:1fr 1fr;gap:10px}
+  .stat{padding:16px 14px}
+  .stat .num{font-size:1.6em}
+  .lang-sel button{padding:3px 6px;font-size:.68em}
+}
+
+/* Touch: disattiva hover effects che danno fastidio */
+@media(hover:none){
+  .feat:hover{transform:none}
+  .stat:hover{transform:none}
+  .cap-item:hover{transform:none}
+  .btn:hover{transform:none}
+  .hero-checks span:hover{transform:none}
+}
+
+/* Desktop grande: più respiro */
+@media(min-width:1400px){
+  .hero{padding-top:72px}
+  section{padding:112px 32px}
+  section.full{padding:112px 32px}
+}
