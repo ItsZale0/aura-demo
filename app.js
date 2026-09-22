@@ -13,6 +13,7 @@ function setLang(l){
   document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Inter',sans-serif" : "'Inter',sans-serif";
   applyI18N();
   buildDynamic();
+  showTimeGreeting();
   try{localStorage.setItem('aria-lang',l)}catch(e){}
 }
 
@@ -479,11 +480,129 @@ function runGenDemo(container,demo){
   });
 }
 
+
+// ═══════════ TEMA DINAMICO (giorno/notte) ═══════════
+var THEME = 'day';
+function applyTheme(t){
+  THEME = t;
+  document.documentElement.setAttribute('data-theme', t === 'night' ? 'night' : '');
+  var btn = document.getElementById('themeBtn');
+  if(btn) btn.textContent = t === 'night' ? '🌙' : '☀️';
+  try{localStorage.setItem('aria-theme', t)}catch(e){}
+}
+function toggleTheme(){
+  applyTheme(THEME === 'day' ? 'night' : 'day');
+  showToast(THEME === 'night' ? '🌙 ' + (I18N[CUR] && I18N[CUR].ui.nightOn || 'Modalità notte') : '☀️ ' + (I18N[CUR] && I18N[CUR].ui.dayOn || 'Modalità giorno'));
+}
+
+// ═══════════ SALUTO TEMPORALE ═══════════
+function getTimeGreeting(){
+  var h = new Date().getHours();
+  if(h >= 5 && h < 12) return {icn:'🌅', key:'morning'};
+  if(h >= 12 && h < 18) return {icn:'☀️', key:'afternoon'};
+  if(h >= 18 && h < 23) return {icn:'🌆', key:'evening'};
+  return {icn:'🌙', key:'night'};
+}
+function showTimeGreeting(){
+  var g = getTimeGreeting();
+  var el = document.getElementById('timeGreet');
+  var icn = document.getElementById('tgIcon');
+  var txt = document.getElementById('tgText');
+  if(!el) return;
+  var t = I18N[CUR];
+  var msg = t && t.ui && t.ui.greetings && t.ui.greetings[g.key] ? t.ui.greetings[g.key] : '';
+  if(msg){
+    el.style.display = 'flex';
+    icn.textContent = g.icn;
+    txt.textContent = msg;
+  }
+}
+
+// ═══════════ TOAST ═══════════
+var toastTimer = null;
+function showToast(msg, icn){
+  var toast = document.getElementById('toast');
+  var tIcon = document.getElementById('toastIcon');
+  var tText = document.getElementById('toastText');
+  if(!toast) return;
+  tIcon.textContent = icn || '👋';
+  tText.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 4500);
+}
+
+// ═══════════ SCROLL REVEAL ═══════════
+function initReveal(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('on');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+}
+
+// ═══════════ CURSOR GLOW ═══════════
+function initCursorGlow(){
+  var glow = document.getElementById('cursorGlow');
+  if(!glow) return;
+  var raf = null;
+  document.addEventListener('mousemove', function(e){
+    if(raf) return;
+    raf = requestAnimationFrame(function(){
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+      glow.classList.add('on');
+      raf = null;
+    });
+  });
+  document.addEventListener('mouseleave', function(){ glow.classList.remove('on'); });
+}
+
+// ═══════════ VISIT COUNTER (vita del sito) ═══════════
+function initVisitVibe(){
+  // numero visite in questa sessione di vita
+  var visits = 0;
+  try{ visits = parseInt(localStorage.getItem('aria-visits') || '0', 10) + 1; localStorage.setItem('aria-visits', visits); }catch(e){ visits = 1; }
+  var t = I18N[CUR];
+  setTimeout(function(){
+    if(visits === 1){
+      var g = getTimeGreeting();
+      var msg = t && t.ui && t.ui.welcomeFirst ? t.ui.welcomeFirst : 'Benvenuto!';
+      showToast(msg, g.icn);
+    } else if(visits === 3){
+      var msg2 = t && t.ui && t.ui.welcomeBack3 ? t.ui.welcomeBack3 : 'Ci vediamo spesso, mi piace 😊';
+      showToast(msg2, '😊');
+    } else if(visits > 3 && visits % 5 === 0){
+      var msg3 = t && t.ui && t.ui.welcomeBack ? t.ui.welcomeBack : 'Bentornato!';
+      showToast(msg3 + ' (' + visits + '° volta)', '🎉');
+    }
+  }, 2500);
+}
+
+// ═══════════ INIT DINAMICO ═══════════
+function initDynamic(){
+  // tema: salvato o auto (19-6 = notte)
+  var saved = null;
+  try{ saved = localStorage.getItem('aria-theme'); }catch(e){}
+  var h = new Date().getHours();
+  applyTheme(saved || (h >= 19 || h < 6 ? 'night' : 'day'));
+  showTimeGreeting();
+  initReveal();
+  initCursorGlow();
+  initVisitVibe();
+  // saluto aggiornato ogni minuto (cambia a mezzanotte ecc)
+  setInterval(showTimeGreeting, 60000);
+}
+
 // INIT
 (function(){
   var langs=['it','en','es','zh'];
   var loaded=0;
   langs.forEach(function(l){
-    fetch(l+'.json').then(function(r){return r.json()}).then(function(d){I18N[l]=d;loaded++;if(loaded===4){var saved='it';try{saved=localStorage.getItem('aria-lang')||'it'}catch(e){}setLang(saved)}}).catch(function(){loaded++;if(loaded===4){setLang('it')}});
+    fetch(l+'.json').then(function(r){return r.json()}).then(function(d){I18N[l]=d;loaded++;if(loaded===4){var saved='it';try{saved=localStorage.getItem('aria-lang')||'it'}catch(e){}setLang(saved);initDynamic();}}).catch(function(){loaded++;if(loaded===4){setLang('it');initDynamic();}});
   });
 })();
