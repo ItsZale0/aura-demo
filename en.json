@@ -112,6 +112,11 @@
         "icn": "🧾",
         "t": "Prepares quotes",
         "d": "Understands the request and drafts the quote you can send in one click."
+      },
+      {
+        "icn": "✨",
+        "t": "And much more",
+        "d": "If it can be done over the phone, Aria can probably do it. Just ask."
       }
     ]
   },
