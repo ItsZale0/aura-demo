@@ -82,20 +82,37 @@
         "icn": "📊",
         "t": "Te enseña todo",
         "d": "Cada llamada, cada cita, todo apuntado en algún sitio."
+      },
+      {
+        "icn": "📧",
+        "t": "Gestiona el email",
+        "d": "Recibe, reenvía y responde. Los importantes te llegan ya seleccionados."
+      },
+      {
+        "icn": "⏰",
+        "t": "Envía recordatorios",
+        "d": "El cliente recibe un recordatorio antes de la cita. Menos retrasos, menos huecos."
+      },
+      {
+        "icn": "🔔",
+        "t": "Te avisa",
+        "d": "¿Caso urgente o cliente importante? Recibes una notificación al instante."
+      },
+      {
+        "icn": "📋",
+        "t": "Recoge los datos",
+        "d": "Formularios, información y peticiones recogidos durante la llamada, listos para ti."
+      },
+      {
+        "icn": "🤝",
+        "t": "Da soporte",
+        "d": "Preguntas frecuentes, horarios, direcciones: responde al momento sin molestarte."
+      },
+      {
+        "icn": "🧾",
+        "t": "Prepara presupuestos",
+        "d": "Entiende la petición y te prepara el presupuesto para enviar en un clic."
       }
-    ]
-  },
-  "capabilities": {
-    "title": "Y no solo eso",
-    "subtitle": "Si lo haces por teléfono, Aria probablemente también puede.",
-    "items": [
-      "Email",
-      "Recordatorios",
-      "Notificaciones",
-      "Formularios",
-      "Soporte",
-      "Presupuestos",
-      "Y más"
     ]
   },
   "demoBanner": {
