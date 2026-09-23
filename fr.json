@@ -115,8 +115,8 @@
       },
       {
         "icn": "✨",
-        "t": "Et bien plus",
-        "d": "Si ça se fait par téléphone, Aria peut probablement le faire. Demandez-nous."
+        "t": "Un autre besoin ?",
+        "d": "Si ça peut se faire par téléphone, Aria peut le faire. Écrivez-nous et on vous dit comment."
       }
     ]
   },
@@ -141,7 +141,7 @@
     "problem": "Problème à résoudre",
     "problemPh": "Nous manquons des appels quand nous sommes occupés",
     "btn": "Générer la démo",
-    "generating": "Un instant...",
+    "generating": "Un instant, je prépare la démo",
     "error": "Erreur",
     "fillFields": "Renseignez le nom, le secteur et les services"
   },
@@ -162,7 +162,7 @@
   },
   "demoUI": {
     "start": "Démarrer",
-    "running": "En cours...",
+    "running": "En cours",
     "replay": "Revoir",
     "reset": "Réinitialiser",
     "calendar": "Calendrier",
@@ -216,7 +216,7 @@
             "t": "Calendrier",
             "s": "Créneaux vérifiés"
           },
-          "say": "Je vérifie les disponibilités tout de suite...",
+          "say": "Je vérifie les disponibilités tout de suite",
           "delay": 11000
         },
         {
