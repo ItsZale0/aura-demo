@@ -82,20 +82,37 @@
         "icn": "📊",
         "t": "Shows you everything",
         "d": "Every call, every appointment, all of it written down somewhere."
+      },
+      {
+        "icn": "📧",
+        "t": "Handles your email",
+        "d": "Receives, forwards, and replies. The important ones reach you already sorted."
+      },
+      {
+        "icn": "⏰",
+        "t": "Sends reminders",
+        "d": "Customers get a reminder before their appointment. Fewer no-shows, fewer gaps."
+      },
+      {
+        "icn": "🔔",
+        "t": "Notifies you",
+        "d": "Urgent case or key customer? You get a notification right away."
+      },
+      {
+        "icn": "📋",
+        "t": "Collects the details",
+        "d": "Forms, information, and requests gathered during the call, ready for you."
+      },
+      {
+        "icn": "🤝",
+        "t": "Provides support",
+        "d": "FAQs, opening hours, directions: answered instantly without bothering you."
+      },
+      {
+        "icn": "🧾",
+        "t": "Prepares quotes",
+        "d": "Understands the request and drafts the quote you can send in one click."
       }
-    ]
-  },
-  "capabilities": {
-    "title": "And that's not all",
-    "subtitle": "If you do it over the phone, Aria can probably do it.",
-    "items": [
-      "Email",
-      "Reminders",
-      "Notifications",
-      "Forms",
-      "Support",
-      "Quotes",
-      "And more"
     ]
   },
   "demoBanner": {
