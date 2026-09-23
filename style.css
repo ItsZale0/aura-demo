@@ -98,7 +98,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif;backgro
 .btn.sec:hover{background:var(--bg2)}
 
 /* ═══ STATS ═══ */
-.stats-wrap{max-width:1080px;margin:0 auto;padding:0 32px 64px}
+.stats-wrap{max-width:1080px;margin:0 auto;padding:0 32px 40px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;transition:all .3s;position:relative;overflow:hidden}
 .stat::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
@@ -118,11 +118,11 @@ h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line
 
 /* ═══ FEATURES ═══ */
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.feat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 28px 30px;transition:all .3s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px 26px 28px;transition:all .3s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden}
 .feat::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent) 6%,transparent),transparent 60%);opacity:0;transition:opacity .3s}
 .feat:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--accent) 35%,var(--border))}
 .feat:hover::before{opacity:1}
-.feat .ficn{width:34px;height:34px;color:var(--accent);display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px}.ficn svg{width:100%;height:100%}
+.feat .ficn{width:34px;height:34px;line-height:1;color:var(--accent);display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px}.ficn svg{width:100%;height:100%}
 .feat:hover .ficn{transform:scale(1.12) rotate(-6deg)}
 .feat h4{font-size:1.04em;font-weight:700;margin-bottom:8px;letter-spacing:-.015em;line-height:1.35}
 .feat p{font-size:.9em;color:var(--muted);line-height:1.65}
@@ -448,8 +448,8 @@ section.full{padding:70px 20px}
 /* Desktop grande: più respiro */
 @media(min-width:1400px){
   .hero{padding-top:72px}
-  section{padding:112px 32px}
-  section.full{padding:112px 32px}
+  section{padding:64px 32px}
+  section.full{padding:64px 32px}
 }
 
 /* ═══ HERO TITLE — animazione d'ingresso + typewriter ═══ */
