@@ -562,3 +562,17 @@ a.feat-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 /* Flash della sezione contatti quando ci arrivi dalla card */
 @keyframes contactFlash{0%{background:color-mix(in srgb,var(--accent) 10%,transparent)}100%{background:transparent}}
 .contact-flash{animation:contactFlash 2.4s ease-out;border-radius:var(--radius)}
+
+/* ═══ LANGUAGE DROPDOWN ═══ */
+.lang-dd{position:relative}
+.lang-dd-btn{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:.82em;font-weight:600;color:var(--text);cursor:pointer;transition:all .2s;font-family:inherit}
+.lang-dd-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lang-dd-arrow{font-size:.75em;transition:transform .25s;color:var(--muted)}
+.lang-dd.open .lang-dd-arrow{transform:rotate(180deg)}
+.lang-dd-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:150px;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);padding:6px;margin:0;list-style:none;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .25s cubic-bezier(.2,.7,.3,1);z-index:100}
+.lang-dd.open .lang-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.lang-dd-menu li{padding:9px 12px;border-radius:8px;font-size:.85em;font-weight:500;cursor:pointer;transition:background .15s;color:var(--text);white-space:nowrap}
+.lang-dd-menu li:hover{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent)}
+.lang-dd-menu li[aria-selected="true"]{color:var(--accent);font-weight:700;background:color-mix(in srgb,var(--accent) 7%,transparent)}
+[data-theme="night"] .lang-dd-btn{background:var(--card)}
+[data-theme="night"] .lang-dd-menu{background:var(--card)}
