@@ -82,20 +82,37 @@
         "icn": "📊",
         "t": "Ti fa vedere tutto",
         "d": "Ogni chiamata, ogni appuntamento, tutto scritto da qualche parte."
+      },
+      {
+        "icn": "📧",
+        "t": "Gestisce le email",
+        "d": "Riceve, inoltra e risponde. Le email importanti ti arrivano già scelte."
+      },
+      {
+        "icn": "⏰",
+        "t": "Manda i promemoria",
+        "d": "Il cliente riceve un reminder prima dell'appuntamento. Pochi ritardi, pochi buchi."
+      },
+      {
+        "icn": "🔔",
+        "t": "Ti avvisa",
+        "d": "Caso urgente o cliente importante? Ti arriva una notifica, subito."
+      },
+      {
+        "icn": "📋",
+        "t": "Raccoglie i dati",
+        "d": "Moduli, informazioni e richieste raccolti durante la chiamata, pronti per te."
+      },
+      {
+        "icn": "🤝",
+        "t": "Dà assistenza",
+        "d": "Domande frequenti, orari, indirizzi: risponde subito senza disturbarti."
+      },
+      {
+        "icn": "🧾",
+        "t": "Prepara preventivi",
+        "d": "Capisce la richiesta e ti prepara il preventivo da inviare in un click."
       }
-    ]
-  },
-  "capabilities": {
-    "title": "E non solo",
-    "subtitle": "Se lo fai al telefono, probabilmente lo può fare Aria.",
-    "items": [
-      "Email",
-      "Promemoria",
-      "Notifiche",
-      "Moduli e form",
-      "Assistenza",
-      "Preventivi",
-      "E altro"
     ]
   },
   "demoBanner": {
