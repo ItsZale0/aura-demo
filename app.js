@@ -780,3 +780,57 @@ function initLangDd(){
 }
 
 initLangDd();
+
+
+// ═══ MAILTO CON FALLBACK ═══
+// Se il browser non ha un client email, mailto: non fa nulla.
+// Apriamo il mailto e dopo 1.2s, se la pagina è ancora visibile e attiva,
+// mostriamo un pannello con l'email da copiare.
+document.addEventListener('click', function(e){
+  var a = e.target.closest ? e.target.closest('a[href^="mailto:"]') : null;
+  if(!a) return;
+  // lascia funzionare il mailto nativo...
+  var t = setTimeout(function(){
+    // se siamo qui, probabilmente nessuna app si è aperta (la pagina resta focused)
+    if(document.visibilityState === 'visible' && !document.hidden){
+      showMailFallback(a.href);
+    }
+  }, 1400);
+  // se l'app si apre (blur), annulla
+  window.addEventListener('blur', function(){ clearTimeout(t); }, {once:true});
+});
+
+function showMailFallback(mailtoUrl){
+  // evita duplicati
+  if(document.getElementById('mailFallback')) return;
+  var m = mailtoUrl.match(/mailto:([^?]+)/);
+  var email = m ? m[1] : 'arioautomationscompany@gmail.com';
+  var bs = mailtoUrl.match(/[?&]body=([^&]*)/);
+  var body = bs ? decodeURIComponent(bs[1].replace(/\+/g,' ')) : '';
+  var sj = mailtoUrl.match(/[?&]subject=([^&]*)/);
+  var subj = sj ? decodeURIComponent(sj[1].replace(/\+/g,' ')) : '';
+  
+  var ov = document.createElement('div');
+  ov.id = 'mailFallback';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(10,10,14,.6);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px';
+  ov.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:480px;width:100%;padding:28px;box-shadow:var(--shadow-lg)">'
+    + '<h3 style="margin:0 0 8px;font-size:1.15em">Il tuo client email non si è aperto</h3>'
+    + '<p style="color:var(--muted);font-size:.9em;margin:0 0 18px;line-height:1.6">Copia l\'indirizzo e scrivici da Gmail, Outlook o dalla mail che usi:</p>'
+    + '<div style="display:flex;gap:8px;margin-bottom:14px">'
+    + '<code style="flex:1;padding:12px 14px;background:var(--bg2);border-radius:10px;font-size:.9em;word-break:break-all">'+email+'</code>'
+    + '<button id="copyMail" style="padding:12px 16px;background:var(--accent);color:#fff;border:0;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit">Copia</button>'
+    + '</div>'
+    + (subj ? '<p style="font-size:.82em;color:var(--muted);margin:0 0 6px"><strong>Oggetto:</strong> '+subj+'</p>' : '')
+    + (body ? '<p style="font-size:.82em;color:var(--muted);margin:0 0 18px;white-space:pre-line"><strong>Messaggio:</strong><br>'+body+'</p>' : '')
+    + '<a href="https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(email)+'&su='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body)+'" target="_blank" rel="noopener" style="display:block;text-align:center;padding:12px;border:1px solid var(--accent);color:var(--accent);border-radius:10px;font-weight:600;text-decoration:none">Apri in Gmail</a>'
+    + '<button id="closeMail" style="margin-top:10px;width:100%;padding:10px;background:none;border:0;color:var(--muted);cursor:pointer;font-family:inherit">Chiudi</button>'
+    + '</div>';
+  document.body.appendChild(ov);
+  document.getElementById('copyMail').onclick = function(){
+    navigator.clipboard.writeText(email).then(function(){
+      this.textContent = 'Copiato ✓';
+    }.bind(this));
+  };
+  document.getElementById('closeMail').onclick = function(){ ov.remove(); };
+  ov.onclick = function(ev){ if(ev.target === ov) ov.remove(); };
+}
