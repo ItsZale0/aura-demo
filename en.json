@@ -115,8 +115,8 @@
       },
       {
         "icn": "✨",
-        "t": "And much more",
-        "d": "If it can be done over the phone, Aria can probably do it. Just ask."
+        "t": "Need something else?",
+        "d": "If it can be done over the phone, Aria can do it. Write to us and we'll tell you how."
       }
     ]
   },
@@ -141,7 +141,7 @@
     "problem": "Problem to solve",
     "problemPh": "We miss calls when we're busy",
     "btn": "Generate the demo",
-    "generating": "One moment...",
+    "generating": "One moment, preparing your demo",
     "error": "Error",
     "fillFields": "Fill in name, industry and services"
   },
@@ -162,7 +162,7 @@
   },
   "demoUI": {
     "start": "Start",
-    "running": "Running...",
+    "running": "Running",
     "replay": "Replay",
     "reset": "Reset",
     "calendar": "Calendar",
@@ -216,7 +216,7 @@
             "t": "Calendar",
             "s": "Slots checked"
           },
-          "say": "Let me check availability...",
+          "say": "Let me check availability right away",
           "delay": 11000
         },
         {
