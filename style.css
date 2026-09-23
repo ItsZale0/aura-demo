@@ -640,3 +640,177 @@ a:hover{color:var(--accent)}
 .hv-bubble{background:var(--bg2);border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:.82em;line-height:1.5;margin-bottom:8px;color:var(--text)}
 .hv-bubble.aria{background:color-mix(in srgb,var(--accent) 12%,var(--card));border-radius:14px 14px 4px 14px}
 .hv-ok{display:flex;align-items:center;gap:8px;font-size:.76em;color:var(--green);font-weight:600;margin-top:12px}
+
+/* ═══════════════════════════════════════════════════════════════
+   OTTIMIZZAZIONE MOBILE — 320 / 360 / 375 / 390 / 768 / 844 / 9:16
+   Solo aggiunte dentro media query: il desktop (>900px) non cambia.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── M1 · Mobile ≤600px: hero, sezioni, card, tabs, form, footer ── */
+@media (max-width:600px){
+  .hero{padding:2.25rem 1.25rem 3rem}
+  .hero h1{font-size:clamp(1.85em,8vw,2.5em);line-height:1.14;letter-spacing:-.035em}
+  .hero p{font-size:.98em;margin-bottom:1.5rem}
+  .hero-badge{margin-bottom:1.125rem}
+  .hero-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin-bottom:1.75rem}
+  .hero-checks span{font-size:.8rem;padding:.6rem .75rem;line-height:1.35}
+  .hero-cta{gap:.625rem}
+
+  section{padding:3rem 1.25rem}
+  section.full{padding:3rem 1.25rem}
+  #personalizza{padding:3rem 1.25rem}
+  .stats-wrap{padding:0 1.25rem 3rem}
+  .sec-head{margin-bottom:1.5rem}
+
+  .feat{padding:1.125rem 1rem 1.25rem}
+  .feat .ficn{width:2rem;height:2rem;margin-bottom:.6rem}
+  .cap-item{padding:.75rem .9rem}
+  .stat{padding:1.125rem 1rem}
+  .tl-step{padding:.875rem 1rem}
+
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:.5rem;margin-bottom:1.75rem}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center;padding:.65rem 1.15rem}
+
+  .p-form input,.p-form textarea{font-size:1rem;padding:.85rem 1rem}
+  .p-form textarea{min-height:6rem !important}
+  .p-form>div{margin-bottom:1.125rem}
+
+  .foot{padding:2.5rem 1.25rem}
+  .foot-inner{gap:1.75rem}
+  .foot-col h5{margin-bottom:.75rem}
+  .foot-col a{min-height:44px;display:flex;align-items:center}
+  .foot-bottom{margin-top:1.75rem}
+  .foot-bottom a{padding:.65rem 0}
+}
+
+/* ── M2 · Tablet/phone grandi ≤768px: input 16px (no zoom iOS), touch 44px ── */
+@media (max-width:768px){
+  .p-form input,.p-form textarea{font-size:1rem}
+  .nav-links a{min-height:44px;display:inline-flex;align-items:center}
+  .tab{min-height:44px;display:inline-flex;align-items:center}
+  .hero-checks span{font-size:.8rem}
+}
+
+/* ── M3 · Tablet 601-900px: griglie features/automazioni sempre 2 colonne ── */
+@media (min-width:601px) and (max-width:900px){
+  .feat-grid,section .aut-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* ── M4 · Schermi piccoli ≤380px ── */
+@media (max-width:380px){
+  .stats{gap:.625rem}
+  .stat{padding:1rem .875rem}
+  .stat .num{font-size:2em}
+  .lang-dd-btn{padding:.5rem .55rem;font-size:.78rem}
+  .hero-cta .btn{padding:.9rem 1.25rem}
+}
+
+/* ── M5 · Molto piccoli ≤360px (320px): pill 1 colonna, zero overflow ── */
+@media (max-width:360px){
+  .hero-checks{grid-template-columns:1fr}
+  .hero h1{font-size:1.7em}
+  .feat h4{font-size:.95em}
+  .cal-vis .cal-grid .day{width:30px;height:30px;min-height:30px}
+  section .aut-grid{grid-template-columns:1fr}
+}
+
+/* ── M6 · Landscape mobile (844×390, 740×360): nav e hero compatti ── */
+@media (max-height:480px) and (orientation:landscape) and (max-width:1000px){
+  .nav{padding:.5rem 1rem}
+  .hero{padding:1.5rem 1.25rem 2rem}
+  .hero h1{font-size:clamp(1.7em,4vw,2.3em);margin-bottom:.875rem}
+  .hero p{margin-bottom:1.125rem}
+  .hero-checks{margin-bottom:1.25rem}
+  section{padding:2.25rem 1.25rem}
+  section.full{padding:2.25rem 1.25rem}
+  #personalizza{padding:2.25rem 1.25rem}
+  .stats-wrap{padding:0 1.25rem 2rem}
+  .feat-grid,.cap-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .dash{grid-template-columns:1fr 1fr}
+  .phone-chat{height:15rem}
+  .visual-body{min-height:15rem}
+}
+
+/* ── M7 · Qualsiasi touch (anche iPad >768): input 16px, target ≥44px ── */
+@media (pointer:coarse){
+  .p-form input,.p-form textarea{font-size:1rem}
+  .tab,.nav-links a{min-height:44px;display:inline-flex;align-items:center}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DESKTOP OPTIMIZATION (≥1024px) — contenitori 1140, ritmo 48/64/96
+   Solo override in min-width: le media query max-width (mobile)
+   gestite altrove restano intatte e vincono sotto i loro breakpoint
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── ≥1024px: base desktop ── */
+@media (min-width:1024px){
+  /* Contenitori unificati a 1140px per respiro su schermi larghi.
+     Per automazioni.html servono selettori con specificity maggiore
+     delle regole nel blocco <style> inline di quella pagina. */
+  .hero,.stats-wrap,.tabs,.demo-view,.site-cta,
+  section,section.full>div,#personalizza>div,
+  .foot-inner,.foot-bottom{max-width:1140px}
+  section.aut-hero,section.aut-section{max-width:1140px}
+
+  /* Nav: gap mantenuto a 28px a 1024 (link non affollati), hover fluido */
+  .nav-links{gap:28px}
+  .nav-links a{transition:color .2s ease}
+
+  /* Ritmo verticale — scala 48/64/96, tier 64px */
+  section{padding:64px 32px}
+  section.full{padding:64px 32px}
+  #personalizza{padding:64px 32px}
+  section.aut-section{padding:64px 32px}
+  .hero{padding-top:64px;padding-bottom:72px}
+  .stats-wrap{padding-bottom:48px}
+  .sec-head,.sec-head.tight{margin-bottom:48px}
+
+  /* Hero: titolo mai strappato — la riga accent (inline-block)
+     entra nella colonna testo senza traboccare */
+  .hero h1{max-width:17ch}
+  .hero p{max-width:64ch}
+
+  /* Griglie: 3 colonne fisse, card mai troppo larghe (≈345px max) */
+  .feat-grid{grid-template-columns:repeat(3,1fr);gap:20px}
+  .aut-section .aut-grid{grid-template-columns:repeat(3,1fr);gap:20px}
+
+  /* Stats: 4 colonne perfettamente uguali, numeri stessa baseline */
+  .stats{grid-template-columns:repeat(4,1fr);gap:20px}
+  .stat .num{font-variant-numeric:tabular-nums}
+
+  /* Demo: phone mockup compatto a sinistra, visual dominante a destra */
+  .dash{grid-template-columns:minmax(340px,400px) 1fr;gap:24px}
+  .phone-chat{height:380px}
+  .visual-body{min-height:380px}
+
+  /* Tipografia: line-length corpo ≤65ch, headings coerenti */
+  .sub{max-width:65ch}
+  .aut-item h4{letter-spacing:-.015em}
+}
+
+/* ── ≥1100px: hero con mockup chiamata a destra ── */
+@media (min-width:1100px){
+  .hero{padding-right:440px}
+  .hero-visual{right:32px;top:50%;transform:translateY(-50%);width:370px}
+}
+
+/* ── ≥1280px: nav più ariegggiata ── */
+@media (min-width:1280px){
+  .nav-links{gap:34px}
+}
+
+/* ── ≥1440px: tier 96px del ritmo verticale + mockup hero più grande ── */
+@media (min-width:1440px){
+  .nav{padding:16px 40px}
+  section{padding:96px 32px}
+  section.full{padding:96px 32px}
+  #personalizza{padding:96px 32px}
+  section.aut-section{padding:96px 32px}
+  .hero{padding-top:96px;padding-bottom:96px;padding-right:480px}
+  .hero-visual{width:400px}
+  .stats-wrap{padding-bottom:64px}
+  .demo-view{padding-bottom:96px}
+}
