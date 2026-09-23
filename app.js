@@ -636,6 +636,12 @@ function initDynamic(){
   // tema: salvato o auto (19-6 = notte)
   var saved = null;
   try{ saved = localStorage.getItem('aria-theme'); }catch(e){}
+  // dark di default: chi aveva 'day' dalla vecchia versione passa a night una volta
+  try{
+    if(saved === 'day' && !localStorage.getItem('aria-dark-migrated')){
+      saved = null; localStorage.setItem('aria-dark-migrated','1');
+    }
+  }catch(e){}
   applyTheme(saved || 'night');
   updateGreetingClock();
   initReveal();
