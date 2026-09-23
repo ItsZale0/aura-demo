@@ -460,5 +460,65 @@
     "title": "Vous voulez un site comme celui-ci ?",
     "text": "Ce site est rapide, il s'adapte à tous les écrans et il est optimisé pour les moteurs de recherche. Si votre activité a besoin d'une présence web comme celle-ci, nous la réalisons pour vous.",
     "btn": "Parlons-en"
+  },
+  "autos": {
+    "hero": {
+      "badge": "Au-delà du téléphone",
+      "title1": "Le téléphone n'était",
+      "title2": "que le début",
+      "subtitle": "Aria s'occupe de toute votre gestion quotidienne : e-mails, documents, rappels et rapports. Vous faites votre métier, elle s'occupe du reste."
+    },
+    "intro": {
+      "title": "Chaque routine, en pilote automatique",
+      "subtitle": "Tout ce que vous répétez chaque jour peut tourner tout seul. Voici ce que nous construisons."
+    },
+    "items": [
+      {
+        "icn": "📞",
+        "t": "Assistante téléphonique IA",
+        "d": "Elle répond, comprend, réserve. Chaque appel devient un rendez-vous, même à trois heures du matin.",
+        "link": "#"
+      },
+      {
+        "icn": "📧",
+        "t": "E-mails qui se trient tout seuls",
+        "d": "Les importants arrivent déjà sélectionnés, avec un brouillon de réponse prêt. Les autres s'archivent tout seuls."
+      },
+      {
+        "icn": "📁",
+        "t": "Documents qui se rangent tout seuls",
+        "d": "Devis, factures, contrats : chaque fichier finit à la bonne place et vous le retrouvez quand il faut, sans le chercher."
+      },
+      {
+        "icn": "⏰",
+        "t": "Rappels et relances",
+        "d": "Aucun client oublié : Aria vous le rappelle, à vous et à eux, au bon moment et sur le bon canal."
+      },
+      {
+        "icn": "📊",
+        "t": "Rapports qui s'écrivent tout seuls",
+        "d": "Chaque semaine, le résumé de votre activité arrive dans votre boîte mail : appels, rendez-vous, travaux terminés."
+      },
+      {
+        "icn": "🔄",
+        "t": "Tout est connecté",
+        "d": "Agendas, tableaux, CRM, WhatsApp : les informations circulent toutes seules entre vos outils, toujours à jour."
+      }
+    ],
+    "how": {
+      "title": "Comment ça marche",
+      "s1t": "Vous nous racontez comment vous travaillez",
+      "s1d": "Un appel de vingt minutes pour comprendre votre routine : ce que vous répétez chaque jour, ce qui vous fait perdre du temps.",
+      "s2t": "Nous construisons les automatisations",
+      "s2d": "En quelques jours, pas des mois. Chaque automatisation est testée sur votre cas réel avant d'être mise en service.",
+      "s3t": "Vous gardez le contrôle",
+      "s3d": "Chaque automatisation vous dit ce qu'elle fait et vous pouvez l'arrêter quand vous voulez. Aucune surprise."
+    },
+    "cta": {
+      "title": "Racontez-nous votre routine",
+      "text": "Cette tâche que vous faites chaque jour et qui vous vole du temps : nous pouvons sûrement l'automatiser. Écrivez-nous, on vous explique comment.",
+      "btn": "Écrivez-nous"
+    },
+    "nav": "Automatisations"
   }
 }
