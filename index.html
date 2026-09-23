@@ -26,11 +26,17 @@
 <ul class="nav-links"><li><a href="#demo" data-i18n="nav.demos">Demo</a></li><li><a href="#personalizza" data-i18n="nav.personalize">Personalizza</a></li><li><a href="#contact" data-i18n="nav.contact">Contatti</a></li></ul>
 <div style="display:flex;gap:8px;align-items:center">
 <button class="theme-btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Giorno / Notte" aria-label="Attiva o disattiva la modalità notte">☀️</button>
-<div class="lang-sel" id="langSel" role="group" aria-label="Lingua / Language">
-<button type="button" onclick="setLang('it')" class="active" aria-label="Italiano" aria-pressed="true">IT</button>
-<button type="button" onclick="setLang('en')" aria-label="English" aria-pressed="false">EN</button>
-<button type="button" onclick="setLang('es')" aria-label="Español" aria-pressed="false">ES</button>
-<button type="button" onclick="setLang('zh')" aria-label="中文" aria-pressed="false">中文</button>
+<div class="lang-dd" id="langSel">
+<button type="button" class="lang-dd-btn" id="langDdBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+<span id="langDdCurrent">🇮🇹 IT</span><span class="lang-dd-arrow">▾</span>
+</button>
+<ul class="lang-dd-menu" id="langDdMenu" role="listbox" aria-label="Language">
+<li role="option" onclick="setLang('it')" data-lang="it" aria-selected="true">🇮🇹 Italiano</li>
+<li role="option" onclick="setLang('en')" data-lang="en" aria-selected="false">🇬🇧 English</li>
+<li role="option" onclick="setLang('es')" data-lang="es" aria-selected="false">🇪🇸 Español</li>
+<li role="option" onclick="setLang('fr')" data-lang="fr" aria-selected="false">🇫🇷 Français</li>
+<li role="option" onclick="setLang('zh')" data-lang="zh" aria-selected="false">🇨🇳 中文</li>
+</ul>
 </div>
 </div>
 </nav>
