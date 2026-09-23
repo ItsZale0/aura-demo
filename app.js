@@ -86,7 +86,7 @@ function buildDynamic(){
   if(stats) stats.innerHTML = t.stats.map(function(s){return '<div class="stat"><div class="num">'+s.num+'</div><div class="lbl">'+s.lbl+'</div></div>'}).join('');
   var fg = document.getElementById('featGrid');
   if(fg) fg.innerHTML = t.features.items.map(function(f){return '<div class="feat"><div class="ficn">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
-  var caps = ['📅','📧','💬','⏰','🎯','🔄','📊','🔔','📋','🤖','🎫','⚡'];
+  var caps = ['📧','⏰','🔔','📋','🤖','🧾','✨'];
   var cg = document.getElementById('capGrid');
   if(cg) cg.innerHTML = t.capabilities.items.map(function(c,i){return '<div class="cap-item"><span class="cap-icn">'+caps[i]+'</span><span class="cap-txt">'+c+'</span></div>'}).join('');
   var tabs = document.getElementById('demo');
