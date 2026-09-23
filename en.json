@@ -460,5 +460,65 @@
     "title": "Want a site like this?",
     "text": "This site is fast, adapts to any screen, and is optimized for search engines. If your business needs a web presence like this, we build it.",
     "btn": "Let's talk"
+  },
+  "autos": {
+    "hero": {
+      "badge": "Beyond the phone",
+      "title1": "The phone was",
+      "title2": "just the beginning",
+      "subtitle": "Aria takes care of your daily admin: emails, documents, reminders and reports. You do your job, she does the rest."
+    },
+    "intro": {
+      "title": "Every routine, on autopilot",
+      "subtitle": "Anything you repeat every day can run on its own. Here's what we build."
+    },
+    "items": [
+      {
+        "icn": "📞",
+        "t": "AI phone receptionist",
+        "d": "Answers, understands, books. Every call becomes an appointment, even at 3 a.m.",
+        "link": "#"
+      },
+      {
+        "icn": "📧",
+        "t": "Email that sorts itself",
+        "d": "The important ones arrive already picked out, with a draft reply ready to go. The rest file themselves away."
+      },
+      {
+        "icn": "📁",
+        "t": "Documents that file themselves",
+        "d": "Quotes, invoices, contracts: every file lands in the right place, and you find it right away when you need it."
+      },
+      {
+        "icn": "⏰",
+        "t": "Reminders and follow-ups",
+        "d": "No customer left behind: Aria reminds you and them, at the right time, on the right channel."
+      },
+      {
+        "icn": "📊",
+        "t": "Reports that write themselves",
+        "d": "Every week, a summary of your business lands in your inbox: calls, appointments, jobs closed."
+      },
+      {
+        "icn": "🔄",
+        "t": "Everything connected",
+        "d": "Calendars, spreadsheets, CRM, WhatsApp: information travels between your tools on its own, always up to date."
+      }
+    ],
+    "how": {
+      "title": "How it works",
+      "s1t": "You tell us how you work",
+      "s1d": "A twenty-minute call to understand your routine: what you repeat every day, what eats up your time.",
+      "s2t": "We build the automations",
+      "s2d": "In days, not months. Each one is tested on your real business before it goes live.",
+      "s3t": "You stay in control",
+      "s3d": "Every automation tells you what it's doing, and you can stop it whenever you want. No surprises."
+    },
+    "cta": {
+      "title": "Tell us about your routine",
+      "text": "That thing you do every day that eats your time? We can probably take it off your plate. Email us and we'll tell you how.",
+      "btn": "Email us"
+    },
+    "nav": "Automations"
   }
 }
