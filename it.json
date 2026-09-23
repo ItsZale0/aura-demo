@@ -460,5 +460,65 @@
     "title": "Vuoi un sito così?",
     "text": "Questo sito è veloce, si adatta a ogni schermo ed è ottimizzato per i motori di ricerca. Se ti serve una presenza web così per la tua attività, la realizziamo noi.",
     "btn": "Parliamone"
+  },
+  "autos": {
+    "hero": {
+      "badge": "Oltre il telefono",
+      "title1": "Il telefono era",
+      "title2": "solo l'inizio",
+      "subtitle": "Aria automatizza tutta la tua gestione quotidiana: email, documenti, promemoria e report. Tu pensi al lavoro, lei al resto."
+    },
+    "intro": {
+      "title": "Automazioni per ogni routine",
+      "subtitle": "Ogni attività che ripeti ogni giorno può lavorare da sola. Ecco cosa costruiamo."
+    },
+    "items": [
+      {
+        "icn": "📞",
+        "t": "Centralino telefonico AI",
+        "d": "Risponde, capisce, prenota. Ogni chiamata diventa un appuntamento, anche alle tre di notte.",
+        "link": "#"
+      },
+      {
+        "icn": "📧",
+        "t": "Email intelligenti",
+        "d": "Le email importanti ti arrivano già scelte, con la bozza di risposta pronta. Le altre si archiviano da sole."
+      },
+      {
+        "icn": "📁",
+        "t": "Documenti in ordine da soli",
+        "d": "Preventivi, fatture, contratti: ogni file finisce al posto giusto e lo ritrovi quando serve, senza cercarlo."
+      },
+      {
+        "icn": "⏰",
+        "t": "Promemoria e follow-up",
+        "d": "Nessun cliente dimenticato: Aria ricorda a te e a loro, al momento giusto e sul canale giusto."
+      },
+      {
+        "icn": "📊",
+        "t": "Report che si scrivono da soli",
+        "d": "Ogni settimana il riepilogo della tua attività, pronto nella tua casella: chiamate, appuntamenti, lavori chiusi."
+      },
+      {
+        "icn": "🔄",
+        "t": "Tutto connesso",
+        "d": "Calendari, fogli, CRM, WhatsApp: le informazioni viaggiano da sole tra i tuoi strumenti, sempre aggiornate."
+      }
+    ],
+    "how": {
+      "title": "Come funziona",
+      "s1t": "Ci racconti come lavori",
+      "s1d": "Una chiamata di venti minuti per capire la tua routine: cosa ripeti ogni giorno, cosa ti fa perdere tempo.",
+      "s2t": "Costruiamo le automazioni",
+      "s2d": "In giorni, non mesi. Ogni automazione viene testata sul tuo caso reale prima di andare in funzione.",
+      "s3t": "Tu controlli tutto",
+      "s3d": "Ogni automazione ti avvisa di quello che fa e la fermi quando vuoi. Nessuna sorpresa."
+    },
+    "cta": {
+      "title": "Raccontaci la tua routine",
+      "text": "La cosa che fai ogni giorno e che ti ruba tempo: probabilmente possiamo automatizzarla. Scrivici e ti diciamo come.",
+      "btn": "Scrivici un'email"
+    },
+    "nav": "Automazioni"
   }
 }
