@@ -115,8 +115,8 @@
       },
       {
         "icn": "✨",
-        "t": "Y mucho más",
-        "d": "Si se puede hacer por teléfono, Aria probablemente puede. Pregúntanos."
+        "t": "¿Necesitas otra cosa?",
+        "d": "Si se puede hacer por teléfono, Aria puede hacerlo. Escríbenos y te decimos cómo."
       }
     ]
   },
@@ -141,7 +141,7 @@
     "problem": "Problema a resolver",
     "problemPh": "Perdemos llamadas cuando estamos ocupados",
     "btn": "Genera la demo",
-    "generating": "Un momento...",
+    "generating": "Un momento, preparo la demo",
     "error": "Error",
     "fillFields": "Rellena nombre, sector y servicios"
   },
@@ -162,7 +162,7 @@
   },
   "demoUI": {
     "start": "Iniciar",
-    "running": "En curso...",
+    "running": "En curso",
     "replay": "Repetir",
     "reset": "Reiniciar",
     "calendar": "Calendario",
@@ -216,7 +216,7 @@
             "t": "Calendario",
             "s": "Huecos verificados"
           },
-          "say": "Verifico la disponibilidad ahora mismo...",
+          "say": "Verifico la disponibilidad ahora mismo",
           "delay": 11000
         },
         {
