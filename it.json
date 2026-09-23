@@ -115,8 +115,8 @@
       },
       {
         "icn": "✨",
-        "t": "E molto altro",
-        "d": "Se si fa al telefono, probabilmente Aria lo può fare. Chiedicelo."
+        "t": "Hai un'altra esigenza?",
+        "d": "Se si può fare al telefono, Aria la può fare. Scrivici e ti diciamo come."
       }
     ]
   },
@@ -141,7 +141,7 @@
     "problem": "Problema da risolvere",
     "problemPh": "Perdiamo chiamate quando siamo occupati",
     "btn": "Genera la demo",
-    "generating": "Un attimo...",
+    "generating": "Un attimo, preparo la demo",
     "error": "Errore",
     "fillFields": "Riempi nome, settore e servizi"
   },
@@ -162,7 +162,7 @@
   },
   "demoUI": {
     "start": "Avvia",
-    "running": "In corso...",
+    "running": "In corso",
     "replay": "Rivedi",
     "reset": "Azzera",
     "calendar": "Calendario",
@@ -216,7 +216,7 @@
             "t": "Calendario",
             "s": "Slot verificati"
           },
-          "say": "Verifico subito la disponibilità...",
+          "say": "Verifico subito la disponibilità",
           "delay": 11000
         },
         {
