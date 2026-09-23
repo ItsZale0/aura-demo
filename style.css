@@ -27,7 +27,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif;backgro
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes wave{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
 @keyframes typing-dot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-@keyframes gradient-move{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+}
 @keyframes sun-glow{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
 @keyframes moon-float{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
 @keyframes badge-in{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
@@ -80,7 +80,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif;backgro
 
 
 .hero h1{font-size:clamp(2.4em,6.5vw,4.4em);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;max-width:13ch;animation:fadeUp .7s ease}
-.hero h1 .accent{color:var(--accent),#ff9500,var(--accent));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradient-move 4s linear infinite}
+.hero h1 .accent{color:var(--accent)}
 .hero p{font-size:clamp(1.05em,2vw,1.28em);color:var(--muted);max-width:33em;line-height:1.7;margin-bottom:32px;animation:fadeUp .7s ease .12s both}
 .hero-checks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;animation:fadeUp .7s ease .2s both}
 .hero-checks span{display:inline-flex;align-items:center;gap:7px;font-size:.86em;font-weight:500;padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:22px;transition:all .25s}
@@ -555,7 +555,8 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){.feat-more,.ficn-more,.spark1,.spark2{animation:none}.spark1,.spark2{opacity:.7}}
 
 /* Card "E molto altro" come link */
-a.feat-more{border:1.5px dashed color-mix(in srgb,var(--accent) 45%,var(--border))}
+a.feat-more{color:var(--text);border:1.5px dashed color-mix(in srgb,var(--accent) 45%,var(--border))}
+a.feat-more:hover{color:var(--accent)}
 a.feat-more h4,a.feat-more p{color:inherit}
 a.feat-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
@@ -582,3 +583,7 @@ a.feat-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 :root{--logo-ink:#ff6b00}
 [data-theme="night"] .logo-bg{fill:#26262e}
 [data-theme="night"] .mark .logo-bg{stroke:#3a3a44;stroke-width:.02}
+
+/* ═══ LINK GLOBALI (mai blu default) ═══ */
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
