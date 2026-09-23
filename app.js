@@ -89,7 +89,9 @@ function buildDynamic(){
     var last = i === t.features.items.length - 1;
     var cls = last ? 'feat feat-more' : 'feat';
     var icn = last ? '<span class="spark1">✦</span><span class="ficn-more">'+f.icn+'</span><span class="spark2">✧</span>' : f.icn;
-    return '<div class="'+cls+'"><div class="ficn">'+icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>';
+    var inner = '<div class="ficn">'+icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p>';
+    if(last) return '<a href="#contact" class="'+cls+'" onclick="smoothToContact(event)" aria-label="'+f.t+'">'+inner+'</a>';
+    return '<div class="'+cls+'">'+inner+'</div>';
   }).join('');
   var tabs = document.getElementById('demo');
   if(tabs) tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')" role="button" tabindex="0" aria-pressed="'+(i===0)+'">'+tb+'</div>'}).join('');
@@ -730,3 +732,14 @@ startDemo = function(n){
     fetch(l+'.json').then(function(r){return r.json()}).then(function(d){I18N[l]=d;loaded++;if(loaded===4){var saved='it';try{saved=localStorage.getItem('aria-lang')||'it'}catch(e){}setLang(saved);initDynamic();}}).catch(function(){loaded++;if(loaded===4){setLang('it');initDynamic();}});
   });
 })();
+
+
+function smoothToContact(e){
+  if(e) e.preventDefault();
+  var el = document.getElementById('contact');
+  if(!el) return;
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  // highlight temporaneo della sezione contatti
+  el.classList.add('contact-flash');
+  setTimeout(function(){el.classList.remove('contact-flash')},2400);
+}
