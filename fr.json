@@ -1,0 +1,464 @@
+{
+  "nav": {
+    "demos": "Démos",
+    "personalize": "Personnaliser",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Le téléphone répond tout seul.",
+    "subtitle": "Aria prend les appels de vos clients, note les rendez-vous dans votre calendrier et envoie les confirmations sur WhatsApp. <strong>Vous faites votre métier, elle s'occupe du reste.</strong>",
+    "check1": "Répond toujours",
+    "check2": "Prend les rendez-vous",
+    "check3": "Envoie les confirmations",
+    "check4": "Ne rate aucun appel",
+    "cta": "Voir comment ça marche",
+    "badge": "En ligne maintenant",
+    "title1": "Le téléphone",
+    "title2": "répond tout seul",
+    "cta2": "Testez-la sur votre activité",
+    "subtitleVariants": [
+      "Aria prend les appels de vos clients, note les rendez-vous dans votre calendrier et envoie les confirmations sur WhatsApp. <strong>Vous faites votre métier, elle s'occupe du reste.</strong>",
+      "Aucun appel manqué, aucun rendez-vous oublié. <strong>Aria répond, organise et confirme. Vous, vous vous concentrez sur votre travail.</strong>",
+      "Votre standard qui ne dort jamais. <strong>Aria répond 24/7, prend les rendez-vous et envoie les rappels.</strong>",
+      "Pendant que vous êtes sur le chantier, Aria répond au téléphone et remplit votre agenda. <strong>Vous ne perdez plus de clients.</strong>",
+      "Une secrétaire qui travaille sans arrêt, ne demande jamais de vacances et ne rate aucun appel. <strong>Elle s'appelle Aria.</strong>",
+      "Les appels arrivent, les rendez-vous s'inscrivent tout seuls dans le calendrier. <strong>Vous ne recevez que les confirmations.</strong>",
+      "Arrêtez de rappeler vos clients en fin de journée. <strong>Aria répond immédiatement, dès la première sonnerie.</strong>",
+      "Le téléphone sonne pendant que vous êtes occupé ? <strong>Aria répond pour vous et s'occupe de tout.</strong>",
+      "Clients, rendez-vous et confirmations : tout est géré pendant que vous travaillez. <strong>Sans embaucher personne.</strong>",
+      "Votre agenda plein sans même décrocher le téléphone. <strong>Aria réserve, déplace et confirme pour vous.</strong>",
+      "Chaque appel est un client en plus. <strong>Aria les prend toutes, même celles que vous perdriez aujourd'hui.</strong>",
+      "De la première sonnerie à la confirmation sur WhatsApp. <strong>Aria fait tout, vous gardez le contrôle.</strong>"
+    ]
+  },
+  "stats": [
+    {
+      "num": "24/7",
+      "lbl": "Toujours en ligne"
+    },
+    {
+      "num": "0",
+      "lbl": "Appels manqués"
+    },
+    {
+      "num": "3x",
+      "lbl": "Plus de rendez-vous"
+    },
+    {
+      "num": "80%",
+      "lbl": "Temps gagné"
+    }
+  ],
+  "features": {
+    "title": "Ce qu'elle fait, exactement",
+    "subtitle": "Rien de compliqué. Juste l'essentiel pour ceux qui reçoivent des appels toute la journée.",
+    "items": [
+      {
+        "icn": "📞",
+        "t": "Répond aux appels",
+        "d": "Quand vous êtes occupé, sur un chantier ou à table. Aria répond et comprend ce qu'il faut."
+      },
+      {
+        "icn": "📅",
+        "t": "Prend les rendez-vous",
+        "d": "Elle regarde votre calendrier, trouve le créneau libre et réserve. Toute seule."
+      },
+      {
+        "icn": "💬",
+        "t": "Envoie les confirmations",
+        "d": "Le client reçoit un message avec la date et l'heure. Fini les rendez-vous oubliés."
+      },
+      {
+        "icn": "🎯",
+        "t": "Comprend qui appelle",
+        "d": "Qui veut acheter, qui demande un renseignement, qui est pressé. Et elle vous le signale."
+      },
+      {
+        "icn": "🔄",
+        "t": "Rappelle les clients manqués",
+        "d": "Les clients que vous n'aviez pas rappelés ? Aria les rappelle et reprend là où vous vous étiez arrêté."
+      },
+      {
+        "icn": "📊",
+        "t": "Vous montre tout",
+        "d": "Chaque appel, chaque rendez-vous, tout est noté noir sur blanc."
+      },
+      {
+        "icn": "📧",
+        "t": "Gère vos e-mails",
+        "d": "Elle reçoit, transfère et répond. Les e-mails importants vous arrivent déjà triés."
+      },
+      {
+        "icn": "⏰",
+        "t": "Envoie les rappels",
+        "d": "Le client reçoit un rappel avant le rendez-vous. Moins de retards, moins de créneaux vides."
+      },
+      {
+        "icn": "🔔",
+        "t": "Vous alerte",
+        "d": "Cas urgent ou client important ? Vous recevez une notification, immédiatement."
+      },
+      {
+        "icn": "📋",
+        "t": "Rassemble les informations",
+        "d": "Formulaires, informations et demandes recueillis pendant l'appel, prêts pour vous."
+      },
+      {
+        "icn": "🤝",
+        "t": "Assiste vos clients",
+        "d": "Questions fréquentes, horaires, adresses : elle répond aussitôt sans vous déranger."
+      },
+      {
+        "icn": "🧾",
+        "t": "Prépare les devis",
+        "d": "Elle comprend la demande et vous prépare le devis à envoyer en un clic."
+      },
+      {
+        "icn": "✨",
+        "t": "Et bien plus",
+        "d": "Si ça se fait par téléphone, Aria peut probablement le faire. Demandez-nous."
+      }
+    ]
+  },
+  "demoBanner": {
+    "title": "Trois exemples, sous vos yeux",
+    "text": "Ce ne sont que trois situations. Chaque activité a les siennes — <a href=\"#personalizza\" style=\"color:inherit\">créez la vôtre ici</a>."
+  },
+  "tabs": [
+    "Réservation",
+    "Qualification",
+    "Relance"
+  ],
+  "personalizza": {
+    "title": "Testez-la sur votre activité",
+    "subtitle": "Décrivez votre activité : Aria simulera un appel avec l'un de vos clients, pour que vous entendiez exactement comment elle répondrait à votre place.",
+    "name": "Nom de l'activité",
+    "namePh": "Cabinet Moreau",
+    "type": "Secteur",
+    "typePh": "Plombier, dentiste, restaurant...",
+    "services": "Services principaux",
+    "servicesPh": "Réparations, entretien, consultations...",
+    "problem": "Problème à résoudre",
+    "problemPh": "Nous manquons des appels quand nous sommes occupés",
+    "btn": "Générer la démo",
+    "generating": "Un instant...",
+    "error": "Erreur",
+    "fillFields": "Renseignez le nom, le secteur et les services"
+  },
+  "contact": {
+    "title": "Deux questions rapides",
+    "text": "Combien ça coûte ? Est-ce que ça fonctionne pour moi ? Écrivez-nous, nous répondons dans la journée.",
+    "btn": "Écrivez-nous sur WhatsApp"
+  },
+  "footer": {
+    "about": "Qui répond au téléphone pour vous.",
+    "services": "Services",
+    "contact": "Contact",
+    "booking": "Rendez-vous",
+    "qualification": "Qualification des clients",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "copyright": "© 2026 Aria Automation"
+  },
+  "demoUI": {
+    "start": "Démarrer",
+    "running": "En cours...",
+    "replay": "Revoir",
+    "reset": "Réinitialiser",
+    "calendar": "Calendrier",
+    "whatsapp": "WhatsApp",
+    "crm": "Notes client",
+    "aria": "Aria",
+    "customer": "Client"
+  },
+  "disclaimer": "Démo simulée. Les résultats réels peuvent varier.",
+  "demos": [
+    {
+      "phone": {
+        "name": "Aria",
+        "tag": "En direct"
+      },
+      "visual": "cal",
+      "steps": [
+        {
+          "t": "14:32:05",
+          "title": "Appel entrant",
+          "body": "Martin Dupont appelle votre numéro.",
+          "delay": 0
+        },
+        {
+          "t": "14:32:07",
+          "title": "Aria répond",
+          "body": "Elle répond de façon professionnelle.",
+          "say": "Bonjour ! Je suis Aria. Comment puis-je vous aider ?",
+          "delay": 2000
+        },
+        {
+          "t": "14:32:10",
+          "title": "Demande de rendez-vous",
+          "body": "Le client veut réserver.",
+          "user": "Je voudrais prendre un rendez-vous pour une consultation.",
+          "delay": 5000
+        },
+        {
+          "t": "14:32:13",
+          "title": "Analyse",
+          "body": "Aria identifie le type de service.",
+          "think": true,
+          "delay": 8000
+        },
+        {
+          "t": "14:32:15",
+          "title": "Vérification des disponibilités",
+          "body": "Aria consulte le calendrier.",
+          "action": {
+            "ic": "cal",
+            "t": "Calendrier",
+            "s": "Créneaux vérifiés"
+          },
+          "say": "Je vérifie les disponibilités tout de suite...",
+          "delay": 11000
+        },
+        {
+          "t": "14:32:18",
+          "title": "Créneau trouvé",
+          "body": "Aria propose l'horaire.",
+          "say": "J'ai demain à 10h. Ça vous convient ?",
+          "delay": 14000
+        },
+        {
+          "t": "14:32:21",
+          "title": "Confirmation",
+          "body": "Le client confirme.",
+          "user": "Parfait !",
+          "delay": 17000
+        },
+        {
+          "t": "14:32:23",
+          "title": "Événement créé",
+          "body": "Aria crée l'événement.",
+          "cal": true,
+          "d": "21 SEPT",
+          "h": "10:00",
+          "n": "Consultation — Martin Dupont",
+          "company": "Dupont & Co",
+          "say": "C'est réservé ! Vous recevrez un rappel.",
+          "delay": 20000
+        },
+        {
+          "t": "14:32:26",
+          "title": "WhatsApp",
+          "body": "Envoie le rappel.",
+          "action": {
+            "ic": "wa",
+            "t": "WhatsApp",
+            "s": "Envoyé"
+          },
+          "delay": 23000
+        },
+        {
+          "t": "14:32:28",
+          "title": "Lead enregistré",
+          "body": "Enregistre dans le système.",
+          "action": {
+            "ic": "crm",
+            "t": "CRM",
+            "s": "Enregistré"
+          },
+          "say": "Merci, bonne journée !",
+          "delay": 26000
+        }
+      ]
+    },
+    {
+      "phone": {
+        "name": "Aria",
+        "tag": "Qualification"
+      },
+      "visual": "crm",
+      "steps": [
+        {
+          "t": "09:15:02",
+          "title": "Nouvel appel",
+          "body": "Un contact inconnu appelle.",
+          "delay": 0
+        },
+        {
+          "t": "09:15:04",
+          "title": "Aria répond",
+          "body": "Elle commence la qualification.",
+          "say": "Bonjour ! Je suis Aria d'Aria Automation. Comment puis-je vous aider ?",
+          "delay": 2000
+        },
+        {
+          "t": "09:15:08",
+          "title": "Intérêt du client",
+          "body": "Le client est intéressé.",
+          "user": "Je voudrais des informations sur vos services.",
+          "delay": 5000
+        },
+        {
+          "t": "09:15:11",
+          "title": "Analyse des besoins",
+          "body": "Aria demande de quoi il a besoin.",
+          "say": "Bien sûr ! Puis-je vous demander ce dont vous avez besoin exactement ?",
+          "delay": 8000
+        },
+        {
+          "t": "09:15:15",
+          "title": "Description du problème",
+          "body": "Le client décrit la situation.",
+          "user": "Nous manquons beaucoup d'appels et nous n'arrivons pas à tout gérer.",
+          "delay": 11000
+        },
+        {
+          "t": "09:15:18",
+          "title": "Demande de budget",
+          "body": "Aria demande le budget.",
+          "say": "Je comprends tout à fait. Avez-vous un budget mensuel en tête pour cette solution ?",
+          "delay": 14000
+        },
+        {
+          "t": "09:15:22",
+          "title": "Budget indiqué",
+          "body": "Le client indique son budget.",
+          "user": "Environ 150 € par mois.",
+          "delay": 17000
+        },
+        {
+          "t": "09:15:25",
+          "title": "Délais",
+          "body": "Aria demande quand commencer.",
+          "say": "Parfait. Quand souhaiteriez-vous commencer ?",
+          "delay": 20000
+        },
+        {
+          "t": "09:15:29",
+          "title": "Urgence",
+          "body": "Le client exprime son urgence.",
+          "user": "Dès que possible, il nous faut une solution rapide.",
+          "delay": 23000
+        },
+        {
+          "t": "09:15:32",
+          "title": "Qualifié",
+          "body": "Aria qualifie le lead CHAUD.",
+          "think": true,
+          "crm": true,
+          "nm": "Marc Lefebvre",
+          "comp": "Entreprise Lefebvre",
+          "bdg": "150 €/mois",
+          "urg": "Haute",
+          "need": "Gestion des appels",
+          "say": "Parfait ! Un de nos conseillers vous contactera aujourd'hui même. Merci !",
+          "delay": 26000
+        }
+      ]
+    },
+    {
+      "phone": {
+        "name": "Aria",
+        "tag": "Relance"
+      },
+      "visual": "wa",
+      "steps": [
+        {
+          "t": "10:00:01",
+          "title": "Analyse de la base de données",
+          "body": "Aria identifie les leads froids.",
+          "delay": 0
+        },
+        {
+          "t": "10:00:03",
+          "title": "Lead sélectionné",
+          "body": "Laura Moreau, il y a 45 jours.",
+          "action": {
+            "ic": "crm",
+            "t": "CRM",
+            "s": "Sélectionné"
+          },
+          "delay": 1500
+        },
+        {
+          "t": "10:00:05",
+          "title": "Appel sortant",
+          "body": "Aria appelle pour relancer.",
+          "say": "Bonjour Laura ! Je suis Aria d'Aria Automation. Comment allez-vous ?",
+          "delay": 3000
+        },
+        {
+          "t": "10:00:10",
+          "title": "La cliente se souvient",
+          "body": "La cliente se souvient de la conversation.",
+          "user": "Ah oui, je me souviens. Nous n'avions pas encore décidé.",
+          "delay": 5500
+        },
+        {
+          "t": "10:00:14",
+          "title": "Offre ciblée",
+          "body": "Aria propose la solution.",
+          "say": "Je comprends. Puis-je vous demander : le problème des appels manqués est-il toujours d'actualité ? Nous avons activé une promotion spéciale.",
+          "delay": 7500
+        },
+        {
+          "t": "10:00:19",
+          "title": "L'intérêt revient",
+          "body": "La cliente demande des détails.",
+          "user": "Oui, le problème est toujours là. De quoi s'agit-il ?",
+          "delay": 10000
+        },
+        {
+          "t": "10:00:23",
+          "title": "Offre envoyée",
+          "body": "Aria envoie l'offre par WhatsApp.",
+          "wa": true,
+          "msg": "Bonjour Laura ! Comme promis, voici les détails de notre promotion spéciale : 1er mois offert + 20 % de réduction pendant les 3 premiers mois. Pour toute question, je suis là ! 🚀",
+          "say": "Si vous activez cette semaine, nous vous offrons le 1er mois gratuit et 20 % de réduction pendant 3 mois.",
+          "delay": 12000
+        },
+        {
+          "t": "10:00:28",
+          "title": "Intérêt confirmé",
+          "body": "La cliente est intéressée mais doit en parler à son associé.",
+          "user": "Intéressant ! Je dois en parler à mon associé.",
+          "delay": 14500
+        },
+        {
+          "t": "10:00:32",
+          "title": "Proposition d'appel",
+          "body": "Aria propose un appel avec un conseiller.",
+          "say": "Bien sûr. Puis-je vous fixer un appel avec l'un de nos conseillers demain après-midi ? Il pourra répondre à toutes vos questions.",
+          "delay": 16500
+        },
+        {
+          "t": "10:00:37",
+          "title": "Rendez-vous confirmé",
+          "body": "La cliente confirme pour le lendemain.",
+          "user": "Oui, demain à 16h, ça me va.",
+          "wa": true,
+          "msg": "Parfait Laura ! Je confirme l'appel avec notre conseiller pour demain à 16h. Nous vous appellerons au numéro que vous nous avez laissé. Bonne journée ! 📞",
+          "say": "Parfait. Je vous envoie un rappel une heure avant. À demain !",
+          "delay": 18500
+        }
+      ]
+    }
+  ],
+  "ui": {
+    "greetings": {
+      "morning": "Bonjour ! La journée commence bien.",
+      "afternoon": "Bon après-midi ! Comment ça va ?",
+      "evening": "Bonsoir ! Toujours au travail ?",
+      "night": "On code tard, hein ? 👀"
+    },
+    "nightOn": "Mode nuit activé",
+    "dayOn": "Mode jour activé",
+    "welcomeFirst": "Bienvenue ! Je suis Aria, jetez un œil aux démos ci-dessous.",
+    "welcomeBack": "Contente de vous revoir !",
+    "welcomeBack3": "On se voit souvent, j'aime ça 😊"
+  },
+  "siteCta": {
+    "title": "Vous voulez un site comme celui-ci ?",
+    "text": "Ce site est rapide, il s'adapte à tous les écrans et il est optimisé pour les moteurs de recherche. Si votre activité a besoin d'une présence web comme celle-ci, nous la réalisons pour vous.",
+    "btn": "Parlons-en"
+  }
+}
