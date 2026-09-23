@@ -635,8 +635,7 @@ function initDynamic(){
   // tema: salvato o auto (19-6 = notte)
   var saved = null;
   try{ saved = localStorage.getItem('aria-theme'); }catch(e){}
-  var h = new Date().getHours();
-  applyTheme(saved || (h >= 19 || h < 6 ? 'night' : 'day'));
+  applyTheme(saved || 'night');
   updateGreetingClock();
   initReveal();
   initCursorGlow();
