@@ -576,3 +576,9 @@ a.feat-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .lang-dd-menu li[aria-selected="true"]{color:var(--accent);font-weight:700;background:color-mix(in srgb,var(--accent) 7%,transparent)}
 [data-theme="night"] .lang-dd-btn{background:var(--card)}
 [data-theme="night"] .lang-dd-menu{background:var(--card)}
+
+/* ═══ LOGO SEGUE TEMA ═══ */
+.logo-bg{fill:#141416}
+:root{--logo-ink:#ff6b00}
+[data-theme="night"] .logo-bg{fill:#26262e}
+[data-theme="night"] .mark .logo-bg{stroke:#3a3a44;stroke-width:.02}
