@@ -85,7 +85,12 @@ function buildDynamic(){
   var stats = document.getElementById('stats');
   if(stats) stats.innerHTML = t.stats.map(function(s){return '<div class="stat"><div class="num">'+s.num+'</div><div class="lbl">'+s.lbl+'</div></div>'}).join('');
   var fg = document.getElementById('featGrid');
-  if(fg) fg.innerHTML = t.features.items.map(function(f){return '<div class="feat"><div class="ficn">'+f.icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>'}).join('');
+  if(fg) fg.innerHTML = t.features.items.map(function(f,i){
+    var last = i === t.features.items.length - 1;
+    var cls = last ? 'feat feat-more' : 'feat';
+    var icn = last ? '<span class="spark1">✦</span><span class="ficn-more">'+f.icn+'</span><span class="spark2">✧</span>' : f.icn;
+    return '<div class="'+cls+'"><div class="ficn">'+icn+'</div><h4>'+f.t+'</h4><p>'+f.d+'</p></div>';
+  }).join('');
   var tabs = document.getElementById('demo');
   if(tabs) tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')" role="button" tabindex="0" aria-pressed="'+(i===0)+'">'+tb+'</div>'}).join('');
   buildDemos();
