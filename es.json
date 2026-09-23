@@ -460,5 +460,65 @@
     "title": "¿Quieres una web así?",
     "text": "Esta web es rápida, se adapta a cualquier pantalla y está optimizada para buscadores. Si tu negocio necesita una presencia web así, la hacemos nosotros.",
     "btn": "Hablemos"
+  },
+  "autos": {
+    "hero": {
+      "badge": "Más allá del teléfono",
+      "title1": "El teléfono era",
+      "title2": "solo el principio",
+      "subtitle": "Aria se encarga de toda tu gestión diaria: correos, documentos, recordatorios e informes. Tú haces tu trabajo, ella hace el resto."
+    },
+    "intro": {
+      "title": "Cada rutina, en piloto automático",
+      "subtitle": "Cualquier tarea que repitas a diario puede funcionar sola. Esto es lo que construimos."
+    },
+    "items": [
+      {
+        "icn": "📞",
+        "t": "Recepcionista telefónica con IA",
+        "d": "Contesta, entiende y reserva. Cada llamada se convierte en una cita, incluso a las tres de la mañana.",
+        "link": "#"
+      },
+      {
+        "icn": "📧",
+        "t": "Correos que se ordenan solos",
+        "d": "Los importantes te llegan ya seleccionados, con la respuesta borrador lista. Los demás se archivan solos."
+      },
+      {
+        "icn": "📁",
+        "t": "Documentos que se archivan solos",
+        "d": "Presupuestos, facturas, contratos: cada archivo acaba en su sitio y lo encuentras cuando lo necesitas, sin buscarlo."
+      },
+      {
+        "icn": "⏰",
+        "t": "Recordatorios y seguimientos",
+        "d": "Ningún cliente olvidado: Aria te lo recuerda a ti y a ellos, en el momento justo y por el canal adecuado."
+      },
+      {
+        "icn": "📊",
+        "t": "Informes que se escriben solos",
+        "d": "Cada semana, el resumen de tu negocio llega a tu bandeja: llamadas, citas, trabajos cerrados."
+      },
+      {
+        "icn": "🔄",
+        "t": "Todo conectado",
+        "d": "Calendarios, hojas de cálculo, CRM, WhatsApp: la información viaja sola entre tus herramientas, siempre actualizada."
+      }
+    ],
+    "how": {
+      "title": "Cómo funciona",
+      "s1t": "Nos cuentas cómo trabajas",
+      "s1d": "Una llamada de veinte minutos para entender tu rutina: qué repites cada día y qué te hace perder el tiempo.",
+      "s2t": "Construimos las automatizaciones",
+      "s2d": "En días, no en meses. Cada automatización se prueba con tu caso real antes de empezar a funcionar.",
+      "s3t": "Tú controlas todo",
+      "s3d": "Cada automatización te avisa de lo que hace y la paras cuando quieras. Sin sorpresas."
+    },
+    "cta": {
+      "title": "Cuéntanos tu rutina",
+      "text": "Eso que haces cada día y te roba tiempo: seguramente podemos automatizarlo. Escríbenos y te contamos cómo.",
+      "btn": "Escríbenos"
+    },
+    "nav": "Automatizaciones"
   }
 }
