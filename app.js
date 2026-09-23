@@ -1,17 +1,13 @@
 var WORKER_URL = 'https://aria-proxy.zampese-alessandro.workers.dev';
 var I18N = {};
 var CUR = 'it';
-var LANG_NAMES = {it:'Italiano',en:'English',es:'Español',zh:'中文'};
+var LANG_NAMES = {it:'Italiano',en:'English',es:'Español',fr:'Français',zh:'中文'};
 var THEME_ARIA = {it:'Attiva o disattiva la modalità notte',en:'Toggle night mode',es:'Activar o desactivar el modo noche',zh:'切换夜间模式'};
 
 function setLang(l){
   CUR = l;
   document.documentElement.lang = l;
-  document.querySelectorAll('#langSel button').forEach(function(b,i){
-    var langs=['it','en','es','zh'];
-    b.classList.toggle('active', langs[i]===l);
-    b.setAttribute('aria-pressed', langs[i]===l ? 'true' : 'false');
-  });
+  updateLangDd();
   var themeBtn=document.getElementById('themeBtn');
   if(themeBtn) themeBtn.setAttribute('aria-label', THEME_ARIA[l]||THEME_ARIA.it);
   document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Plus Jakarta Sans',sans-serif" : "'Plus Jakarta Sans',sans-serif";
@@ -442,7 +438,7 @@ async function generateDemo(){
   btn.disabled=true;btn.textContent=t.personalizza.generating;
   out.style.display='block';
   out.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:20px"><div style="width:24px;height:24px;border:3px solid #5c5c7a;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div><span style="color:var(--muted)">'+t.personalizza.generating+'</span></div>';
-  var langInstr = CUR==='it'?'Rispondi SOLO con JSON valido in italiano.':CUR==='es'?'Responde SOLO con JSON válido en español.':CUR==='zh'?'仅用有效的中文 JSON 回答。':'Respond ONLY with valid JSON in English.';
+  var langInstr = CUR==='it'?'Rispondi SOLO con JSON valido in italiano.':CUR==='es'?'Responde SOLO con JSON válido en español.':CUR==='fr'?'Réponds UNIQUEMENTE avec un JSON valide en français.':CUR==='zh'?'仅用有效的中文 JSON 回答。':'Respond ONLY with valid JSON in English.';
   var prompt='You are Aria, a REALISTIC phone receptionist AI. Generate a demo in '+LANG_NAMES[CUR]+'.\nBUSINESS: '+data.name+' ('+data.type+')\nSERVICES: '+data.services+'\nPROBLEM: '+(data.problem||'Missed calls')+'\n\n'+langInstr+'\n\nREALISM RULES (critical):\n- Conversation: 6-8 SHORT messages total (real phone calls are brief)\n- Each message: max 15 words, natural spoken language, like a real phone call\n- Aria sounds human: polite, direct, warm, like a real receptionist\n- Customer speaks casually, sometimes brief ("Yes, perfect", "Tomorrow works")\n- datetime format: "tomorrow 10:00" or "2026-09-22 15:00"\n\nTONE RULES — Aria NEVER says technical or detailed things:\n- NEVER mention: APIs, tokens, IDs, workflows, automations, systems, databases, CRM, integrations, URLs, codes, forms with links\n- NEVER read long details aloud (no full addresses, no lists of options, no prices with decimals)\n- Aria speaks like a person: "Perfect, all set!", "I will send you a message on WhatsApp", "Marco will call you tomorrow"\n- The technical details go ONLY in the actions JSON, never in the spoken conversation\n\nACTIONS — use ONLY these types (all automatable via n8n):\nCREATE_APPOINTMENT {service, customer_name, datetime}\nSEND_WHATSAPP_CONFIRMATION {to, message}\nSEND_WHATSAPP_REMINDER {to, timing, message}\nLOG_CALL_CRM {name, request, status}\nSEND_EMAIL {to, subject, message}\nSEND_SMS {to, message}\nCREATE_TICKET {subject, priority, customer}\nUPDATE_CRM_STATUS {name, from, to}\nADD_TO_WAITLIST {name, preferred_time}\nSEND_FOLLOWUP {channel, timing, message}\nGENERATE_QUOTE {service, price_range}\nTRANSCRIBE_SUMMARY {sent_to, summary}\nBOOK_TABLE {name, people, datetime}\nORDER_STATUS_CHECK {order_id}\nCANCEL_APPOINTMENT {customer_name, datetime}\n\nPick 2-4 actions that fit this business. Every action MUST have its required fields filled.\nNEVER invent action types outside this list.\n\nExample tone: Aria: "Hi, this is Aria from Smith Plumbing. How can I help?" — Customer: "Hi, my kitchen sink is leaking." — Aria: "Sorry to hear that. Can I book a technician for you?" — Customer: "Yes, tomorrow morning if possible." — Aria: "Done, tomorrow at 9. You will get a message with the details."\n\nFormat: {"title":"...","scenario":"one short sentence","script":[{"speaker":"Aria","text":"..."},{"speaker":"Customer","text":"..."}],"actions":[{"type":"CREATE_APPOINTMENT","details":{"service":"...","customer_name":"...","datetime":"..."}}]}';
   try{
     var res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'nex-agi/nex-n2.5-pro:free',messages:[{role:'user',content:prompt}],max_tokens:2000})});
@@ -726,10 +722,10 @@ startDemo = function(n){
 };
 // INIT
 (function(){
-  var langs=['it','en','es','zh'];
+  var langs=['it','en','es','fr','zh'];
   var loaded=0;
   langs.forEach(function(l){
-    fetch(l+'.json').then(function(r){return r.json()}).then(function(d){I18N[l]=d;loaded++;if(loaded===4){var saved='it';try{saved=localStorage.getItem('aria-lang')||'it'}catch(e){}setLang(saved);initDynamic();}}).catch(function(){loaded++;if(loaded===4){setLang('it');initDynamic();}});
+    fetch(l+'.json').then(function(r){return r.json()}).then(function(d){I18N[l]=d;loaded++;if(loaded===5){var saved='it';try{saved=localStorage.getItem('aria-lang')||'it'}catch(e){}setLang(saved);initDynamic();}}).catch(function(){loaded++;if(loaded===5){setLang('it');initDynamic();}});
   });
 })();
 
@@ -743,3 +739,38 @@ function smoothToContact(e){
   el.classList.add('contact-flash');
   setTimeout(function(){el.classList.remove('contact-flash')},2400);
 }
+
+
+// ═══ LANGUAGE DROPDOWN ═══
+var LANG_DD_FLAGS = {it:'🇮🇹',en:'🇬🇧',es:'🇪🇸',fr:'🇫🇷',zh:'🇨🇳'};
+var LANG_DD_SHORT = {it:'IT',en:'EN',es:'ES',fr:'FR',zh:'中文'};
+function updateLangDd(){
+  var btn = document.getElementById('langDdBtn');
+  var cur = document.getElementById('langDdCurrent');
+  var menu = document.getElementById('langDdMenu');
+  if(!btn||!cur||!menu) return;
+  cur.textContent = (LANG_DD_FLAGS[CUR]||'') + ' ' + (LANG_DD_SHORT[CUR]||CUR);
+  menu.querySelectorAll('li').forEach(function(li){
+    li.setAttribute('aria-selected', li.getAttribute('data-lang')===CUR ? 'true' : 'false');
+  });
+}
+function initLangDd(){
+  var dd = document.getElementById('langSel');
+  var btn = document.getElementById('langDdBtn');
+  if(!dd||!btn) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    dd.classList.toggle('open');
+    btn.setAttribute('aria-expanded', dd.classList.contains('open'));
+  });
+  document.addEventListener('click', function(){
+    dd.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  });
+  updateLangDd();
+}
+
+initLangDd();
