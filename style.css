@@ -553,3 +553,12 @@ html{scroll-behavior:smooth}
 @keyframes sparkSpin{0%,100%{transform:rotate(-6deg) scale(1)}50%{transform:rotate(6deg) scale(1.08)}}
 @keyframes morePulse{0%,100%{box-shadow:0 1px 3px rgba(20,20,30,.06)}50%{box-shadow:0 4px 18px color-mix(in srgb,var(--accent) 22%,transparent)}}
 @media (prefers-reduced-motion:reduce){.feat-more,.ficn-more,.spark1,.spark2{animation:none}.spark1,.spark2{opacity:.7}}
+
+/* Card "E molto altro" come link */
+a.feat-more{text-decoration:none;color:inherit;cursor:pointer;display:block}
+a.feat-more h4,a.feat-more p{color:inherit}
+a.feat-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Flash della sezione contatti quando ci arrivi dalla card */
+@keyframes contactFlash{0%{background:color-mix(in srgb,var(--accent) 10%,transparent)}100%{background:transparent}}
+.contact-flash{animation:contactFlash 2.4s ease-out;border-radius:var(--radius)}
