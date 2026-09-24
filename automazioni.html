@@ -11,6 +11,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+
+/* coerenza con index */
+.aut-hero{max-width:1080px;margin:0 auto;padding:64px 32px 40px;text-align:center}
+.aut-hero h1{font-size:clamp(2.4em,6.5vw,4.4em);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;max-width:13ch;margin-left:auto;margin-right:auto}
+.aut-hero h1 .accent{color:var(--accent)}
+.aut-hero .sub{font-size:1.05em;color:var(--muted);line-height:1.7;max-width:34em;margin:0 auto}
+
 /* specifico pagina automazioni */
 .aut-hero{max-width:1080px;margin:0 auto;padding:64px 32px 40px;text-align:center}
 .aut-hero .badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));border-radius:99px;font-size:.8em;font-weight:700;color:var(--accent);margin-bottom:22px}
@@ -62,9 +69,14 @@
 </nav>
 
 <section class="aut-hero">
-<div class="badge reveal" data-i18n="autos.hero.badge">Oltre il telefono</div>
-<h1 class="reveal"><span data-i18n="autos.hero.title1">Il telefono era</span> <span class="accent" data-i18n="autos.hero.title2">solo l'inizio</span></h1>
-<p class="sub reveal d1" data-i18n="autos.hero.subtitle">Aria automatizza tutta la tua gestione quotidiana: email, documenti, promemoria e report. Tu pensi al lavoro, lei al resto.</p>
+<img id="heroLogo" src="logo-dark.svg?v=2" alt="Aria" style="width:76px;height:76px;border-radius:20px;margin-bottom:20px;box-shadow:0 8px 24px rgba(20,20,26,.18)">
+<div class="time-greet" id="timeGreet" style="display:none">
+<span class="tg-icn" id="tgIcon"></span>
+<span id="tgText"></span>
+</div>
+<div class="hero-badge"><span class="dot"></span><span data-i18n="autos.hero.badge">Oltre il telefono</span></div>
+<h1><span data-i18n="autos.hero.title1">Il telefono era</span> <span class="accent" data-i18n="autos.hero.title2">solo l'inizio.</span></h1>
+<p class="sub" data-i18n="autos.hero.subtitle">Aria automatizza tutta la tua gestione quotidiana: email, documenti, promemoria e report. Tu pensi al lavoro, lei al resto.</p>
 </section>
 
 <section class="aut-section">
