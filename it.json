@@ -528,5 +528,19 @@
       "btn": "Scrivici un'email"
     },
     "nav": "Automazioni"
+  },
+  "valueBlock": {
+    "title": "Questo è solo l'inizio",
+    "subtitle": "Le 13 cose qui sopra sono quelle più richieste. Ma Aria si costruisce intorno al tuo lavoro, non il contrario.",
+    "examples_title": "Ogni settimana ci chiedono cose nuove. Tipo:",
+    "examples": [
+      "\"Può Aria chiamare i clienti che non si presentano e riprenotare?\" — Sì.",
+      "\"Può chiedere le dimensioni del problema prima di passarmi la chiamata?\" — Sì.",
+      "\"Può rispondere in tre lingue e scrivere il preventivo nella lingua del cliente?\" — Sì.",
+      "\"Può mandarmi un riepilogo vocale della giornata alle 18?\" — Sì.",
+      "\"Può integrarsi col gestionale che uso già?\" — Quasi sempre sì."
+    ],
+    "cta_title": "Dimmi cosa ti serve. Se si fa al telefono, Aria lo impara.",
+    "cta_btn": "Raccontaci il tuo caso"
   }
 }
