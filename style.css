@@ -867,3 +867,20 @@ a:hover{color:var(--accent)}
   .demo-view.active,.demo-view .chat-msg,.demo-view .cal-vis,.demo-view .wa-vis,.demo-view .crm-vis,
   #pOutput .gen-chat > div,#pOutput .gen-actions > div{animation:none}
 }
+
+/* ═══ BLOCCO VALORE (oltre le 13 card) ═══ */
+.value-block{margin-top:56px;padding:40px 36px;border:1px solid var(--border);border-radius:20px;background:var(--card);position:relative;overflow:hidden}
+.value-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
+.vb-head{text-align:center;max-width:560px;margin:0 auto 32px}
+.vb-head h3{font-size:clamp(1.4em,3vw,1.9em);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+.vb-head p{color:var(--muted);font-size:1em;line-height:1.6;margin:0}
+.vb-examples{display:flex;flex-direction:column;gap:10px;max-width:680px;margin:0 auto}
+.vb-ex{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--bg2);border-radius:12px;font-size:.92em;line-height:1.55;color:var(--text);animation:demoIn .5s cubic-bezier(.22,.9,.28,1) both}
+.vb-check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-size:.75em;font-weight:800;margin-top:2px}
+.vb-cta{text-align:center;margin-top:32px;padding-top:28px;border-top:1px solid var(--border)}
+.vb-cta p{font-size:1.08em;font-weight:600;margin:0 0 18px;letter-spacing:-.01em}
+@media (max-width:640px){
+  .value-block{padding:28px 20px;margin-top:40px}
+  .vb-ex{font-size:.86em;padding:12px 14px}
+}
+@media (prefers-reduced-motion:reduce){.vb-ex{animation:none}}
