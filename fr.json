@@ -542,5 +542,19 @@
     ],
     "cta_title": "Dites-nous ce qu'il vous faut. Si ça se fait par téléphone, Aria l'apprend.",
     "cta_btn": "Racontez-nous votre cas"
-  }
+  },
+  "demoSections": [
+    {
+      "title": "Réservation",
+      "desc": "Le client appelle, Aria répond, regarde le calendrier et réserve. Confirmation WhatsApp."
+    },
+    {
+      "title": "Qualification",
+      "desc": "Aria pose les bonnes questions avant de vous transférer l'appel : elle sait qui achète et qui non."
+    },
+    {
+      "title": "Récupération",
+      "desc": "Les clients qui ne répondaient plus ? Aria les rappelle et repart de là où vous étiez."
+    }
+  ]
 }
