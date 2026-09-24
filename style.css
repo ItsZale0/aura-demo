@@ -943,3 +943,13 @@ a.nav-brand:hover .mark{transform:rotate(-8deg) scale(1.08)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 button:focus:not(:focus-visible){outline:none}
 a:focus:not(:focus-visible){outline:none}
+
+/* ═══ FIX: allineamento nome + indentazione bolle chat hero ═══ */
+.hv-caller > div:last-child{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hv-caller strong{line-height:1.2}
+.hv-caller span{line-height:1.3}
+
+/* bolle: cliente a sinistra, Aria indentata a destra */
+.hv-bubble{max-width:82%;align-self:flex-start}
+.hv-bubble.aria{margin-left:auto;margin-right:26px;max-width:82%;align-self:flex-end}
+.hv-body{display:flex;flex-direction:column}
