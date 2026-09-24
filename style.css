@@ -923,3 +923,16 @@ body.page-exit{animation:pageOut .26s cubic-bezier(.4,0,1,1) both}
 /* logo nav = link home */
 a.nav-brand{cursor:pointer}
 a.nav-brand:hover .mark{transform:rotate(-8deg) scale(1.08)}
+
+/* ═══ FIX AUDIT MOBILE: touch target 44px ═══ */
+@media (max-width:768px){
+  .cal-nav button{width:44px;height:44px}
+  .foot-bottom a{min-height:44px;display:inline-flex;align-items:center}
+  .cta-action .btn{min-height:44px}
+  .nav-links a{font-size:.875em}
+  .foot-bottom{font-size:.875em}
+  .hero-checks span{font-size:.875rem}
+}
+
+/* nav-right: flex sempre (fix audit desktop) */
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0}
