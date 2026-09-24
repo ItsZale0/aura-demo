@@ -51,7 +51,7 @@
   ],
   "features": {
     "title": "Cosa fa, esattamente",
-    "subtitle": "Niente di complicato. Le cose che servono a chi riceve chiamate tutto il giorno.",
+    "subtitle": "Niente di complicato. Le automazioni che servono a chi riceve chiamate tutto il giorno.",
     "items": [
       {
         "icn": "📞",
@@ -531,8 +531,8 @@
   },
   "valueBlock": {
     "title": "Questo è solo l'inizio",
-    "subtitle": "Le 13 cose qui sopra sono quelle più richieste. Ma Aria si costruisce intorno al tuo lavoro, non il contrario.",
-    "examples_title": "Ogni settimana ci chiedono cose nuove. Tipo:",
+    "subtitle": "Le 13 automazioni qui sopra sono le più richieste. Ma Aria si costruisce intorno al tuo lavoro, non il contrario.",
+    "examples_title": "Ogni settimana ci chiedono automazioni nuove. Tipo:",
     "examples": [
       "\"Può Aria chiamare i clienti che non si presentano e riprenotare?\" — Sì.",
       "\"Può chiedere le dimensioni del problema prima di passarmi la chiamata?\" — Sì.",
