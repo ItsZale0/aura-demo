@@ -687,7 +687,10 @@ function applyTheme(t){
   document.documentElement.setAttribute('data-theme', t === 'night' ? 'night' : '');
   var btn = document.getElementById('themeBtn');
   if(btn) btn.textContent = t === 'night' ? '🌙' : '☀️';
-  try{localStorage.setItem('aria-theme', t)}catch(e){}
+  try{localStorage.setItem('aria-theme', t)
+  var hl = document.getElementById('heroLogo');
+  if(hl){ hl.src = (t === 'night') ? 'logo-dark.svg' : 'logo-cream.svg'; }
+}catch(e){}
 }
 function toggleTheme(){
   applyTheme(THEME === 'day' ? 'night' : 'day');
