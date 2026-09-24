@@ -79,10 +79,10 @@ body{font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif;backgro
 .time-greet{font-size:.72em;margin-bottom:10px}
 }
 
-.hero{max-width:1080px;margin:0 auto;padding:40px 32px 56px;position:relative}
+.hero{max-width:1080px;margin:0 auto;padding:40px 32px 56px;position:relative;text-align:center}
 
 
-.hero h1{font-size:clamp(2.4em,6.5vw,4.4em);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;max-width:13ch;animation:fadeUp .7s ease}
+.hero h1{font-size:clamp(2.4em,6.5vw,4.4em);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;max-width:13ch;margin-left:auto;margin-right:auto;animation:fadeUp .7s ease}
 .hero h1 .accent{color:var(--accent)}
 .hero p{font-size:clamp(1.05em,2vw,1.28em);color:var(--muted);max-width:33em;line-height:1.7;margin-bottom:32px;animation:fadeUp .7s ease .12s both}
 .hero-checks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;animation:fadeUp .7s ease .2s both}
