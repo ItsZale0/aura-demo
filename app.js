@@ -91,6 +91,15 @@ var fg = document.getElementById('featGrid');
     if(last) return '<a href="automazioni.html" class="'+cls+'" aria-label="'+f.t+'">'+inner+'</a>';
     return '<div class="'+cls+'">'+inner+'</div>';
   }).join('');
+  
+  // blocco valore: esempi richieste custom
+  var vb = document.getElementById('vbExamples');
+  if(vb && t.valueBlock){
+    vb.innerHTML = t.valueBlock.examples.map(function(ex,i){
+      return '<div class="vb-ex" style="animation-delay:'+(i*0.09)+'s"><span class="vb-check">✓</span><span>'+ex+'</span></div>';
+    }).join('');
+  }
+
   var tabs = document.getElementById('demo');
   if(tabs) tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')" role="button" tabindex="0" aria-pressed="'+(i===0)+'">'+tb+'</div>'}).join('');
   buildDemos();
