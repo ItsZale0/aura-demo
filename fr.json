@@ -375,8 +375,8 @@
   "autos": {
     "hero": {
       "badge": "Au-delà du téléphone",
-      "title1": "Le téléphone n'était",
-      "title2": "que le début",
+      "title1": "Le téléphone",
+      "title2": "n'est que le début.",
       "subtitle": "Aria s'occupe de toute votre gestion quotidienne : e-mails, documents, rappels et rapports. Vous faites votre métier, elle s'occupe du reste."
     },
     "intro": {
