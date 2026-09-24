@@ -689,7 +689,7 @@ function applyTheme(t){
   if(btn) btn.textContent = t === 'night' ? '🌙' : '☀️';
   try{localStorage.setItem('aria-theme', t)
   var hl = document.getElementById('heroLogo');
-  if(hl){ hl.src = (t === 'night') ? 'logo-dark.svg' : 'logo-cream.svg'; }
+  if(hl){ hl.src = (t === 'night') ? 'logo-dark.svg?v=2' : 'logo-cream.svg?v=2'; }
 }catch(e){}
 }
 function toggleTheme(){
