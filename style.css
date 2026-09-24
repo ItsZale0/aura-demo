@@ -85,11 +85,11 @@ body{font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif;backgro
 .hero h1{font-size:clamp(2.4em,6.5vw,4.4em);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px;max-width:13ch;margin-left:auto;margin-right:auto;animation:fadeUp .7s ease}
 .hero h1 .accent{color:var(--accent)}
 .hero p{font-size:clamp(1.05em,2vw,1.28em);color:var(--muted);max-width:33em;line-height:1.7;margin-bottom:32px;animation:fadeUp .7s ease .12s both}
-.hero-checks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;animation:fadeUp .7s ease .2s both}
+.hero-checks{justify-content:center;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;animation:fadeUp .7s ease .2s both}
 .hero-checks span{display:inline-flex;align-items:center;gap:7px;font-size:.86em;font-weight:500;padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:22px;transition:all .25s}
 .hero-checks span:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--accent) 40%,var(--border))}
 .hero-checks .ck{color:var(--green);font-weight:800}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s ease .28s both}
+.hero-cta{justify-content:center;display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s ease .28s both}
 
 /* ═══ BOTTONI ═══ */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;background:var(--text);color:var(--bg);border:none;border-radius:12px;font-size:.95em;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .2s;position:relative;overflow:hidden}
@@ -803,8 +803,6 @@ a:hover{color:var(--accent)}
   .tab{transition-duration:.22s}
   .tab:hover{transform:none}
 }
-@media 
-
 /* ═══ BLOCCO VALORE (oltre le 13 card) ═══ */
 .value-block{margin-top:56px;padding:40px 36px;border:1px solid var(--border);border-radius:20px;background:var(--card);position:relative;overflow:hidden}
 .value-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
@@ -955,4 +953,37 @@ a:focus:not(:focus-visible){outline:none}
 .hv-body{display:flex;flex-direction:column}
 
 
+
+
+.feat{min-height:206px}
+
+/* ═══ FIX AUDIT MOBILE ═══ */
+@media (max-width:768px){
+  a.nav-brand{min-height:44px;padding:7px 0}
+  .foot-col a,.foot-col span,.foot-col h5{font-size:.875rem}
+}
+@media (max-width:820px){
+  .wa-msg{font-size:.875rem}
+  .cal-day{font-size:.875rem}
+  .cal-dow{font-size:.8rem}
+  .demo-sections{padding:0 20px 56px}
+}
+@media (max-width:700px){
+  .cta-text p{font-size:.875rem}
+  .cta-action .btn{font-size:.875rem}
+  .cta-inner{align-items:stretch}
+  .cta-action .btn{width:100%}
+}
+@media (max-width:640px){
+  .vb-ex{font-size:.875rem}
+}
+@media (max-width:600px){
+  .feat p{font-size:.875rem}
+  .stat .lbl{font-size:.875rem}
+  .p-form label{font-size:.875rem}
+  #personalizza>div{align-items:stretch}
+  .p-form{width:100%}
+}
+@media (max-width:360px){
+  .hero h1{font-size:1.85em}
 }
