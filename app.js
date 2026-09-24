@@ -1010,7 +1010,9 @@ function showMailFallback(mailtoUrl){
   setTimeout(function(){ document.body.classList.remove('page-enter'); }, 450);
 
   // uscita: intercetta i click sui link verso altre pagine del sito
+  var exiting = false;
   document.addEventListener('click', function(e){
+    if(exiting) return;
     var a = e.target.closest ? e.target.closest('a') : null;
     if(!a) return;
     var href = a.getAttribute('href');
@@ -1018,6 +1020,7 @@ function showMailFallback(mailtoUrl){
     // solo link interni .html
     if(!/\.html(\?|$)/.test(href) && !href.endsWith('.html')) return;
     e.preventDefault();
+    exiting = true;
     document.body.classList.add('page-exit');
     setTimeout(function(){ window.location.href = href; }, 260);
   });
