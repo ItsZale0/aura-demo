@@ -184,269 +184,172 @@
     {
       "phone": {
         "name": "Aria",
-        "tag": "En vivo"
+        "tag": "Live"
       },
       "visual": "cal",
+      "customer": "Marcos Rossi",
       "steps": [
         {
           "t": "14:32:05",
           "title": "Llamada entrante",
-          "body": "Juan García llama a tu número.",
+          "body": "Marcos Rossi llama a tu número.",
           "delay": 0
         },
         {
           "t": "14:32:07",
           "title": "Aria responde",
-          "body": "Responde profesionalmente.",
-          "say": "¡Hola! Soy Aria. ¿Cómo puedo ayudarte?",
-          "delay": 2000
+          "body": "Responde con profesionalidad.",
+          "say": "¡Buenos días! Soy Aria, la asistente de Studio Rossi. ¿En qué puedo ayudarte?",
+          "delay": 1
         },
         {
-          "t": "14:32:10",
-          "title": "Solicitud de cita",
-          "body": "El cliente quiere reservar.",
-          "user": "Quisiera reservar una cita para una consulta.",
-          "delay": 5000
-        },
-        {
-          "t": "14:32:13",
-          "title": "Análisis",
-          "body": "Aria identifica el tipo de servicio.",
-          "think": true,
-          "delay": 8000
-        },
-        {
-          "t": "14:32:15",
-          "title": "Verificar disponibilidad",
-          "body": "Aria revisa el calendario.",
-          "action": {
-            "ic": "cal",
-            "t": "Calendario",
-            "s": "Huecos verificados"
-          },
-          "say": "Verifico la disponibilidad ahora mismo",
-          "delay": 11000
+          "t": "14:32:12",
+          "title": "El cliente habla",
+          "body": "",
+          "user": "Hola, quisiera reservar una visita para la próxima semana.",
+          "delay": 2
         },
         {
           "t": "14:32:18",
-          "title": "Hueco encontrado",
-          "body": "Aria propone el horario.",
-          "say": "Tengo mañana a las 10:00. ¿Te parece bien?",
-          "delay": 14000
+          "title": "Aria propone",
+          "body": "",
+          "say": "¡Claro! Tengo libre el jueves 18 a las 10:00 o el viernes 19 a las 15:30. ¿Qué prefieres?",
+          "delay": 3
         },
         {
-          "t": "14:32:21",
-          "title": "Confirmación",
-          "body": "El cliente confirma.",
-          "user": "¡Perfecto!",
-          "delay": 17000
+          "t": "14:32:25",
+          "title": "El cliente elige",
+          "body": "",
+          "user": "El jueves a las 10 me va perfecto.",
+          "delay": 4
         },
         {
-          "t": "14:32:23",
-          "title": "Evento creado",
-          "body": "Aria crea el evento.",
-          "cal": true,
-          "d": "21 SEP",
-          "h": "10:00",
-          "n": "Consulta — Juan García",
-          "company": "García & Co",
-          "say": "¡Reservado! Recibirás un recordatorio.",
-          "delay": 20000
-        },
-        {
-          "t": "14:32:26",
-          "title": "WhatsApp",
-          "body": "Envía recordatorio.",
-          "action": {
-            "ic": "wa",
-            "t": "WhatsApp",
-            "s": "Enviado"
-          },
-          "delay": 23000
-        },
-        {
-          "t": "14:32:28",
-          "title": "Lead guardado",
-          "body": "Guarda en el sistema.",
-          "action": {
-            "ic": "crm",
-            "t": "CRM",
-            "s": "Guardado"
-          },
-          "say": "¡Gracias, buen día!",
-          "delay": 26000
+          "t": "14:32:30",
+          "title": "Reserva",
+          "body": "Aria escribe la cita en el calendario.",
+          "say": "Perfecto, reservado para el jueves 18 a las 10:00. Te enviamos la confirmación por WhatsApp. ¡Hasta pronto!",
+          "wa": "Confirmado: jueves 18 a las 10:00 en Studio Rossi. ¡Hasta pronto!",
+          "delay": 5
         }
       ]
     },
     {
       "phone": {
         "name": "Aria",
-        "tag": "Calificar"
+        "tag": "Qualifica"
       },
       "visual": "crm",
+      "customer": "Laura Blanco",
       "steps": [
         {
-          "t": "09:15:02",
-          "title": "Nueva llamada",
-          "body": "Contacto desconocido llama.",
+          "t": "09:14:02",
+          "title": "Llamada entrante",
+          "body": "Número desconocido.",
           "delay": 0
         },
         {
-          "t": "09:15:04",
+          "t": "09:14:05",
           "title": "Aria responde",
-          "body": "Inicia la calificación.",
-          "say": "¡Hola! Soy Aria de Aria Automation. ¿Cómo puedo ayudarte?",
-          "delay": 2000
+          "body": "",
+          "say": "¡Buenos días! Soy Aria, la asistente de TechInstall. ¿En qué puedo ayudarte?",
+          "delay": 1
         },
         {
-          "t": "09:15:08",
-          "title": "Interés del cliente",
-          "body": "El cliente está interesado.",
-          "user": "Me gustaría información sobre sus servicios.",
-          "delay": 5000
+          "t": "09:14:10",
+          "title": "El cliente habla",
+          "body": "",
+          "user": "Buenos días, busco un presupuesto para una instalación eléctrica.",
+          "crm": {
+            "k": "Necesidad",
+            "v": "Instalación eléctrica"
+          },
+          "delay": 2
         },
         {
-          "t": "09:15:11",
-          "title": "Análisis de necesidades",
-          "body": "Aria pregunta qué necesita.",
-          "say": "¡Por supuesto! ¿Puedo preguntarte qué necesitáis exactamente?",
-          "delay": 8000
+          "t": "09:14:16",
+          "title": "Aria califica",
+          "body": "Aria hace las preguntas correctas.",
+          "say": "¡Con gusto! ¿Cuántas habitaciones hay que cablear y para cuándo lo necesitas?",
+          "delay": 3
         },
         {
-          "t": "09:15:15",
-          "title": "Descripción del problema",
-          "body": "El cliente describe la situación.",
-          "user": "Perdemos muchas llamadas y no podemos gestionar todo.",
-          "delay": 11000
+          "t": "09:14:24",
+          "title": "Detalles",
+          "body": "",
+          "user": "Un piso de 90 m², para fin de mes si es posible.",
+          "crm": {
+            "k": "Tamaño",
+            "v": "90 m²"
+          },
+          "delay": 4
         },
         {
-          "t": "09:15:18",
-          "title": "Consulta de presupuesto",
-          "body": "Aria pregunta por el presupuesto.",
-          "say": "Entiendo perfectamente. ¿Tenéis en mente un presupuesto mensual para esta solución?",
-          "delay": 14000
-        },
-        {
-          "t": "09:15:22",
-          "title": "Presupuesto indicado",
-          "body": "El cliente indica el presupuesto.",
-          "user": "Unos 150€ al mes.",
-          "delay": 17000
-        },
-        {
-          "t": "09:15:25",
-          "title": "Plazos",
-          "body": "Aria pregunta cuándo empezar.",
-          "say": "Perfecto. ¿Cuándo os gustaría empezar?",
-          "delay": 20000
-        },
-        {
-          "t": "09:15:29",
-          "title": "Urgencia",
-          "body": "El cliente expresa urgencia.",
-          "user": "Lo antes posible, necesitamos una solución rápida.",
-          "delay": 23000
-        },
-        {
-          "t": "09:15:32",
-          "title": "Calificado",
-          "body": "Aria califica el lead HOT.",
-          "think": true,
-          "crm": true,
-          "nm": "Marcos Blanco",
-          "comp": "Estudio Blanco",
-          "bdg": "€150/mes",
-          "urg": "Alta",
-          "need": "Gestión de llamadas",
-          "say": "¡Perfecto! Un operador te contactará hoy mismo. ¡Gracias!",
-          "delay": 26000
+          "t": "09:14:31",
+          "title": "Lead calificado",
+          "body": "Aria lo apunta todo y pasa el lead.",
+          "say": "Perfecto, lo he apuntado todo. Uno de nuestros operadores te llamará hoy mismo con el presupuesto. ¡Gracias!",
+          "crm_pre": {
+            "k": "Plazo",
+            "v": "Fin de mes"
+          },
+          "crm": {
+            "k": "Estado",
+            "v": "Lead calificado ✓"
+          },
+          "delay": 5
         }
       ]
     },
     {
       "phone": {
         "name": "Aria",
-        "tag": "Recuperación"
+        "tag": "Recupero"
       },
       "visual": "wa",
+      "customer": "Julia Ferrer",
       "steps": [
         {
-          "t": "10:00:01",
-          "title": "Análisis de base de datos",
-          "body": "Aria identifica los leads fríos.",
+          "t": "17:45:00",
+          "title": "Aria actúa",
+          "body": "Cliente que llevaba 3 semanas sin responder.",
           "delay": 0
         },
         {
-          "t": "10:00:03",
-          "title": "Lead seleccionado",
-          "body": "Laura Verde, hace 45 días.",
-          "action": {
-            "ic": "crm",
-            "t": "CRM",
-            "s": "Seleccionado"
-          },
-          "delay": 1500
+          "t": "17:45:05",
+          "title": "Aria llama",
+          "body": "",
+          "say": "¡Buenas tardes! Llamo de parte del Taller Verdi. Había dejado un presupuesto para el cambio de pastillas de freno, ¿sigue interesado?",
+          "delay": 1
         },
         {
-          "t": "10:00:05",
-          "title": "Llamada saliente",
-          "body": "Aria llama para reactivar.",
-          "say": "¡Hola Laura! Soy Aria de Aria Automation. ¿Cómo estás?",
-          "delay": 3000
+          "t": "17:45:15",
+          "title": "El cliente responde",
+          "body": "",
+          "user": "¡Ah sí, me había olvidado! Vale, veamos.",
+          "delay": 2
         },
         {
-          "t": "10:00:10",
-          "title": "El cliente recuerda",
-          "body": "El cliente recuerda la conversación.",
-          "user": "Ah sí, me acuerdo. Aún no habíamos decidido.",
-          "delay": 5500
+          "t": "17:45:22",
+          "title": "Aria cierra",
+          "body": "",
+          "say": "¡Estupendo! Tengo un hueco libre mañana a las 16:00, ¿le va bien? Le envío la confirmación por WhatsApp ahora mismo.",
+          "wa": "Confirmado: cita mañana a las 16:00 en Taller Verdi.",
+          "delay": 3
         },
         {
-          "t": "10:00:14",
-          "title": "Oferta dirigida",
-          "body": "Aria propone la solución.",
-          "say": "Entiendo. ¿Puedo preguntarte: el problema de las llamadas perdidas sigue abierto? Hemos activado una promoción especial.",
-          "delay": 7500
-        },
-        {
-          "t": "10:00:19",
-          "title": "Interés renace",
-          "body": "El cliente pide detalles.",
-          "user": "Sí, el problema sigue ahí. ¿De qué se trata?",
-          "delay": 10000
-        },
-        {
-          "t": "10:00:23",
-          "title": "Oferta enviada",
-          "body": "Aria envía la oferta por WhatsApp.",
-          "wa": true,
-          "msg": "¡Hola Laura! Como prometido, te envío los detalles de nuestra promoción especial: 1er mes gratis + 20% de descuento los primeros 3 meses. ¡Para cualquier pregunta, aquí estoy! 🚀",
-          "say": "Si activas esta semana, te ofrecemos el 1er mes gratis y el 20% de descuento durante 3 meses.",
-          "delay": 12000
-        },
-        {
-          "t": "10:00:28",
-          "title": "Interés confirmado",
-          "body": "El cliente está interesado pero debe consultarlo.",
-          "user": "¡Interesante! Debo hablarlo con mi socio.",
-          "delay": 14500
-        },
-        {
-          "t": "10:00:32",
-          "title": "Propuesta de llamada",
-          "body": "Aria propone una llamada con un operador.",
-          "say": "Por supuesto. ¿Puedo agendarte una llamada con uno de nuestros operadores para mañana por la tarde? Podrá responder todas tus preguntas.",
-          "delay": 16500
-        },
-        {
-          "t": "10:00:37",
-          "title": "Cita confirmada",
-          "body": "El cliente confirma para el día siguiente.",
+          "t": "17:45:30",
+          "title": "El cliente acepta",
+          "body": "",
           "user": "Sí, mañana a las 16:00 me va bien.",
-          "wa": true,
-          "msg": "¡Perfecto Laura! Confirmo la llamada con nuestro operador para mañana a las 16:00. Te llamaremos al número que nos dejaste. ¡Buen día! 📞",
-          "say": "Perfecto. Te envío un recordatorio una hora antes. ¡Hasta mañana!",
-          "delay": 18500
+          "delay": 4
+        },
+        {
+          "t": "17:45:35",
+          "title": "Recuperación completada",
+          "body": "Cliente recuperado y cita reservada.",
+          "say": "Perfecto, ¡hasta mañana! Acabo de enviarle el recordatorio por WhatsApp.",
+          "wa": "Recordatorio: ¡nos vemos mañana a las 16:00!",
+          "delay": 5
         }
       ]
     }
