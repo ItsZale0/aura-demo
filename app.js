@@ -25,11 +25,21 @@ function typeText(elId, text){
   var i = 0;
   el.textContent = '';
   clearTimeout(TYPE_TIMER);
+  var cursor = document.getElementById('typeCursor');
+  if(cursor){ cursor.style.display = ''; cursor.style.opacity = ''; }
   function tick(){
     if(i <= text.length){
       el.textContent = text.substring(0, i);
       i++;
       TYPE_TIMER = setTimeout(tick, 55);
+    } else if(cursor){
+      // scrittura finita: il cursore lampeggia ancora un attimo poi sparisce
+      setTimeout(function(){
+        if(!cursor) return;
+        cursor.style.transition = 'opacity .6s';
+        cursor.style.opacity = '0';
+        setTimeout(function(){ if(cursor) cursor.style.display = 'none'; }, 650);
+      }, 2200);
     }
   }
   tick();
@@ -44,7 +54,7 @@ function applyI18N(){
       // Hero title: animazione speciale
       if(el.hasAttribute('data-i18n') && (k==='hero.title1' || k==='hero.title2' || k==='autos.hero.title1' || k==='autos.hero.title2')){
         if(k==='hero.title1' || k==='autos.hero.title1'){
-          el.innerHTML = '<span class="w">'+esc(v)+'</span>';
+          el.textContent = v;
         } else {
           // title2 = typewriter, parte dopo l'ingresso di title1
           el.innerHTML = '<span class="type-wrap"><span class="accent" id="typeTarget"></span></span><span class="type-cursor" id="typeCursor"></span>';
