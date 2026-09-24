@@ -915,3 +915,7 @@ body.page-exit{animation:pageOut .26s cubic-bezier(.4,0,1,1) both}
 /* ═══ HERO BADGE (index + automazioni) ═══ */
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));border-radius:99px;font-size:.8em;font-weight:700;color:var(--accent);margin-bottom:22px}
 .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+
+@media (max-width:640px){
+  #heroLogo{width:64px!important;height:64px!important;border-radius:17px!important}
+}
