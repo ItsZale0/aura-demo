@@ -61,7 +61,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif;backgro
   .nav-links::-webkit-scrollbar{display:none}
   .nav-links a{font-size:.82em;padding:8px 10px;white-space:nowrap;border-radius:8px}
   .nav-links a.active{color:var(--accent)}
-  .nav-right{margin-left:auto}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0}
 }
 
 /* ═══ TIME GREETING ═══ */
