@@ -528,5 +528,19 @@
       "btn": "Écrivez-nous"
     },
     "nav": "Automatisations"
+  },
+  "valueBlock": {
+    "title": "Ce n'est que le début",
+    "subtitle": "Les 13 choses ci-dessus sont les plus demandées. Mais Aria se construit autour de votre métier, pas l'inverse.",
+    "examples_title": "Chaque semaine, on nous demande de nouvelles choses. Comme :",
+    "examples": [
+      "« Aria peut appeler les absents et replanifier ? » — Oui.",
+      "« Peut-elle demander les détails du problème avant de me transférer l'appel ? » — Oui.",
+      "« Peut-elle répondre en trois langues et écrire le devis dans la langue du client ? » — Oui.",
+      "« Peut-elle m'envoyer un résumé vocal de la journée à 18h ? » — Oui.",
+      "« Peut-elle s'intégrer au logiciel que j'utilise déjà ? » — Presque toujours oui."
+    ],
+    "cta_title": "Dites-nous ce qu'il vous faut. Si ça se fait par téléphone, Aria l'apprend.",
+    "cta_btn": "Racontez-nous votre cas"
   }
 }
