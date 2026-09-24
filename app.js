@@ -99,7 +99,18 @@ var fg = document.getElementById('featGrid');
 var timers=[];
 function clr(){timers.forEach(clearTimeout);timers=[]}
 function sch(fn,ms){timers.push(setTimeout(fn,ms))}
-function selectDemo(n){document.querySelectorAll('.tab').forEach(function(tb,i){tb.classList.toggle('active',i===n);tb.setAttribute('aria-pressed', i===n)});document.querySelectorAll('.demo-view').forEach(function(v,i){v.classList.toggle('active',i===n)})}
+function selectDemo(n){
+  document.querySelectorAll('.tab').forEach(function(tb,i){tb.classList.toggle('active',i===n);tb.setAttribute('aria-pressed', i===n)});
+  document.querySelectorAll('.demo-view').forEach(function(v,i){v.classList.toggle('active',i===n)});
+  // porta la vista selezionata in vista (solo se serve, mobile-friendly)
+  var view = document.getElementById('dv'+n);
+  if(view){
+    var r = view.getBoundingClientRect();
+    if(r.top < 60 || r.top > window.innerHeight * 0.7){
+      view.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+}
 
 function buildDemos(){
   var t = I18N[CUR];
