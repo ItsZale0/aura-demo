@@ -146,9 +146,17 @@
     "fillFields": "Fill in name, industry and services"
   },
   "contact": {
-    "title": "Two quick questions",
-    "text": "How much does it cost? Will it work for my case? Email us, we reply within the day.",
-    "btn": "Email us"
+    "title": "Let's talk",
+    "text": "Pick whichever you prefer: we reply within the day.",
+    "email_t": "Email",
+    "email_d": "Write to us for a quote or a question. We reply by the end of the day.",
+    "wa_t": "WhatsApp",
+    "wa_d": "The fastest way: send a direct message, we reply within minutes.",
+    "tg_t": "Telegram",
+    "tg_d": "Follow us and message us on Telegram, also for updates and news.",
+    "email_btn": "Send an email",
+    "wa_btn": "Open WhatsApp",
+    "tg_btn": "Open Telegram"
   },
   "footer": {
     "about": "Who answers the phone for you.",
