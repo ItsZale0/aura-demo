@@ -29,6 +29,98 @@
       "La agenda llena sin descolgar el teléfono. <strong>Aria reserva, reprograma y confirma por ti.</strong>",
       "Cada llamada es un cliente más. <strong>Aria las atiende todas, incluso las que hoy perderías.</strong>",
       "Del primer tono a la confirmación por WhatsApp. <strong>Aria lo hace todo, tú lo supervisas todo.</strong>"
+    ],
+    "scenarios": [
+      {
+        "status": "Llamada entrante",
+        "av": "M",
+        "name": "Marcos Rossi",
+        "role": "Fontanero — cliente",
+        "user": "¡Hola! Quisiera reservar una reparación para mañana por la mañana.",
+        "aria": "¡Claro! Te he apuntado para mañana a las 9:00. Te lo confirmo por WhatsApp.",
+        "ok": "✓ Cita registrada · Confirmación enviada"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "L",
+        "name": "Laura Blanco",
+        "role": "Cliente nueva",
+        "user": "Buenos días, ¿tienen hueco para una visita esta semana?",
+        "aria": "¡Sí! Tengo libre el jueves a las 15:00. Te envío el recordatorio por SMS.",
+        "ok": "✓ Visita programada · Recordatorio enviado"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "J",
+        "name": "Julia Ferrer",
+        "role": "Cliente — renovación",
+        "user": "Tengo que renovar el contrato, ¿pueden llamarme?",
+        "aria": "¡Por supuesto! Te paso ahora mismo con un agente, mientras tanto anoto tu solicitud.",
+        "ok": "✓ Solicitud calificada · Agente avisado"
+      },
+      {
+        "status": "Llamada perdida",
+        "av": "A",
+        "name": "Alejandro Cortés",
+        "role": "Número nuevo",
+        "user": "Llamada sin respuesta a las 14:32",
+        "aria": "¡Hola Alejandro! Soy Aria, te he devuelto la llamada en cuanto quedó libre la línea.",
+        "ok": "✓ Llamada devuelta en 3 minutos · Cita agendada"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "C",
+        "name": "Clínica Dental Rossi",
+        "role": "Cliente habitual",
+        "user": "Buenas tardes, tengo que cambiar mi limpieza dental al viernes.",
+        "aria": "¡Hecho! Lo paso al viernes a las 10:30 y aviso a la doctora.",
+        "ok": "✓ Cita reprogramada · Todos avisados"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "P",
+        "name": "Pablo Verde",
+        "role": "Proveedor",
+        "user": "Soy Pablo, llamo por el presupuesto del mes.",
+        "aria": "¡Hola Pablo! He reenviado el presupuesto a la oficina, te decimos algo antes de mañana.",
+        "ok": "✓ Presupuesto reenviado · Oficina avisada"
+      },
+      {
+        "status": "Mensaje de WhatsApp",
+        "av": "F",
+        "name": "Francisca Morales",
+        "role": "Cliente — consulta",
+        "user": "Perdonen, ¿a qué hora cierran esta noche?",
+        "aria": "¡Cerramos a las 19:00! Si quieres, te puedo reservar una cita para mañana.",
+        "ok": "✓ Respuesta inmediata · Cliente informada"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "D",
+        "name": "Dr. Delgado",
+        "role": "Consulta médica",
+        "user": "¿Puedes confirmarme las citas de mañana?",
+        "aria": "¡Claro! Mañana tienes 12 citas, la primera a las 8:30. Te he enviado la lista por WhatsApp.",
+        "ok": "✓ Lista enviada · Agenda actualizada"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "R",
+        "name": "Restaurante Da Gino",
+        "role": "Cliente — reserva",
+        "user": "Buenas noches, ¿una mesa para 4 esta noche a las 20:30?",
+        "aria": "¡Perfecto! Mesa para 4 a las 20:30 a su nombre. ¡Les esperamos!",
+        "ok": "✓ Mesa reservada · Reserva confirmada"
+      },
+      {
+        "status": "Llamada entrante",
+        "av": "E",
+        "name": "Elena Rueda",
+        "role": "Cliente — urgente",
+        "user": "Tengo una urgencia, ¿pueden venir ahora mismo?",
+        "aria": "¡Entendido, es urgente! He avisado al técnico más cercano, llega en menos de una hora.",
+        "ok": "✓ Emergencia gestionada · Técnico en camino"
+      }
     ]
   },
   "stats": [
