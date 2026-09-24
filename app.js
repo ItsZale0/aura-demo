@@ -42,7 +42,7 @@ function applyI18N(){
     var v = k.split('.').reduce(function(o,p){return o&&o[p]},t);
     if(v!==undefined){
       // Hero title: animazione speciale
-      if(el.hasAttribute('data-i18n') && (k==='hero.title1' || k==='hero.title2')){
+      if(el.hasAttribute('data-i18n') && (k==='hero.title1' || k==='hero.title2' || k==='autos.hero.title1' || k==='autos.hero.title2')){
         if(k==='hero.title1'){
           el.innerHTML = '<span class="w">'+esc(v)+'</span>';
         } else {
