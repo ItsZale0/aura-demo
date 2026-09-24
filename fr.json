@@ -29,6 +29,98 @@
       "Votre agenda plein sans même décrocher le téléphone. <strong>Aria réserve, déplace et confirme pour vous.</strong>",
       "Chaque appel est un client en plus. <strong>Aria les prend toutes, même celles que vous perdriez aujourd'hui.</strong>",
       "De la première sonnerie à la confirmation sur WhatsApp. <strong>Aria fait tout, vous gardez le contrôle.</strong>"
+    ],
+    "scenarios": [
+      {
+        "status": "Appel entrant",
+        "av": "M",
+        "name": "Martin Dupont",
+        "role": "Plombier — client",
+        "user": "Bonjour ! Je voudrais réserver une réparation pour demain matin.",
+        "aria": "Bien sûr ! Je vous ai noté pour demain à 9h00. Je vous confirme sur WhatsApp.",
+        "ok": "✓ Rendez-vous enregistré · Confirmation envoyée"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "L",
+        "name": "Laura Lefebvre",
+        "role": "Nouvelle cliente",
+        "user": "Bonjour, avez-vous un créneau pour une visite cette semaine ?",
+        "aria": "Oui ! Jeudi à 15h00 est libre. Je vous envoie le rappel par SMS.",
+        "ok": "✓ Visite planifiée · Rappel envoyé"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "J",
+        "name": "Julie Moreau",
+        "role": "Cliente — renouvellement",
+        "user": "Je dois renouveler mon contrat, pouvez-vous me rappeler ?",
+        "aria": "Bien sûr ! Je vous passe immédiatement un conseiller, je note votre demande en attendant.",
+        "ok": "✓ Demande qualifiée · Conseiller prévenu"
+      },
+      {
+        "status": "Appel manqué",
+        "av": "A",
+        "name": "Alexandre Petit",
+        "role": "Nouveau numéro",
+        "user": "Appel sans réponse à 14h32",
+        "aria": "Bonjour Alexandre ! Ici Aria, je vous ai rappelé dès que la ligne s'est libérée.",
+        "ok": "✓ Rappelé sous 3 minutes · Rendez-vous fixé"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "C",
+        "name": "Cabinet Dentaire Dupont",
+        "role": "Cliente fidèle",
+        "user": "Bonsoir, je dois décaler mon détartrage à vendredi.",
+        "aria": "C'est fait ! Décalé à vendredi 10h30, je préviens la dentiste.",
+        "ok": "✓ Rendez-vous déplacé · Tout le monde prévenu"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "P",
+        "name": "Paul Bernard",
+        "role": "Fournisseur",
+        "user": "C'est Paul, j'appelle pour le devis du mois.",
+        "aria": "Bonjour Paul ! J'ai transmis le devis au bureau, nous vous tenons informés d'ici demain.",
+        "ok": "✓ Devis transmis · Bureau prévenu"
+      },
+      {
+        "status": "Message WhatsApp",
+        "av": "F",
+        "name": "Françoise Mercier",
+        "role": "Cliente — renseignement",
+        "user": "Excusez-moi, vous fermez à quelle heure ce soir ?",
+        "aria": "Nous fermons à 19h00 ! Si vous le souhaitez, je peux vous fixer un rendez-vous pour demain.",
+        "ok": "✓ Réponse immédiate · Cliente informée"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "D",
+        "name": "Dr. Delacroix",
+        "role": "Cabinet médical",
+        "user": "Peux-tu me confirmer les consultations de demain ?",
+        "aria": "Bien sûr ! Demain vous avez 12 consultations, la première à 8h30. Je vous ai envoyé la liste sur WhatsApp.",
+        "ok": "✓ Liste envoyée · Agenda synchronisé"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "R",
+        "name": "Restaurant Chez Gino",
+        "role": "Cliente — réservation",
+        "user": "Bonsoir, une table pour 4 ce soir à 20h30 ?",
+        "aria": "Parfait ! Table pour 4 à 20h30 à votre nom. Nous vous attendons !",
+        "ok": "✓ Table réservée · Réservation confirmée"
+      },
+      {
+        "status": "Appel entrant",
+        "av": "É",
+        "name": "Élise Roux",
+        "role": "Cliente — urgente",
+        "user": "J'ai une urgence, pouvez-vous venir tout de suite ?",
+        "aria": "Compris, c'est urgent ! J'ai prévenu le technicien le plus proche, il arrive dans l'heure.",
+        "ok": "✓ Urgence gérée · Technicien en route"
+      }
     ]
   },
   "stats": [
