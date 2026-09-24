@@ -13,6 +13,7 @@ function setLang(l){
   document.body.style.fontFamily = l==='zh' ? "'Noto Sans SC','Plus Jakarta Sans',sans-serif" : "'Plus Jakarta Sans',sans-serif";
   applyI18N();
   buildDynamic();
+  renderHeroScenario();
   showTimeGreeting();
   updateGreetingClock();
   try{localStorage.setItem('aria-lang',l)}catch(e){}
@@ -432,6 +433,119 @@ function normalizeDemo(d){
 }
 
 // Safe escape for HTML injection
+
+// ═══ SCENARI EROE DINAMICI: una casistica di Aria diversa a ogni visita ═══
+var HERO_SCENARIOS = [
+  {
+    "status": "Chiamata in arrivo",
+    "av": "M",
+    "name": "Mario Rossi",
+    "role": "Idraulico — cliente",
+    "user": "Ciao! Vorrei prenotare una riparazione per domattina.",
+    "aria": "Certo! Ti ho segnato per domani alle 9:00. Confermo su WhatsApp.",
+    "ok": "✓ Appuntamento salvato · Conferma inviata"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "L",
+    "name": "Laura Bianchi",
+    "role": "Nuova cliente",
+    "user": "Buongiorno, avete posto per un sopralluogo questa settimana?",
+    "aria": "Sì! Ho libero giovedì alle 15:00. Ti mando il promemoria via SMS.",
+    "ok": "✓ Sopralluogo fissato · Promemoria inviato"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "G",
+    "name": "Giulia Ferrari",
+    "role": "Cliente — rinnovo",
+    "user": "Devo rinnovare il contratto, potete richiamarmi?",
+    "aria": "Certo! Ti passo subito l'operatore, intanto segno la richiesta.",
+    "ok": "✓ Richiesta qualificata · Operatore avvisato"
+  },
+  {
+    "status": "Chiamata persa",
+    "av": "A",
+    "name": "Alessandro Conti",
+    "role": "Nuovo numero",
+    "user": "Chiamata senza risposta alle 14:32",
+    "aria": "Ciao Alessandro! Sono Aria, ti ho richiamato appena libera la linea.",
+    "ok": "✓ Richiamato in 3 minuti · Appuntamento fissato"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "S",
+    "name": "Studio Dentistico Rossi",
+    "role": "Cliente abituale",
+    "user": "Buonasera, dovrei spostare la pulizia dei denti a venerdì.",
+    "aria": "Fatto! Sposto a venerdì alle 10:30 e avviso la dottoressa.",
+    "ok": "✓ Appuntamento spostato · Tutti avvisati"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "P",
+    "name": "Paolo Verdi",
+    "role": "Fornitore",
+    "user": "Sono Paolo, richiamo per il preventivo del mese.",
+    "aria": "Ciao Paolo! Ho inoltrato il preventivo all'ufficio, ti aggiorniamo entro domani.",
+    "ok": "✓ Preventivo inoltrato · Ufficio avvisato"
+  },
+  {
+    "status": "Messaggio WhatsApp",
+    "av": "F",
+    "name": "Francesca Moretti",
+    "role": "Cliente — info",
+    "user": "Scusate, a che ora chiudete stasera?",
+    "aria": "Chiudiamo alle 19:00! Se ti serve, posso fissarti un appuntamento per domani.",
+    "ok": "✓ Risposta immediata · Cliente informata"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "D",
+    "name": "Dott. De Luca",
+    "role": "Studio medico",
+    "user": "Puoi darmi conferma per le visite di domani?",
+    "aria": "Certo! Domani hai 12 visite, la prima alle 8:30. Ti ho mandato l'elenco su WhatsApp.",
+    "ok": "✓ Elenco inviato · Agenda allineata"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "R",
+    "name": "Ristorante Da Gino",
+    "role": "Cliente — prenotazione",
+    "user": "Buonasera, un tavolo per 4 stasera alle 20:30?",
+    "aria": "Perfetto! Tavolo per 4 alle 20:30 a nome vostro. Vi aspetto!",
+    "ok": "✓ Tavolo riservato · Prenotazione confermata"
+  },
+  {
+    "status": "Chiamata in arrivo",
+    "av": "E",
+    "name": "Elena Russo",
+    "role": "Cliente — urgente",
+    "user": "Ho un'emergenza, potete venire subito?",
+    "aria": "Ho capito, è urgente! Ho avvisato il tecnico più vicino, arriva entro un'ora.",
+    "ok": "✓ Emergenza gestita · Tecnico in strada"
+  }
+];
+
+function renderHeroScenario(){
+  var pool = (typeof I18N !== 'undefined' && I18N[CUR] && I18N[CUR].hero && I18N[CUR].hero.scenarios) || HERO_SCENARIOS;
+  var s = pool[Math.floor(Math.random()*pool.length)];
+  var set = function(id, v){ var el = document.getElementById(id); if(el) el.textContent = v; };
+  set('hvStatus', s.status);
+  set('hvAvatar', s.av);
+  set('hvName', s.name);
+  set('hvRole', s.role);
+  set('hvUserMsg', s.user);
+  set('hvAriaMsg', s.aria);
+  set('hvOk', s.ok);
+  var dot = document.querySelector('.hv-dot');
+  if(dot){
+    dot.style.background = s.status === 'Chiamata persa' ? '#e5484d' : '#46a758';
+  }
+}
+document.addEventListener('DOMContentLoaded', renderHeroScenario);
+
 function esc(s){
   return String(s === null || s === undefined ? '' : s)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
@@ -917,7 +1031,9 @@ startDemo = function(n){
     applyTheme(theme || 'night');
     var lang='it';try{lang=localStorage.getItem('aria-lang')||'it'}catch(e){}
     if(!I18N[lang]) lang='it';
-    setLang(lang);initDynamic();
+    setLang(lang);
+    renderHeroScenario();
+    initDynamic();
     if(typeof buildAutos==='function') buildAutos();
     if(typeof updateLangDd==='function') updateLangDd();
   }
