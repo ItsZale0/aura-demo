@@ -542,5 +542,19 @@
     ],
     "cta_title": "Dimmi cosa ti serve. Se si fa al telefono, Aria lo impara.",
     "cta_btn": "Raccontaci il tuo caso"
-  }
+  },
+  "demoSections": [
+    {
+      "title": "Prenotazione",
+      "desc": "Il cliente chiama, Aria risponde, guarda il calendario e prenota. Conferma su WhatsApp."
+    },
+    {
+      "title": "Qualifica",
+      "desc": "Aria fa le domande giuste prima di passarti la chiamata: capisce chi compra e chi no."
+    },
+    {
+      "title": "Recupero",
+      "desc": "I clienti che non rispondevano più? Aria li richiama e riparte da dove eravate rimasti."
+    }
+  ]
 }
