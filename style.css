@@ -896,3 +896,18 @@ a:hover{color:var(--accent)}
   .cal-day{font-size:.7em}
 }
 @media (prefers-reduced-motion:reduce){.wa-msg,.cal-day.booked,.crm-field{animation:none}}
+
+/* ═══ TRANSIZIONI DI PAGINA ═══ */
+@keyframes pageIn{
+  0%{opacity:0;transform:translateY(10px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes pageOut{
+  0%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(-8px)}
+}
+body.page-enter{animation:pageIn .45s cubic-bezier(.22,.9,.28,1) both}
+body.page-exit{animation:pageOut .26s cubic-bezier(.4,0,1,1) both}
+@media (prefers-reduced-motion:reduce){
+  body.page-enter,body.page-exit{animation:none}
+}
