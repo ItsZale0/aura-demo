@@ -919,3 +919,7 @@ body.page-exit{animation:pageOut .26s cubic-bezier(.4,0,1,1) both}
 @media (max-width:640px){
   #heroLogo{width:64px!important;height:64px!important;border-radius:17px!important}
 }
+
+/* logo nav = link home */
+a.nav-brand{cursor:pointer}
+a.nav-brand:hover .mark{transform:rotate(-8deg) scale(1.08)}
