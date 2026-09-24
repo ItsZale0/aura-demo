@@ -146,9 +146,17 @@
     "fillFields": "请填写名称、行业和服务"
   },
   "contact": {
-    "title": "两个简单的问题",
-    "text": "多少钱？适合我的业务吗？给我们发邮件，当天回复。",
-    "btn": "给我们发邮件"
+    "title": "聊聊吧",
+    "text": "选择你喜欢的方式：我们当天回复。",
+    "email_t": "邮件",
+    "email_d": "想询价或有疑问？给我们写邮件，今天之内回复。",
+    "wa_t": "WhatsApp",
+    "wa_d": "最快的方式：直接发消息，几分钟内回复。",
+    "tg_t": "Telegram",
+    "tg_d": "在 Telegram 上关注我们、给我们留言，还可以获取最新动态。",
+    "email_btn": "发送邮件",
+    "wa_btn": "打开 WhatsApp",
+    "tg_btn": "打开 Telegram"
   },
   "footer": {
     "about": "替您接电话的人。",
