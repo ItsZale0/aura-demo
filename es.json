@@ -146,9 +146,17 @@
     "fillFields": "Rellena nombre, sector y servicios"
   },
   "contact": {
-    "title": "Dos preguntas rápidas",
-    "text": "¿Cuánto cuesta? ¿Funciona para mi caso? Escríbenos, respondemos el mismo día.",
-    "btn": "Escríbenos"
+    "title": "Hablemos",
+    "text": "Elige cómo prefieres: respondemos el mismo día.",
+    "email_t": "Email",
+    "email_d": "Escríbenos para pedir un presupuesto o hacer una pregunta. Te respondemos antes de finalizar el día.",
+    "wa_t": "WhatsApp",
+    "wa_d": "La vía más rápida: mensaje directo, respuesta en pocos minutos.",
+    "tg_t": "Telegram",
+    "tg_d": "Síguenos y escríbenos por Telegram, también para novedades y actualizaciones.",
+    "email_btn": "Enviar un email",
+    "wa_btn": "Abrir WhatsApp",
+    "tg_btn": "Abrir Telegram"
   },
   "footer": {
     "about": "Quien contesta el teléfono por ti.",
