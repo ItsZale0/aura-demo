@@ -805,6 +805,21 @@ function initDynamic(){
   setInterval(updateGreetingClock, 30000);
   initScrollProgress();
   initNavActive();
+  
+  // pagina automazioni: griglia items
+  var ag = document.getElementById('autosGrid');
+  if(ag && t.autos && t.autos.items){
+    var AUTO_ICONS = {
+      '📞': FEAT_ICONS['📞'], '📧': FEAT_ICONS['📧'], '📁': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+      '⏰': FEAT_ICONS['⏰'], '📊': FEAT_ICONS['📊'], '🔄': FEAT_ICONS['🔄']
+    };
+    ag.innerHTML = t.autos.items.map(function(it, i){
+      var icn = AUTO_ICONS[it.icn] || '';
+      var dl = ['','d1','d2'][i % 3];
+      return '<div class="aut-item reveal ' + dl + '"><div class="aicn">' + icn + '</div><h4>' + esc(it.t) + '</h4><p>' + esc(it.d) + '</p></div>';
+    }).join('');
+  }
+
   // tab demo accessibili da tastiera (Enter/Spazio)
   document.addEventListener('keydown', function(e){
     if((e.key==='Enter'||e.key===' ') && e.target && e.target.classList && e.target.classList.contains('tab')){
