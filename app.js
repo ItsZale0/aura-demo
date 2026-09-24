@@ -111,8 +111,6 @@ var fg = document.getElementById('featGrid');
     }).join('');
   }
 
-  var tabs = document.getElementById('demo');
-  if(tabs) tabs.innerHTML = t.tabs.map(function(tb,i){return '<div class="tab'+(i===0?' active':'')+'" onclick="selectDemo('+i+')" role="button" tabindex="0" aria-pressed="'+(i===0)+'">'+tb+'</div>'}).join('');
   buildDemos();
 }
 
