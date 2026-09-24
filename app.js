@@ -176,39 +176,104 @@ function playDemo(n){
   var el=document.getElementById('cm'+n);
   if(!el) return;
   el.innerHTML='';
+  var sec=document.getElementById('demoSec'+n);
+  var calGrid=sec?sec.querySelector('.cal-grid'):null;
+  var waMsgs=sec?sec.querySelector('.wa-msgs'):null;
+  var crmVis=sec?sec.querySelector('.crm-vis'):null;
+  
+  // ── CALENDARIO: griglia mese con giorni, prenotazione evidenziata a fine chat ──
+  if(calGrid){
+    var days=['L','M','M','G','V','S','D'];
+    var html='';
+    days.forEach(function(dv){html+='<div class="cal-dow">'+dv+'</div>';});
+    for(var i=0;i<3;i++){html+='<div class="cal-day empty"></div>';}
+    for(var dd=1;dd<=31;dd++){
+      html+='<div class="cal-day'+(dd===18?' booked':'')+'">'+dd+(dd===18?'<span class="cal-dot"></span>':'')+'</div>';
+    }
+    calGrid.innerHTML=html;
+  }
+  
+  // ── WHATSAPP: messaggi che arrivano in sync con la chat ──
+  var waQueue=[];
+  if(waMsgs){
+    waMsgs.innerHTML='';
+    // i messaggi WA derivano dagli step con wa:true o li generiamo dagli eventi chiave
+    d.steps.forEach(function(st){
+      if(st.wa){ waQueue.push(st.wa); }
+    });
+  }
+  
+  // ── CRM: campi che si compilano in sync ──
+  var crmFields=[];
+  if(crmVis){
+    var lead=crmVis.querySelector('.crm-lead');
+    if(lead){
+      d.steps.forEach(function(st){
+        if(st.crm){ crmFields.push(st.crm); }
+      });
+    }
+  }
+  
   var delay=0;
+  var waIdx=0, crmIdx=0;
   d.steps.forEach(function(st,i){
-    if(st.say){ // Aria parla
+    if(st.say){
       setTimeout(function(){
-        var div=document.createElement('div');
-        div.className='chat-msg aria';
-        div.innerHTML='<strong>Aria:</strong> '+esc(st.say);
-        el.appendChild(div);
-        el.scrollTop=999;
+        addChatMsg(el,'Aria','aria',st.say);
+        // se questo step ha un evento wa/crm, mostralo in sync
+        if(st.wa && waMsgs){ addWaMsg(waMsgs, st.wa); }
+        if(st.crm && crmVis){ addCrmField(crmVis, st.crm); }
       }, delay);
-      delay+=1800;
+      delay+=1900;
     }
-    if(st.user){ // cliente parla
+    if(st.user){
       setTimeout(function(){
-        var div=document.createElement('div');
-        div.className='chat-msg user';
-        div.innerHTML='<strong>'+esc(d.phone && d.phone.customer || 'Cliente')+':</strong> '+esc(st.user);
-        el.appendChild(div);
-        el.scrollTop=999;
+        addChatMsg(el, (d.phone && d.phone.customer) || 'Cliente', 'user', st.user);
+        if(st.wa && waMsgs){ addWaMsg(waMsgs, st.wa); }
+        if(st.crm && crmVis){ addCrmField(crmVis, st.crm); }
       }, delay);
-      delay+=1600;
+      delay+=1700;
     }
-    if(st.body && !st.say && !st.user){ // evento di sistema
+    if(st.body && !st.say && !st.user){
       setTimeout(function(){
-        var div=document.createElement('div');
-        div.className='chat-msg sys';
-        div.innerHTML='<strong>'+esc(st.title)+':</strong> '+esc(st.body);
-        el.appendChild(div);
-        el.scrollTop=999;
+        addChatMsg(el, st.title, 'sys', st.body);
+        if(st.wa && waMsgs){ addWaMsg(waMsgs, st.wa); }
+        if(st.crm && crmVis){ addCrmField(crmVis, st.crm); }
       }, delay);
-      delay+=1200;
+      delay+=1300;
     }
   });
+  
+  // WA fallback: se la demo è 'wa' visual ma nessuno step ha st.wa, genera 
+  // conferma/promemoria dagli eventi di prenotazione
+  if(waMsgs && waQueue.length===0){
+    var booked=d.steps.some(function(s){return /book|prenot|appuntament|appointment|domani|tomorrow/i.test(s.say||'')+ (s.user||'');});
+    setTimeout(function(){ addWaMsg(waMsgs, t.demoUI.waConfirm || 'Conferma: appuntamento domani alle 10:00. Via Rossi 12, Roma.'); }, delay-1500);
+    setTimeout(function(){ addWaMsg(waMsgs, t.demoUI.waReminder || 'Promemoria: ci vediamo domani alle 10:00!'); }, delay+2500);
+  }
+}
+
+function addChatMsg(el,who,cls,text){
+  var div=document.createElement('div');
+  div.className='chat-msg '+cls;
+  div.innerHTML='<strong>'+esc(who)+':</strong> '+esc(text);
+  el.appendChild(div);
+  el.scrollTop=el.scrollHeight;
+}
+function addWaMsg(box,text){
+  var div=document.createElement('div');
+  div.className='wa-msg';
+  div.textContent=text;
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
+}
+function addCrmField(vis,field){
+  var info=vis.querySelector('.lead-info');
+  if(!info) return;
+  var el=document.createElement('div');
+  el.className='crm-field';
+  el.innerHTML='<span class="cf-k">'+esc(field.k)+'</span><span class="cf-v">'+esc(field.v)+'</span>';
+  info.appendChild(el);
 }
 
 function startDemo(n){
