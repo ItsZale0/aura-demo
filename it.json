@@ -146,9 +146,17 @@
     "fillFields": "Riempi nome, settore e servizi"
   },
   "contact": {
-    "title": "Due domande veloci",
-    "text": "Quanto costa? Funziona per il mio caso? Scrivici, rispondiamo in giornata.",
-    "btn": "Scrivici un'email"
+    "title": "Parliamone",
+    "text": "Scegli come preferisci: rispondiamo in giornata.",
+    "email_t": "Email",
+    "email_d": "Scrivici per un preventivo o una domanda. Ti rispondiamo entro sera.",
+    "wa_t": "WhatsApp",
+    "wa_d": "Il modo più veloce: messaggio diretto, risposta in pochi minuti.",
+    "tg_t": "Telegram",
+    "tg_d": "Seguici e scrivici su Telegram, anche per aggiornamenti e novità.",
+    "email_btn": "Scrivi un'email",
+    "wa_btn": "Apri WhatsApp",
+    "tg_btn": "Apri Telegram"
   },
   "footer": {
     "about": "Chi risponde al telefono per te.",
