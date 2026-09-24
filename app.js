@@ -1001,3 +1001,32 @@ function showMailFallback(mailtoUrl){
   document.getElementById('closeMail').onclick = function(){ ov.remove(); };
   ov.onclick = function(ev){ if(ev.target === ov) ov.remove(); };
 }
+
+
+// ═══ TRANSIZIONI DI PAGINA (fluide tra HTML) ═══
+(function(){
+  // entrata: al load la pagina appare morbida
+  document.body.classList.add('page-enter');
+  setTimeout(function(){ document.body.classList.remove('page-enter'); }, 450);
+
+  // uscita: intercetta i click sui link verso altre pagine del sito
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || a.target === '_blank') return;
+    // solo link interni .html
+    if(!/\.html(\?|$)/.test(href) && !href.endsWith('.html')) return;
+    e.preventDefault();
+    document.body.classList.add('page-exit');
+    setTimeout(function(){ window.location.href = href; }, 260);
+  });
+  // se l'utente torna indietro (bfcache), ripulisci
+  window.addEventListener('pageshow', function(ev){
+    if(ev.persisted){
+      document.body.classList.remove('page-exit','page-enter');
+      document.body.classList.add('page-enter');
+      setTimeout(function(){ document.body.classList.remove('page-enter'); }, 450);
+    }
+  });
+})();
