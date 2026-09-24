@@ -187,266 +187,169 @@
         "tag": "Live"
       },
       "visual": "cal",
+      "customer": "Mark Ross",
       "steps": [
         {
-          "t": "2:32:05 PM",
+          "t": "14:32:05",
           "title": "Incoming call",
-          "body": "John Smith calls your number.",
+          "body": "Mark Ross calls your number.",
           "delay": 0
         },
         {
-          "t": "2:32:07 PM",
+          "t": "14:32:07",
           "title": "Aria answers",
           "body": "Answers professionally.",
-          "say": "Hello! This is Aria. How can I help you?",
-          "delay": 2000
+          "say": "Good morning! This is Aria, Studio Rossi's assistant. How can I help you?",
+          "delay": 1
         },
         {
-          "t": "2:32:10 PM",
-          "title": "Appointment request",
-          "body": "Customer wants to book.",
-          "user": "I'd like to book an appointment for a consultation.",
-          "delay": 5000
+          "t": "14:32:12",
+          "title": "The customer speaks",
+          "body": "",
+          "user": "Hi, I'd like to book a visit for next week.",
+          "delay": 2
         },
         {
-          "t": "2:32:13 PM",
-          "title": "Analysis",
-          "body": "Aria identifies service type.",
-          "think": true,
-          "delay": 8000
+          "t": "14:32:18",
+          "title": "Aria proposes",
+          "body": "",
+          "say": "Of course! I have Thursday the 18th at 10:00 or Friday the 19th at 15:30. Which do you prefer?",
+          "delay": 3
         },
         {
-          "t": "2:32:15 PM",
-          "title": "Check availability",
-          "body": "Aria checks calendar.",
-          "action": {
-            "ic": "cal",
-            "t": "Calendar",
-            "s": "Slots checked"
-          },
-          "say": "Let me check availability right away",
-          "delay": 11000
+          "t": "14:32:25",
+          "title": "The customer chooses",
+          "body": "",
+          "user": "Thursday at 10 works great.",
+          "delay": 4
         },
         {
-          "t": "2:32:18 PM",
-          "title": "Slot found",
-          "body": "Aria proposes time.",
-          "say": "I have tomorrow at 10:00 AM. Does that work?",
-          "delay": 14000
-        },
-        {
-          "t": "2:32:21 PM",
-          "title": "Confirmation",
-          "body": "Customer confirms.",
-          "user": "Perfect!",
-          "delay": 17000
-        },
-        {
-          "t": "2:32:23 PM",
-          "title": "Event created",
-          "body": "Aria creates event.",
-          "cal": true,
-          "d": "SEP 21",
-          "h": "10:00 AM",
-          "n": "Consultation — John Smith",
-          "company": "Smith & Co",
-          "say": "Booked! You'll receive a reminder.",
-          "delay": 20000
-        },
-        {
-          "t": "2:32:26 PM",
-          "title": "WhatsApp",
-          "body": "Sends reminder.",
-          "action": {
-            "ic": "wa",
-            "t": "WhatsApp",
-            "s": "Sent"
-          },
-          "delay": 23000
-        },
-        {
-          "t": "2:28:28 PM",
-          "title": "Lead saved",
-          "body": "Saves to system.",
-          "action": {
-            "ic": "crm",
-            "t": "CRM",
-            "s": "Saved"
-          },
-          "say": "Thank you, have a great day!",
-          "delay": 26000
+          "t": "14:32:30",
+          "title": "Booking",
+          "body": "Aria writes the appointment on the calendar.",
+          "say": "Perfect, booked for Thursday the 18th at 10:00. We'll send you a WhatsApp confirmation. See you soon!",
+          "wa": "Confirmed: Thursday 18th at 10:00 at Studio Rossi. See you soon!",
+          "delay": 5
         }
       ]
     },
     {
       "phone": {
         "name": "Aria",
-        "tag": "Qualify"
+        "tag": "Qualifica"
       },
       "visual": "crm",
+      "customer": "Laura Smith",
       "steps": [
         {
-          "t": "9:15:02 AM",
-          "title": "New call",
-          "body": "Unknown contact calls.",
+          "t": "09:14:02",
+          "title": "Incoming call",
+          "body": "Unknown number.",
           "delay": 0
         },
         {
-          "t": "9:15:04 AM",
+          "t": "09:14:05",
           "title": "Aria answers",
-          "body": "Starts qualification.",
-          "say": "Hello! This is Aria from Aria Automation. How can I help you?",
-          "delay": 2000
+          "body": "",
+          "say": "Good morning! This is Aria, TechInstall's assistant. How can I help you?",
+          "delay": 1
         },
         {
-          "t": "9:15:08 AM",
-          "title": "Customer interest",
-          "body": "Customer is interested.",
-          "user": "I'd like to learn more about your services.",
-          "delay": 5000
+          "t": "09:14:10",
+          "title": "The customer speaks",
+          "body": "",
+          "user": "Good morning, I'm looking for a quote for an electrical installation.",
+          "crm": {
+            "k": "Need",
+            "v": "Electrical installation"
+          },
+          "delay": 2
         },
         {
-          "t": "9:15:11 AM",
-          "title": "Needs assessment",
-          "body": "Aria asks what they need.",
-          "say": "Of course! What exactly do you need?",
-          "delay": 8000
+          "t": "09:14:16",
+          "title": "Aria qualifies",
+          "body": "Aria asks the right questions.",
+          "say": "Happy to! How many rooms need wiring, and by when do you need it?",
+          "delay": 3
         },
         {
-          "t": "9:15:15 AM",
-          "title": "Problem description",
-          "body": "Customer describes situation.",
-          "user": "We miss many calls and can't manage everything.",
-          "delay": 11000
+          "t": "09:14:24",
+          "title": "Details",
+          "body": "",
+          "user": "A 90 sqm apartment, by the end of the month if possible.",
+          "crm": {
+            "k": "Size",
+            "v": "90 sqm"
+          },
+          "delay": 4
         },
         {
-          "t": "9:15:18 AM",
-          "title": "Budget inquiry",
-          "body": "Aria asks about budget.",
-          "say": "I understand. Do you have a monthly budget in mind?",
-          "delay": 14000
-        },
-        {
-          "t": "9:15:22 AM",
-          "title": "Budget indicated",
-          "body": "Customer states budget.",
-          "user": "Around $150 per month.",
-          "delay": 17000
-        },
-        {
-          "t": "9:15:25 AM",
-          "title": "Timeline",
-          "body": "Aria asks when to start.",
-          "say": "Perfect. When would you like to start?",
-          "delay": 20000
-        },
-        {
-          "t": "9:15:29 AM",
-          "title": "Urgency",
-          "body": "Customer expresses urgency.",
-          "user": "As soon as possible, we need a quick solution.",
-          "delay": 23000
-        },
-        {
-          "t": "9:15:32 AM",
-          "title": "Qualified",
-          "body": "Aria qualifies lead HOT.",
-          "think": true,
-          "crm": true,
-          "nm": "Michael Brown",
-          "comp": "Brown Studio",
-          "bdg": "$150/month",
-          "urg": "High",
-          "need": "Call management",
-          "say": "Got it! An operator will contact you today. Thanks!",
-          "delay": 26000
+          "t": "09:14:31",
+          "title": "Lead qualified",
+          "body": "Aria notes everything and passes the lead.",
+          "say": "Perfect, I've noted everything. One of our reps will call you today with the quote. Thank you!",
+          "crm_pre": {
+            "k": "Timing",
+            "v": "End of month"
+          },
+          "crm": {
+            "k": "Status",
+            "v": "Lead qualified ✓"
+          },
+          "delay": 5
         }
       ]
     },
     {
       "phone": {
         "name": "Aria",
-        "tag": "Recovery"
+        "tag": "Recupero"
       },
       "visual": "wa",
+      "customer": "Julia Parker",
       "steps": [
         {
-          "t": "10:00:01 AM",
-          "title": "Database analysis",
-          "body": "Aria identifies cold leads.",
+          "t": "17:45:00",
+          "title": "Aria takes action",
+          "body": "Customer who hadn't answered in 3 weeks.",
           "delay": 0
         },
         {
-          "t": "10:00:03 AM",
-          "title": "Lead selected",
-          "body": "Sarah Green, 45 days ago.",
-          "action": {
-            "ic": "crm",
-            "t": "CRM",
-            "s": "Selected"
-          },
-          "delay": 1500
+          "t": "17:45:05",
+          "title": "Aria calls",
+          "body": "",
+          "say": "Good evening! I'm calling on behalf of Verdi Auto Shop. You had left a quote for brake pad replacement — are you still interested?",
+          "delay": 1
         },
         {
-          "t": "10:00:05 AM",
-          "title": "Outbound call",
-          "body": "Aria calls to re-engage.",
-          "say": "Hi Sarah! This is Aria from Aria Automation. How are you?",
-          "delay": 3000
+          "t": "17:45:15",
+          "title": "The customer replies",
+          "body": "",
+          "user": "Oh right, I forgot! Sure, let's look at it.",
+          "delay": 2
         },
         {
-          "t": "10:00:10 AM",
-          "title": "Customer remembers",
-          "body": "Customer remembers conversation.",
-          "user": "Oh yes, I remember. We hadn't decided yet.",
-          "delay": 5500
+          "t": "17:45:22",
+          "title": "Aria closes",
+          "body": "",
+          "say": "Great! I have a slot open tomorrow at 4:00 PM — does that work? I'll send you the confirmation on WhatsApp right away.",
+          "wa": "Confirmed: appointment tomorrow at 4:00 PM at Verdi Auto Shop.",
+          "delay": 3
         },
         {
-          "t": "10:00:14 AM",
-          "title": "Targeted offer",
-          "body": "Aria proposes solution.",
-          "say": "I understand. Can I ask: is the missed calls problem still open? We've activated a special promotion.",
-          "delay": 7500
-        },
-        {
-          "t": "10:00:19 AM",
-          "title": "Interest reborn",
-          "body": "Customer asks details.",
-          "user": "Yes, the problem is still there. What is it about?",
-          "delay": 10000
-        },
-        {
-          "t": "10:00:23 AM",
-          "title": "Offer sent",
-          "body": "Aria sends offer via WhatsApp.",
-          "wa": true,
-          "msg": "Hi Sarah! As promised, here are the details of our special promotion: 1st month free + 20% discount for the first 3 months. If you have questions, I'm here! 🚀",
-          "say": "If you activate this week, we offer you the 1st month free and 20% discount for 3 months.",
-          "delay": 12000
-        },
-        {
-          "t": "10:00:28 AM",
-          "title": "Interest confirmed",
-          "body": "Customer interested but needs to consult.",
-          "user": "Interesting! I need to talk to my partner.",
-          "delay": 14500
-        },
-        {
-          "t": "10:00:32 AM",
-          "title": "Call proposal",
-          "body": "Aria proposes operator call.",
-          "say": "Of course. Can I schedule a call with our operator for tomorrow afternoon? They can answer all your questions.",
-          "delay": 16500
-        },
-        {
-          "t": "10:00:37 AM",
-          "title": "Appointment confirmed",
-          "body": "Customer confirms next day.",
+          "t": "17:45:30",
+          "title": "The customer accepts",
+          "body": "",
           "user": "Yes, tomorrow at 4:00 PM works.",
-          "wa": true,
-          "msg": "Perfect Sarah! I confirm the call with our operator for tomorrow at 4:00 PM. We'll call you at your usual number. Have a great day! 📞",
-          "say": "Perfect. I'll send you a reminder one hour before. See you tomorrow!",
-          "delay": 18500
+          "delay": 4
+        },
+        {
+          "t": "17:45:35",
+          "title": "Win-back complete",
+          "body": "Customer recovered and appointment booked.",
+          "say": "Perfect, see you tomorrow! I've just sent you the WhatsApp reminder.",
+          "wa": "Reminder: see you tomorrow at 4:00 PM!",
+          "delay": 5
         }
       ]
     }
