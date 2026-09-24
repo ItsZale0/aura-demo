@@ -1021,6 +1021,13 @@ function showMailFallback(mailtoUrl){
     document.body.classList.add('page-exit');
     setTimeout(function(){ window.location.href = href; }, 260);
   });
+  // dopo il caricamento: se c'è un anchor (#contact), scrolla dolcemente
+  if(window.location.hash){
+    setTimeout(function(){
+      var target = document.querySelector(window.location.hash);
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 500);
+  }
   // se l'utente torna indietro (bfcache), ripulisci
   window.addEventListener('pageshow', function(ev){
     if(ev.persisted){
