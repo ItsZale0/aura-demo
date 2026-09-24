@@ -528,5 +528,19 @@
       "btn": "Email us"
     },
     "nav": "Automations"
+  },
+  "valueBlock": {
+    "title": "This is just the beginning",
+    "subtitle": "The 13 things above are the most requested. But Aria is built around your work, not the other way around.",
+    "examples_title": "Every week clients ask for new things. Like:",
+    "examples": [
+      "\"Can Aria call no-shows and rebook them?\" — Yes.",
+      "\"Can it ask for the issue details before transferring the call?\" — Yes.",
+      "\"Can it answer in three languages and write the quote in the customer's language?\" — Yes.",
+      "\"Can it send me a voice summary of the day at 6pm?\" — Yes.",
+      "\"Can it integrate with the software I already use?\" — Almost always yes."
+    ],
+    "cta_title": "Tell us what you need. If it can be done over the phone, Aria learns it.",
+    "cta_btn": "Tell us your case"
   }
 }
