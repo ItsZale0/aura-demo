@@ -814,3 +814,14 @@ a:hover{color:var(--accent)}
   .stats-wrap{padding-bottom:64px}
   .demo-view{padding-bottom:96px}
 }
+
+/* ═══ CONTATTI: 3 CARD ═══ */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1080px;margin:0 auto}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;text-align:center;transition:all .3s cubic-bezier(.2,.7,.3,1)}
+.contact-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+.contact-card h4{font-size:1.05em;font-weight:700;margin-bottom:8px}
+.contact-card p{font-size:.86em;color:var(--muted);line-height:1.6;margin:0 0 20px}
+.cc-icn{width:38px;height:38px;color:var(--accent);margin:0 auto 14px}
+.cc-icn svg{width:100%;height:100%}
+.contact-card .btn{width:100%;justify-content:center}
+@media (max-width:640px){.contact-card{padding:24px 20px}}
