@@ -123,26 +123,91 @@ function selectDemo(n){
 
 function buildDemos(){
   var t = I18N[CUR];
-  var views = document.getElementById('demoViews');
-  views.innerHTML='';
+  var host = document.getElementById('demoSections');
+  if(!host) return;
+  host.innerHTML='';
   var icnMap={cal:'📅',wa:'📱',crm:'🎯'};
   var titleMap={cal:t.demoUI.calendar,wa:t.demoUI.whatsapp,crm:t.demoUI.crm};
   t.demos.forEach(function(d,n){
-    var v=document.createElement('div');
-    v.className='demo-view'+(n===0?' active':'');
-    v.id='dv'+n;
+    var sec=document.createElement('div');
+    sec.className='demo-section reveal';
+    sec.id='demoSec'+n;
+    var meta = (t.demoSections && t.demoSections[n]) || {title:'', desc:''};
+    var head='<div class="ds-head">'
+      +'<span class="ds-num">'+(n+1)+'</span>'
+      +'<div class="ds-titles"><h3>'+esc(meta.title)+'</h3><p>'+esc(meta.desc)+'</p></div>'
+      +'</div>';
     var vis='';
     if(d.visual==='cal'){
-      vis='<div class="cal-vis"><div class="cal-top"><span class="cal-title">2026</span><div class="cal-nav"><button>‹</button><button>Today</button><button>›</button></div></div><div class="cal-grid"><div class="hdr">L</div><div class="hdr">M</div><div class="hdr">M</div><div class="hdr">G</div><div class="hdr">V</div><div class="hdr">S</div><div class="hdr">D</div>';
-      for(var i=1;i<=35;i++){vis+='<div class="day'+(i===20?' today':'')+'" id="cal-day-'+(i-2)+'">'+((i>2&&i<=32)?i-2:'')+'</div>'}
-      vis+='</div><div class="cal-ev" id="cal-ev"><div class="ev-time" id="cal-ht"></div><div class="ev-name" id="cal-hn"></div><div class="ev-det" id="cal-hc"></div></div></div>';
-    } else if(d.visual==='wa'){
-      vis='<div class="wa-vis" id="wa-box"></div>';
-    } else {
-      vis='<div class="crm-vis"><div class="crm-top">🎯 CRM</div><div class="crm-body"><div class="crm-lead" id="crm-card"><div class="av" id="crm-av">J</div><div class="info"><div class="n" id="crm-cn"></div><div class="m" id="crm-cc"></div></div><span class="badge hot" id="crm-cb">HOT</span></div><div class="crm-row"><span class="k">Budget</span><span class="v" id="crm-bdg"></span></div><div class="crm-row"><span class="k">Urgency</span><span class="v" id="crm-urg"></span></div><div class="crm-row"><span class="k">Need</span><span class="v" id="crm-need"></span></div></div></div>';
+      vis='<div class="cal-vis"><div class="cal-top"><span class="cal-title">2026</span><div class="cal-nav"><button>‹</button><button>›</button></div></div><div class="cal-grid"></div></div>';
     }
-    v.innerHTML='<div class="dash"><div class="panel phone"><div class="panel-head"><div class="picn">🤖</div><h4>'+d.phone.name+'</h4><span class="tag"><span class="dot"></span>'+d.phone.tag+'</span></div><div class="phone-chat" id="s'+n+'-chat"></div></div><div class="panel visual"><div class="panel-head"><div class="picn">'+icnMap[d.visual]+'</div><h4>'+titleMap[d.visual]+'</h4></div><div class="visual-body">'+vis+'</div></div></div><div class="timeline" id="s'+n+'-tl"></div><div class="prog"><div class="fill" id="s'+n+'-prog"></div></div><div class="controls"><button class="prim" id="s'+n+'-btn" onclick="startDemo('+n+')">'+t.demoUI.start+'</button><button class="sec" onclick="resetDemo('+n+')">'+t.demoUI.reset+'</button></div>';
-    views.appendChild(v);
+    if(d.visual==='wa'){
+      vis='<div class="wa-vis"><div class="wa-top"><span class="wa-name">'+esc(d.customer||'')+'</span><span class="wa-online">online</span></div><div class="wa-msgs"></div></div>';
+    }
+    if(d.visual==='crm'){
+      vis='<div class="crm-vis"><div class="crm-top"><span>'+t.demoUI.crm+'</span><span class="crm-live">live</span></div><div class="crm-lead"><div class="av">'+esc((d.customer||'A').charAt(0))+'</div><div class="lead-info"><strong>'+esc(d.customer||'')+'</strong><span class="badge warm">warm</span></div></div></div>';
+    }
+    var chat='<div class="chat-wrap"><div class="chat-head"><span class="chat-name">Aria</span><span class="chat-live"><span class="dot"></span>live</span></div><div class="chat-msgs" id="cm'+n+'"></div></div>';
+    sec.innerHTML=head+'<div class="ds-body">'+chat+vis+'</div>';
+    host.appendChild(sec);
+    // avvia la conversazione quando la sezione entra in viewport
+    var played=false;
+    var start=function(){ if(!played){played=true;playDemo(n);} };
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ start(); io.disconnect(); } });
+      },{threshold:0.25});
+      io.observe(sec);
+      // fallback: se dopo 2.5s non è partita (IO buggato), controlla posizione
+      setTimeout(function(){
+        if(!played){
+          var r=sec.getBoundingClientRect();
+          if(r.top < window.innerHeight && r.bottom > 0) start();
+        }
+      },2500);
+    } else { start(); }
+  });
+}
+
+function playDemo(n){
+  var t=I18N[CUR];
+  var d=t.demos[n];
+  if(!d) return;
+  var el=document.getElementById('cm'+n);
+  if(!el) return;
+  el.innerHTML='';
+  var delay=0;
+  d.steps.forEach(function(st,i){
+    if(st.say){ // Aria parla
+      setTimeout(function(){
+        var div=document.createElement('div');
+        div.className='chat-msg aria';
+        div.innerHTML='<strong>Aria:</strong> '+esc(st.say);
+        el.appendChild(div);
+        el.scrollTop=999;
+      }, delay);
+      delay+=1800;
+    }
+    if(st.user){ // cliente parla
+      setTimeout(function(){
+        var div=document.createElement('div');
+        div.className='chat-msg user';
+        div.innerHTML='<strong>'+esc(d.phone && d.phone.customer || 'Cliente')+':</strong> '+esc(st.user);
+        el.appendChild(div);
+        el.scrollTop=999;
+      }, delay);
+      delay+=1600;
+    }
+    if(st.body && !st.say && !st.user){ // evento di sistema
+      setTimeout(function(){
+        var div=document.createElement('div');
+        div.className='chat-msg sys';
+        div.innerHTML='<strong>'+esc(st.title)+':</strong> '+esc(st.body);
+        el.appendChild(div);
+        el.scrollTop=999;
+      }, delay);
+      delay+=1200;
+    }
   });
 }
 
