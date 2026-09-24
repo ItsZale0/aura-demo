@@ -29,6 +29,98 @@
       "A full calendar without ever picking up the phone. <strong>Aria books, reschedules, and confirms for you.</strong>",
       "Every call is another customer. <strong>Aria takes them all — even the ones you'd lose today.</strong>",
       "From the first ring to the WhatsApp confirmation. <strong>Aria does it all, you oversee it all.</strong>"
+    ],
+    "scenarios": [
+      {
+        "status": "Incoming call",
+        "av": "M",
+        "name": "Mark Ross",
+        "role": "Plumber — customer",
+        "user": "Hi! I'd like to book a repair for tomorrow morning.",
+        "aria": "Sure! I've got you down for tomorrow at 9:00 AM. Confirmation sent on WhatsApp.",
+        "ok": "✓ Appointment saved · Confirmation sent"
+      },
+      {
+        "status": "Incoming call",
+        "av": "L",
+        "name": "Laura White",
+        "role": "New customer",
+        "user": "Good morning, do you have an opening for a site visit this week?",
+        "aria": "Yes! Thursday at 3:00 PM is free. I'll text you a reminder.",
+        "ok": "✓ Site visit booked · Reminder sent"
+      },
+      {
+        "status": "Incoming call",
+        "av": "G",
+        "name": "Grace Ferris",
+        "role": "Customer — renewal",
+        "user": "I need to renew my contract — could you call me back?",
+        "aria": "Of course! Connecting you with an agent right now — I've logged your request in the meantime.",
+        "ok": "✓ Request qualified · Agent notified"
+      },
+      {
+        "status": "Missed call",
+        "av": "A",
+        "name": "Alex Conway",
+        "role": "New number",
+        "user": "Missed call at 2:32 PM",
+        "aria": "Hi Alex! This is Aria — I called you back as soon as the line was free.",
+        "ok": "✓ Called back in 3 minutes · Appointment booked"
+      },
+      {
+        "status": "Incoming call",
+        "av": "R",
+        "name": "Ross Dental Studio",
+        "role": "Regular customer",
+        "user": "Good evening, I need to move my dental cleaning to Friday.",
+        "aria": "Done! Moved to Friday at 10:30 AM — I'll let the dentist know.",
+        "ok": "✓ Appointment rescheduled · Everyone notified"
+      },
+      {
+        "status": "Incoming call",
+        "av": "P",
+        "name": "Paul Green",
+        "role": "Supplier",
+        "user": "It's Paul, calling about this month's quote.",
+        "aria": "Hi Paul! I've forwarded the quote to the office — we'll get back to you by tomorrow.",
+        "ok": "✓ Quote forwarded · Office notified"
+      },
+      {
+        "status": "WhatsApp message",
+        "av": "F",
+        "name": "Frances Morgan",
+        "role": "Customer — question",
+        "user": "Sorry, what time do you close tonight?",
+        "aria": "We close at 7:00 PM! If you'd like, I can book you in for tomorrow.",
+        "ok": "✓ Instant reply · Customer informed"
+      },
+      {
+        "status": "Incoming call",
+        "av": "D",
+        "name": "Dr. Dawson",
+        "role": "Medical practice",
+        "user": "Can you confirm tomorrow's appointments for me?",
+        "aria": "Sure! You have 12 appointments tomorrow, the first at 8:30 AM. I've sent you the list on WhatsApp.",
+        "ok": "✓ List sent · Calendar synced"
+      },
+      {
+        "status": "Incoming call",
+        "av": "G",
+        "name": "Gino's Restaurant",
+        "role": "Customer — booking",
+        "user": "Good evening, a table for 4 tonight at 8:30 PM?",
+        "aria": "Perfect! Table for 4 at 8:30 PM under your name. See you then!",
+        "ok": "✓ Table reserved · Booking confirmed"
+      },
+      {
+        "status": "Incoming call",
+        "av": "E",
+        "name": "Emma Rose",
+        "role": "Customer — urgent",
+        "user": "I have an emergency — can you come right away?",
+        "aria": "Got it — this is urgent! I've alerted the nearest technician; they'll be there within the hour.",
+        "ok": "✓ Emergency handled · Technician on the way"
+      }
     ]
   },
   "stats": [
