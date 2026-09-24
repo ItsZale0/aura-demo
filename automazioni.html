@@ -41,6 +41,30 @@
 .aut-cta h2{font-size:clamp(1.7em,3.5vw,2.3em);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
 .aut-cta .sub{font-size:1em;color:var(--muted);line-height:1.7;max-width:32em;margin:0 auto 28px}
 @media (max-width:640px){.aut-hero{padding:44px 20px 28px}.aut-section{padding:40px 20px}.aut-cta{padding:44px 20px 64px}}
+
+/* ═══ LAYOUT FIX (mobile + desktop) ═══ */
+.aut-hero{padding:48px 20px 32px}
+.aut-hero .sub{padding:0 8px}
+.aut-section{padding:48px 20px}
+.aut-grid{gap:14px}
+.aut-item{padding:22px 20px}
+.aut-steps{gap:28px}
+.aut-cta{padding:48px 20px 64px}
+@media (max-width:640px){
+  .aut-hero h1{font-size:clamp(2em,9vw,2.6em);line-height:1.15;letter-spacing:-.03em}
+  .aut-hero .sub{font-size:.95em;line-height:1.65}
+  .aut-grid{grid-template-columns:1fr}
+  .aut-steps{grid-template-columns:1fr}
+  .aut-step{padding-top:56px}
+  .aut-step::before{width:44px;height:44px}
+  #heroLogo{width:64px!important;height:64px!important;border-radius:17px!important}
+}
+@media (min-width:1100px){
+  .aut-hero{padding-top:72px}
+  .aut-grid{gap:18px}
+  .aut-item{padding:30px 28px}
+}
+
 </style>
 </head>
 <body>
@@ -75,7 +99,7 @@
 <span id="tgText"></span>
 </div>
 <div class="hero-badge"><span class="dot"></span><span data-i18n="autos.hero.badge">Oltre il telefono</span></div>
-<h1><span data-i18n="autos.hero.title1">Il telefono era</span> <span class="accent" data-i18n="autos.hero.title2">solo l'inizio.</span></h1>
+<h1 style="text-wrap:balance"><span data-i18n="autos.hero.title1">Il telefono era</span> <span class="accent" data-i18n="autos.hero.title2">solo l'inizio.</span></h1>
 <p class="sub" data-i18n="autos.hero.subtitle">Aria automatizza tutta la tua gestione quotidiana: email, documenti, promemoria e report. Tu pensi al lavoro, lei al resto.</p>
 </section>
 
