@@ -542,5 +542,19 @@
     ],
     "cta_title": "Tell us what you need. If it can be done over the phone, Aria learns it.",
     "cta_btn": "Tell us your case"
-  }
+  },
+  "demoSections": [
+    {
+      "title": "Booking",
+      "desc": "The customer calls, Aria answers, checks the calendar and books. WhatsApp confirmation."
+    },
+    {
+      "title": "Qualification",
+      "desc": "Aria asks the right questions before transferring: she knows who's buying and who's not."
+    },
+    {
+      "title": "Win-back",
+      "desc": "Customers who stopped answering? Aria calls them back and picks up where you left off."
+    }
+  ]
 }
