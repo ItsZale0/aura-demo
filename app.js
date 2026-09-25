@@ -2,6 +2,14 @@ var WORKER_URL = 'https://aria-proxy.zampese-alessandro.workers.dev';
 var I18N = {};
 var CUR = 'it';
 var LANG_NAMES = {it:'Italiano',en:'English',es:'Español',fr:'Français',zh:'中文'};
+// Mobile SEO: meta description tradotte per ogni lingua
+var I18N_META = {
+  it: "Aria risponde alle chiamate dei tuoi clienti, prende appuntamenti e manda conferme. Funziona anche quando non rispondi tu.",
+  en: "Aria answers your customers' calls, books appointments and sends confirmations. Works even when you're not available.",
+  es: "Aria responde a las llamadas de tus clientes, agenda citas y envía confirmaciones. Funciona incluso cuando no estás disponible.",
+  fr: "Aria répond aux appels de vos clients, prend des rendez-vous et envoie des confirmations. Fonctionne même quand vous n'êtes pas disponible.",
+  zh: "Aria 代您接听客户来电，预订约会并发送确认。即使您不可用也能正常工作。"
+};
 var THEME_ARIA = {it:'Attiva o disattiva la modalità notte',en:'Toggle night mode',es:'Activar o desactivar el modo noche',zh:'切换夜间模式'};
 
 function setLang(l){
@@ -48,6 +56,14 @@ function typeText(elId, text){
 
 function applyI18N(){
   var t = I18N[CUR];
+  // Mobile SEO: aggiorna meta description e og:locale per ogni lingua
+  var metaDesc = I18N_META && I18N_META[CUR];
+  if(metaDesc){
+    var md = document.querySelector('meta[name="description"]');
+    if(md) md.setAttribute('content', metaDesc);
+    var ol = document.querySelector('meta[property="og:locale"]');
+    if(ol) ol.setAttribute('content', CUR === 'zh' ? 'zh_CN' : (CUR === 'it' ? 'it_IT' : (CUR === 'fr' ? 'fr_FR' : (CUR === 'es' ? 'es_ES' : 'en_US'))));
+  }
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var k = el.getAttribute('data-i18n');
     var v = k.split('.').reduce(function(o,p){return o&&o[p]},t);
