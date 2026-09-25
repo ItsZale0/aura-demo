@@ -118,6 +118,7 @@ section.full>div{max-width:1080px;margin:0 auto}
 .sec-head.tight{margin-bottom:32px}
 h2{font-size:clamp(1.8em,3.8vw,2.5em);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px}
 .sub{font-size:1.05em;color:var(--muted);line-height:1.7;max-width:32em;margin-bottom:0}
+.sub a{display:inline-block;padding:6px 4px;margin:-6px -4px;min-height:44px;min-width:44px}
 
 /* ═══ FEATURES ═══ */
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
@@ -758,7 +759,8 @@ a:hover{color:var(--accent)}
 }
 
 /* ═══ CONTATTI: 3 CARD ═══ */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1080px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:1080px;margin:0 auto}
+@media (max-width:640px){.contact-grid{grid-template-columns:1fr}}
 .contact-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;text-align:center;transition:all .3s cubic-bezier(.2,.7,.3,1)}
 .contact-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
 .contact-card h4{font-size:1.05em;font-weight:700;margin-bottom:8px}
