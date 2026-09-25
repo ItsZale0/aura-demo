@@ -6,6 +6,23 @@
 <title>Aria — Risponde al telefono per te</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
 <meta name="description" content="Aria risponde alle chiamate dei tuoi clienti, prende appuntamenti e manda conferme. Funziona anche quando non rispondi tu.">
+<!-- Mobile SEO: meta tag lingua EN -->
+<meta property="og:locale" content="it_IT">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Aria — Assistente Vocale AI",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Voice Assistant",
+  "offers": { "@type": "Offer", "price": "0" },
+  "operatingSystem": "Web",
+  "softwareVersion": "1.0",
+  "featureList": ["Risposte automatiche telefone", "Prenotazione appuntamenti", "Conferme WhatsApp", "5 lingue", "24/7"],
+  "description": "Aria risponde al telefono al posto tuo, prende appuntamenti e manda conferme. 24/7, senza mai perdere una chiamata.",
+  "url": "https://itszale0.github.io/aura-demo/"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
@@ -91,7 +108,7 @@
 <section class="after-full" style="padding-top:48px;padding-bottom:32px" id="demo">
 <div class="sec-head reveal" style="text-align:center;max-width:600px;margin:0 auto 40px">
 <h2 data-i18n="demoBanner.title">Tre esempi, fatti vedere</h2>
-<p class="sub" data-i18n-html="demoBanner.text">Queste sono solo tre situazioni. Ogni attività ha le sue — <a href="#personalizza" style="color:inherit;font-weight:600">crea la tua qui</a>.</p>
+<p class="sub" data-i18n-html="demoBanner.text">Queste sono solo tre situazioni. Ogni attività ha le sue — <a href="#personalizza" style="color:inherit;font-weight:600" data-i18n="features.demoLink">crea la tua qui</a>.</p>
 </div>
 </section>
 
@@ -165,6 +182,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"><span class="t-icn" id="toastIcon">👋</span><span id="toastText"></span></div>
 
-<script src="app.js"></script>
+<script src="app.js" defer></script>
 </body>
 </html>
