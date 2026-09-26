@@ -6,24 +6,125 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Aria Marketing — Summary Privato</title>
 <style>
-body{background:#0a0a0a;color:#f0f0f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:20px;margin:0}
-h1{color:#ff6b00;font-size:1.8em;margin-bottom:20px}
-h2{color:#ff6b00;font-size:1.2em;text-transform:uppercase;margin-bottom:16px}
-.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:20px;margin-bottom:16px}
-.ok{color:#4ade80}.err{color:#ef4444}.warn{color:#fbbf24}
+:root{--bg:#0a0a0a;--card:#1a1a1a;--border:#2a2a2a;--text:#f0f0f0;--muted:#888;--accent:#ff6b00;--green:#4ade80;--red:#ef4444;--yellow:#fbbf24}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--border);margin-bottom:32px}
+.logo{font-size:1.8em;font-weight:800;color:var(--accent);letter-spacing:-0.03em}
+.logo span{color:var(--text)}
+.overall-status{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:12px;font-weight:700}
+.ok{background:rgba(74,222,128,.15);color:var(--green)}
+.warn{background:rgba(251,191,36,.15);color:var(--yellow)}
+.error{background:rgba(239,68,68,.15);color:var(--red)}
+.dot{width:12px;height:12px;border-radius:50%;animation:pulse 2s infinite}
+.ok .dot{background:var(--green)}.warn .dot{background:var(--yellow)}.error .dot{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.refresh-btn{background:var(--accent);color:#000;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;font-size:.9em}
+.refresh-btn:hover{opacity:.9}
+.section{margin-bottom:32px}
+.section h2{font-size:1.2em;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-a{color:#ff6b00}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:transform .2s,border-color .2s}
+.service-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.service-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.service-name{font-size:1.1em;font-weight:600}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:.8em;font-weight:600}
+.badge-ok{background:rgba(74,222,128,.15);color:var(--green)}
+.badge-error{background:rgba(239,68,68,.15);color:var(--red)}
+.service-details{font-size:.85em;color:var(--muted);margin-top:8px}
+.action-section{margin-top:32px}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.action-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-weight:600;font-size:.95em;cursor:pointer;text-decoration:none;transition:all .2s}
+.action-btn:hover{border-color:var(--accent);background:rgba(255,107,0,.05);transform:translateY(-1px)}
+.action-btn.primary{background:var(--accent);color:#000;border-color:var(--accent)}
+.action-btn.primary:hover{opacity:.9}
+.manual-task{background:rgba(251,191,36,.1);border:1px solid var(--yellow);border-radius:12px;padding:20px;margin-top:24px}
+.manual-task h3{color:var(--yellow);margin-bottom:12px}
+.manual-task ul{list-style:none}
+.manual-task li{padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.manual-task li:last-child{border-bottom:none}
+.time{color:var(--accent);font-weight:600}
+.timestamp{text-align:center;color:var(--muted);font-size:.8em;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
+@media(max-width:640px){.logo{font-size:1.5em}.grid{grid-template-columns:1fr}.action-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<h1>Aria Marketing</h1>
-<div class="grid">
-<div class="card"><h2>Status</h2><p class="warn">Server locale: verifica porta 8000</p></div>
-<div class="card"><h2>Google Sheets</h2><p class="ok">Connesso</p></div>
-<div class="card"><h2>Telegram</h2><p class="ok">@Thedestrum</p></div>
+<div class="container">
+<div class="header">
+<div class="logo">Aria<span> Marketing</span></div>
+<div style="display:flex;gap:12px;align-items:center">
+<div class="overall-status" id="overall"><span class="dot"></span><span>Caricamento...</span></div>
+<button class="refresh-btn" onclick="location.reload()">🔄 Aggiorna</button>
 </div>
-<p><a href="https://docs.google.com/spreadsheets/d/1MzyBh6-Nvu463wagninA44rtmq5D-_9SShyEYyM3ESA">Apri Google Sheets</a></p>
-<p><a href="https://t.me/Thedestrum">Canale Telegram</a></p>
-<p><em>Pagina privata — noindex</em></p>
+</div>
+
+<div class="section"><h2>📊 Status Servizi</h2><div class="grid" id="services"></div></div>
+
+<div class="section action-section">
+<h2>⚡ Azioni Rapide</h2>
+<div class="action-grid">
+<a href="https://docs.google.com/spreadsheets/d/1MzyBh6-Nvu463wagninA44rtmq5D-_9SShyEYyM3ESA" target="_blank" class="action-btn primary">📊 Google Sheets</a>
+<a href="https://docs.google.com/spreadsheets/d/1cCONnklelOyIZzeSRCb5K4Tmwz17u4YFVUvnf4qQP9k" target="_blank" class="action-btn">👥 FB Groups</a>
+<a href="https://t.me/Thedestrum" target="_blank" class="action-btn">📱 Telegram</a>
+<a href="https://itszale0.github.io/aura-demo/" target="_blank" class="action-btn">🌐 Sito Demo</a>
+</div>
+</div>
+
+<div class="section">
+<div class="manual-task">
+<h3>👤 Task Manuali (Tua Azione)</h3>
+<ul>
+<li><span class="desc">Posta in gruppi FB <strong>da_postare</strong></span><span class="time">Ogni 2h: 09,11,13,15,17 UTC</span></li>
+<li><span class="desc">Copia copy da Sheet <strong>contenuti</strong> → incolla nel gruppo</span></li>
+<li><span class="desc">Aggiorna Sheet <strong>gruppi_fb</strong>: Postato=Sì, Data=Oggi</span><span class="time">Colonne I,J,K</span></li>
+</ul>
+</div>
+</div>
+
+<div class="timestamp">Ultimo check: <span id="timestamp">-</span></div>
+</div>
+
+<script>
+async function loadStatus() {
+  try {
+    const r = await fetch('/api/status');
+    const s = await r.json();
+    const icons = {cron_jobs:'⏰',google_sheets:'📊',telegram_bot:'📱',github_pages:'🌐'};
+    const names = {cron_jobs:'Cron Jobs',google_sheets:'Google Sheets API',telegram_bot:'Telegram Bot',github_pages:'GitHub Pages'};
+    let allOk = true;
+    let cards = '';
+    for (const [key, svc] of Object.entries(s)) {
+      if (key === 'timestamp') continue;
+      const ok = svc.ok !== false;
+      if (!ok) allOk = false;
+      const icon = icons[key] || '⚙️';
+      const name = names[key] || key;
+      const bc = ok ? 'badge-ok' : 'badge-error';
+      const bt = ok ? 'OK' : 'ERRORE';
+      let details = '';
+      if (ok) {
+        if (key === 'cron_jobs') details = `Attivi: ${svc.active||0} | Marketing: ${svc.marketing||0}`;
+        else if (key === 'google_sheets') details = `HTTP ${svc.status||'?'}`;
+        else if (key === 'telegram_bot') details = `Bot: @${svc.bot||'?'}`;
+        else if (key === 'github_pages') details = `HTTP ${svc.status||'?'}`;
+      } else {
+        details = svc.error || '';
+      }
+      cards += `<div class="service-card"><div class="service-header"><span class="service-name">${icon} ${name}</span><span class="status-badge ${bc}"><span class="dot"></span>${bt}</span></div><div class="service-details">${details}</div></div>`;
+    }
+    document.getElementById('services').innerHTML = cards;
+    const overall = document.getElementById('overall');
+    overall.className = 'overall-status ' + (allOk ? 'ok' : 'warn');
+    overall.querySelector('span:last-child').textContent = allOk ? 'TUTTI ATTIVI' : 'QUALCHE PROBLEMA';
+    document.getElementById('timestamp').textContent = s.timestamp || '-';
+  } catch(e) {
+    document.getElementById('services').innerHTML = '<div class="service-card"><div class="service-header"><span class="service-name">⚠️ Server</span></div><div class="service-details">Impossibile connettere al server</div></div>';
+    document.getElementById('overall').className = 'overall-status error';
+    document.getElementById('overall').querySelector('span:last-child').textContent = 'SERVER NON RAGGIUNGIBILE';
+  }
+}
+loadStatus();
+</script>
 </body>
 </html>
