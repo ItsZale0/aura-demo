@@ -20,13 +20,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .dot{width:12px;height:12px;border-radius:50%;animation:pulse 2s infinite}
 .ok .dot{background:var(--green)}.warn .dot{background:var(--yellow)}.error .dot{background:var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.refresh-btn{background:var(--accent);color:#000;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;font-size:.9em}
-.refresh-btn:hover{opacity:.9}
 .section{margin-bottom:32px}
 .section h2{font-size:1.2em;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.service-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:transform .2s,border-color .2s}
-.service-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
 .service-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .service-name{font-size:1.1em;font-weight:600}
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:.8em;font-weight:600}
@@ -36,9 +33,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .action-section{margin-top:32px}
 .action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .action-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-weight:600;font-size:.95em;cursor:pointer;text-decoration:none;transition:all .2s}
-.action-btn:hover{border-color:var(--accent);background:rgba(255,107,0,.05);transform:translateY(-1px)}
+.action-btn:hover{border-color:var(--accent)}
 .action-btn.primary{background:var(--accent);color:#000;border-color:var(--accent)}
-.action-btn.primary:hover{opacity:.9}
 .manual-task{background:rgba(251,191,36,.1);border:1px solid var(--yellow);border-radius:12px;padding:20px;margin-top:24px}
 .manual-task h3{color:var(--yellow);margin-bottom:12px}
 .manual-task ul{list-style:none}
@@ -46,20 +42,36 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .manual-task li:last-child{border-bottom:none}
 .time{color:var(--accent);font-weight:600}
 .timestamp{text-align:center;color:var(--muted);font-size:.8em;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
-@media(max-width:640px){.logo{font-size:1.5em}.grid{grid-template-columns:1fr}.action-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="container">
 <div class="header">
 <div class="logo">Aria<span> Marketing</span></div>
-<div style="display:flex;gap:12px;align-items:center">
-<div class="overall-status" id="overall"><span class="dot"></span><span>Caricamento...</span></div>
-<button class="refresh-btn" onclick="location.reload()">🔄 Aggiorna</button>
-</div>
+<div class="overall-status warn"><span class="dot"></span><span>SERVER LOCAL</span></div>
 </div>
 
-<div class="section"><h2>📊 Status Servizi</h2><div class="grid" id="services"></div></div>
+<div class="section">
+<h2>📊 Status Servizi</h2>
+<div class="grid">
+<div class="service-card">
+<div class="service-header"><span class="service-name">🖥️ Dashboard Server</span><span class="status-badge badge-error"><span class="dot"></span>ERRORE</span></div>
+<div class="service-details">Server locale su porta 8000 — accessibile solo da WSL/Windows</div>
+</div>
+<div class="service-card">
+<div class="service-header"><span class="service-name">📊 Google Sheets API</span><span class="status-badge badge-ok"><span class="dot"></span>OK</span></div>
+<div class="service-details">Sheet "Aria Marketing" — 6 schede, 15 gruppi FB</div>
+</div>
+<div class="service-card">
+<div class="service-header"><span class="service-name">📱 Telegram Bot</span><span class="status-badge badge-ok"><span class="dot"></span>OK</span></div>
+<div class="service-details">Bot: @Thedestrum — report giornaliero 09:00 UTC</div>
+</div>
+<div class="service-card">
+<div class="service-header"><span class="service-name">🌐 GitHub Pages</span><span class="status-badge badge-ok"><span class="dot"></span>OK</span></div>
+<div class="service-details">Sito demo: itszale0.github.io/aura-demo</div>
+</div>
+</div>
+</div>
 
 <div class="section action-section">
 <h2>⚡ Azioni Rapide</h2>
@@ -73,7 +85,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 <div class="section">
 <div class="manual-task">
-<h3>👤 Task Manuali (Tua Azione)</h3>
+<h3>👤 Task Manuali</h3>
 <ul>
 <li><span class="desc">Posta in gruppi FB <strong>da_postare</strong></span><span class="time">Ogni 2h: 09,11,13,15,17 UTC</span></li>
 <li><span class="desc">Copia copy da Sheet <strong>contenuti</strong> → incolla nel gruppo</span></li>
@@ -82,49 +94,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 </div>
 
-<div class="timestamp">Ultimo check: <span id="timestamp">-</span></div>
+<div class="timestamp">
+⚠️ Questa pagina è statica — per dati live apri <a href="http://localhost:8000/summary" style="color:var(--accent)">dashboard locale</a>
 </div>
-
-<script>
-async function loadStatus() {
-  try {
-    const r = await fetch('/api/status');
-    const s = await r.json();
-    const icons = {cron_jobs:'⏰',google_sheets:'📊',telegram_bot:'📱',github_pages:'🌐'};
-    const names = {cron_jobs:'Cron Jobs',google_sheets:'Google Sheets API',telegram_bot:'Telegram Bot',github_pages:'GitHub Pages'};
-    let allOk = true;
-    let cards = '';
-    for (const [key, svc] of Object.entries(s)) {
-      if (key === 'timestamp') continue;
-      const ok = svc.ok !== false;
-      if (!ok) allOk = false;
-      const icon = icons[key] || '⚙️';
-      const name = names[key] || key;
-      const bc = ok ? 'badge-ok' : 'badge-error';
-      const bt = ok ? 'OK' : 'ERRORE';
-      let details = '';
-      if (ok) {
-        if (key === 'cron_jobs') details = `Attivi: ${svc.active||0} | Marketing: ${svc.marketing||0}`;
-        else if (key === 'google_sheets') details = `HTTP ${svc.status||'?'}`;
-        else if (key === 'telegram_bot') details = `Bot: @${svc.bot||'?'}`;
-        else if (key === 'github_pages') details = `HTTP ${svc.status||'?'}`;
-      } else {
-        details = svc.error || '';
-      }
-      cards += `<div class="service-card"><div class="service-header"><span class="service-name">${icon} ${name}</span><span class="status-badge ${bc}"><span class="dot"></span>${bt}</span></div><div class="service-details">${details}</div></div>`;
-    }
-    document.getElementById('services').innerHTML = cards;
-    const overall = document.getElementById('overall');
-    overall.className = 'overall-status ' + (allOk ? 'ok' : 'warn');
-    overall.querySelector('span:last-child').textContent = allOk ? 'TUTTI ATTIVI' : 'QUALCHE PROBLEMA';
-    document.getElementById('timestamp').textContent = s.timestamp || '-';
-  } catch(e) {
-    document.getElementById('services').innerHTML = '<div class="service-card"><div class="service-header"><span class="service-name">⚠️ Server</span></div><div class="service-details">Impossibile connettere al server</div></div>';
-    document.getElementById('overall').className = 'overall-status error';
-    document.getElementById('overall').querySelector('span:last-child').textContent = 'SERVER NON RAGGIUNGIBILE';
-  }
-}
-loadStatus();
-</script>
+</div>
 </body>
 </html>
